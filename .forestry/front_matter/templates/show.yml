@@ -56,3 +56,5 @@ fields:
       file: 
       path: 
   label: Duration
+pages:
+- src/shows/museday-mashup-mixer.md
