@@ -44,12 +44,15 @@ fields:
   type: select
   default: []
   config:
-    required: false
+    required: true
     options:
-    - 15m
-    - 30m
-    - 45m
-    - 60m
+    - '0:15'
+    - '0:30'
+    - '0:45'
+    - '1:00'
+    - '1:30'
+    - '2:00'
+    - '3:00'
     source:
       type: simple
       section: 
