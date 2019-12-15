@@ -5,12 +5,12 @@ admin_path: ''
 webhook_url: 
 sections:
 - type: directory
-  path: src/shows
+  path: content/shows
   label: Shows
   create: all
   match: "**/*"
 - type: directory
-  path: src/pages
+  path: content/pages
   label: Pages
   create: all
   match: "**/*"
