@@ -48,7 +48,7 @@ export default ({ children }) => (
           />
         </Link>
         <NavLink to="/about">About</NavLink>
-        <NavLink to="/schedule">Schedule</NavLink>
+        <NavLink to="/shows">Shows</NavLink>
       </ReadableContainer>
     </Section>
     <Section>
