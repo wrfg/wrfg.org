@@ -7,6 +7,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Dependencies
+          command: npm install
+      - run:
           name: Build
           command: script/deploy/build
       - run:
