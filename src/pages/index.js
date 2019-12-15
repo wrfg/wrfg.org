@@ -1,3 +1,11 @@
 import React from "react"
 
-export default () => <div>Hello WRFG!</div>
+import Layout from "../components/layout.js"
+
+export default () => {
+  return (
+    <Layout>
+      <div>Hello WRFG!</div>
+    </Layout>
+  )
+}

@@ -1,10 +1,15 @@
 import React from "react"
 import { graphql } from "gatsby"
 
+import Layout from "../components/layout.js"
+
 export default ({ data }) => {
   const page = data.markdownRemark
+
   return (
-    <div dangerouslySetInnerHTML={{ __html: page.html }} />
+    <Layout>
+      <div dangerouslySetInnerHTML={{ __html: page.html }} />
+    </Layout>
   )
 }
 
