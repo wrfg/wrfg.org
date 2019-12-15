@@ -1,4 +1,58 @@
 ---
 label: Show
 hide_body: true
-fields: []
+fields:
+- name: title
+  type: text
+  config:
+    required: false
+  label: Title
+- name: day
+  type: select
+  default: []
+  config:
+    required: true
+    options:
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Day
+- name: start
+  type: select
+  default: []
+  config:
+    required: false
+    options:
+    - 12:00a
+    - 12:15a
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Start time
+- name: duration
+  type: select
+  default: []
+  config:
+    required: false
+    options:
+    - 15m
+    - 30m
+    - 45m
+    - 60m
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Duration
