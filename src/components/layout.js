@@ -6,12 +6,14 @@ import { Global, css } from "@emotion/core"
 
 import { ReadableContainer, Section } from "./parts.js"
 
+import { LoadablePlayer } from "../client/player.js"
+
 const NavLink = ({ children, ...props }) => {
   return (
     <Link {...props} css={css`
       display: inline-block;
       vertical-align: top;
-      margin: 0.6em;
+      padding: 0.3em;
     `}>
       {children}
     </Link>
@@ -41,13 +43,17 @@ export default ({ children }) => (
             alt="WRFG"
             css={css`
               height: 1.6em;
-              margin-top: 0.3em;
               margin-right: 0.6em;
             `}
           />
         </Link>
         <NavLink to="/about">About</NavLink>
         <NavLink to="/schedule">Schedule</NavLink>
+      </ReadableContainer>
+    </Section>
+    <Section>
+      <ReadableContainer>
+        <LoadablePlayer />
       </ReadableContainer>
     </Section>
     <ReadableContainer>

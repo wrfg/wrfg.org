@@ -21,6 +21,7 @@ export const Section = ({ children }) => {
   return (
     <div
       css={css`
+        padding: 0.3em 0;
         border-bottom: 1px solid #ccc;
       `}
     >
