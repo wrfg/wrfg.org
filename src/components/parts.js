@@ -29,3 +29,40 @@ export const Section = ({ children }) => {
     </div>
   )
 }
+
+export const Clear = ({ children }) => {
+  return (
+    <div
+      css={css`
+        overflow: auto;
+        width: 100%;
+      `}
+    >
+      {children}
+    </div>
+  )
+}
+
+export const Left = ({ children }) => {
+  return (
+    <div
+      css={css`
+        float: left;
+      `}
+    >
+      {children}
+    </div>
+  )
+}
+
+export const Right = ({ children }) => {
+  return (
+    <div
+      css={css`
+        float: right;
+      `}
+    >
+      {children}
+    </div>
+  )
+}
