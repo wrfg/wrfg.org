@@ -1,48 +1,23 @@
 import React, { Fragment } from "react"
-import { Link, graphql } from "gatsby"
 
-import { LocalTime, Duration } from "@js-joda/core"
+import { Link, graphql } from "gatsby"
 
 import Layout from "@/components/layout.js"
 
-const toLocalTime = (time) => {
-  let hours = parseInt(time.split(":")[0], 10)
-  const minutes = parseInt(time.split(":")[1].substring(0, 2), 10)
-  const meridiem = time.slice(-1)
+import Now from "@/client/now.js"
 
-  if (meridiem === "a") {
-    if (hours === 12) {
-      hours = 0
-    }
-  } else if (meridiem === "p") {
-    if (hours !== 12) {
-      hours += 12
-    }
-  } else {
-    throw new Error(`Unparsable time \`${time}\``)
-  }
-
-  return LocalTime.of(hours, minutes)
-}
-
-const toDuration = (duration) => {
-  const [ hours, minutes ] = duration.split(":").map((part) => parseInt(part, 10))
-  return Duration.ofHours(hours).plusMinutes(minutes)
-}
+import Show from "@/models/show.js"
 
 const byStart = (x, y) => {
-  const xStart = toLocalTime(x.frontmatter.start)
-  const yStart = toLocalTime(y.frontmatter.start)
-
-  if (xStart.equals(yStart)) {
+  if (x.start.equals(y.start)) {
     return 0
   }
 
-  if (xStart.isBefore(yStart)) {
+  if (x.start.isBefore(y.start)) {
     return -1
   }
 
-  if (xStart.isAfter(yStart)) {
+  if (x.start.isAfter(y.start)) {
     return 1
   }
 
@@ -50,7 +25,7 @@ const byStart = (x, y) => {
 }
 
 export default ({ data }) => {
-  const allShows = data.allMarkdownRemark.edges.map((edge) => edge.node)
+  const allShows = data.allMarkdownRemark.edges.map((edge) => edge.node).map(Show.factory)
 
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
@@ -61,12 +36,11 @@ export default ({ data }) => {
       <p>Next: Else</p>
       <h1>Schedule</h1>
       {days.map((day) => {
-        const shows = allShows.filter((show) => show.frontmatter.day === day).sort(byStart)
+        const shows = allShows.filter((show) => show.day === day).sort(byStart)
 
         if (shows.length === 0) {
           return null
         }
-
 
         return (
           <Fragment key={day}>
@@ -74,13 +48,10 @@ export default ({ data }) => {
             <table>
               <tbody>
                 {shows.map((show) => {
-                  const starts = toLocalTime(show.frontmatter.start)
-                  const ends = starts.plus(toDuration(show.frontmatter.duration))
-
                   return (
                     <tr key={show.id}>
-                      <td>{starts.toLocaleString()} - {ends.toLocaleString()}</td>
-                      <td><Link to={show.fields.slug}>{show.frontmatter.title}</Link></td>
+                      <td>{show.start.toLocaleString()} - {show.end.toLocaleString()}</td>
+                      <td><Link to={show.slug}>{show.title}</Link></td>
                     </tr>
                   )
                 })}
