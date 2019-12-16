@@ -57,6 +57,7 @@ const readStatus = async () => {
 
 const Player = () => {
   // bug: operating system media buttons can act on the <audio> element, causing it to play, but the ui doesn't reflect that state
+  // bug: full page reload causes player to stop
   const [ state, setState ] = useState("paused")
 
   const toggle = () => {
