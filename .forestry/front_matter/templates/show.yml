@@ -153,3 +153,5 @@ fields:
       file: 
       path: 
   label: Duration
+pages:
+- content/shows/different-hues-of-the-blues.md
