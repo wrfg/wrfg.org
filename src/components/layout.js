@@ -20,9 +20,20 @@ const NavLink = ({ children, ...props }) => {
   )
 }
 
+const ExternalLink = ({ ...props }) => {
+  if (props.hasOwnProperty("to")) {
+    props.href = props.to
+    delete props.to
+  }
+
+  return (
+    <a {...props} target="_blank" rel="noopener nofollow" />
+  )
+}
+
 const SocialImageLink = ({ to, src, alt }) => {
   return (
-    <Link
+    <ExternalLink
       to={to}
       css={css`
         display: inline-block;
@@ -36,7 +47,7 @@ const SocialImageLink = ({ to, src, alt }) => {
          vertical-align: middle;
         `}
       />
-    </Link>
+    </ExternalLink>
   )
 }
 
