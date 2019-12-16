@@ -30,6 +30,7 @@ const PulsingRedCircle = () => {
   )
 }
 
+/*
 const readStatus = async () => {
   const body = await fetch("http://streaming.wrfg.org/7.html")
   const [
@@ -52,6 +53,7 @@ const readStatus = async () => {
     songTitle: songTitle,
   }
 }
+*/
 
 const Player = () => {
   // bug: operating system media buttons can act on the <audio> element, causing it to play, but the ui doesn't reflect that state
