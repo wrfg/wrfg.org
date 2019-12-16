@@ -1,5 +1,3 @@
-import { useStaticQuery, graphql } from "gatsby"
-
 import { LocalTime, Duration } from "@js-joda/core"
 
 const toLocalTime = (time) => {
