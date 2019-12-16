@@ -83,7 +83,7 @@ export default ({ children }) => (
               />
             </Link>
             <NavLink to="/about">About</NavLink>
-            <NavLink to="/shows">Shows</NavLink>
+            <NavLink to="/schedule">Schedule</NavLink>
           </Left>
           <Right>
             <SocialImageLink
