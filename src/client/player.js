@@ -54,6 +54,7 @@ const readStatus = async () => {
 }
 
 const Player = () => {
+  // bug: operating system media buttons can act on the <audio> element, causing it to play, but the ui doesn't reflect that state
   const [ state, setState ] = useState("paused")
 
   const toggle = () => {
@@ -76,7 +77,12 @@ const Player = () => {
 
   return (
     <>
-      <button onClick={() => toggle()}>{state === "playing" ? "⏸" : "▶️"}</button>
+      <button
+        onClick={() => toggle()}
+        css={css`border: none; background: transparent; width: 1.6em; height: 1.6em; text-align: center; padding: 0;`}
+      >
+        {state === "playing" ? "◼️" : "▶︎"}
+      </button>
       <span css={css`margin-left: .5em`}>LIVE NOW <PulsingRedCircle /></span>
       <audio preload="none" ref={audioElementRef}>
         <source src="http://streaming.wrfg.org/" type="audio/mpeg" />
