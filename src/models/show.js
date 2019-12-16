@@ -34,6 +34,9 @@ class Show {
   get id() {
     return this.data.id
   }
+  get slug() {
+    return this.data.fields.slug
+  }
   get title() {
     return this.data.frontmatter.title
   }
@@ -43,9 +46,11 @@ class Show {
   get start() {
     return toLocalTime(this.data.frontmatter.start)
   }
+  get duration() {
+    return toDuration(this.data.frontmatter.duration)
+  }
   get end() {
-    return this.start.plus(toDuration(this.data.frontmatter.duration))
-
+    return this.start.plus(this.duration)
   }
   static factory(data) {
     return new Show(data)
@@ -54,5 +59,33 @@ class Show {
 
 const all = [new Show({title: 'My Show'})]
 
+const dayAsOrdinal = (day) => {
+  return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].indexOf(day)
+}
+
+const sortByStart = (x, y) => {
+  if (dayAsOrdinal(x.day) < dayAsOrdinal(y.day)) {
+    return -1
+  }
+
+  if (dayAsOrdinal(x.day) > dayAsOrdinal(y.day)) {
+    return 1;
+  }
+
+  if (x.start.isBefore(y.start)) {
+    return -1
+  }
+
+  if (x.start.isAfter(y.start)) {
+    return 1
+  }
+
+  if (x.start.equals(y.start)) {
+    return 0
+  }
+
+  throw new Error(`Somehow two times are not equal, not greater, and not less than each other`)
+}
+
 export default Show
-export { all }
+export { all, sortByStart }

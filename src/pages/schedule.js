@@ -6,23 +6,7 @@ import Layout from "@/components/layout.js"
 
 import Now from "@/client/now.js"
 
-import Show from "@/models/show.js"
-
-const byStart = (x, y) => {
-  if (x.start.equals(y.start)) {
-    return 0
-  }
-
-  if (x.start.isBefore(y.start)) {
-    return -1
-  }
-
-  if (x.start.isAfter(y.start)) {
-    return 1
-  }
-
-  throw new Error(`Somehow two times are not equal, not greater, and not less than each other`)
-}
+import Show, { sortByStart } from "@/models/show.js"
 
 export default ({ data }) => {
   const allShows = data.allMarkdownRemark.edges.map((edge) => edge.node).map(Show.factory)
@@ -32,11 +16,10 @@ export default ({ data }) => {
   return (
     <Layout>
       <h1>Now</h1>
-      <p>{new Date().toLocaleString()}</p>
-      <p>Next: Else</p>
+      <Now />
       <h1>Schedule</h1>
       {days.map((day) => {
-        const shows = allShows.filter((show) => show.day === day).sort(byStart)
+        const shows = allShows.filter((show) => show.day === day).sort(sortByStart)
 
         if (shows.length === 0) {
           return null
