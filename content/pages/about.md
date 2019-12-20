@@ -3,7 +3,7 @@
 ---
 ## Mission
 
-WRFG 89.3 FM Radio Free Georgia Broadcasting Foundation, Inc. provides a voice for those who have been traditionally denied open access to the broadcast media through the involvement of a broad base of community elements to guarantee that access.
+WRFG 89.3 FM Radio Free Georgia Broadcasting provides a voice for those who have been traditionally denied open access to the broadcast media through the involvement of a broad base of community elements to guarantee that access.
 
 In the utilization of the Foundation’s facilities and in its programs the following communities will receive first priority:
 
@@ -24,7 +24,7 @@ Between 1977 and 1980, WRFG produced the 50-part “Living Atlanta” series on 
 
 In 2003, WRFG hosted the last FCC public hearing in the country on Media Deregulation. The event was broadcast nationally.
 
-To learn more, see our [milestones](/uploads/historical-milstones.pdf), [Faces of WRFG](https://www.youtube.com/watch?v=QfLwA29AthI), and an [interview with Harlon Joye](/uploads/interview-with-harlon-joye.pdf), a founder and board member. 
+To learn more, see our [milestones](/uploads/historical-milstones.pdf), [Faces of WRFG](https://www.youtube.com/watch?v=QfLwA29AthI), and an [interview with Harlon Joye](/uploads/interview-with-harlon-joye.pdf), a founder and board member.
 
 ## Board
 
@@ -39,9 +39,9 @@ To learn more, see our [milestones](/uploads/historical-milstones.pdf), [Faces o
 * Tawhiyda Tupak-El
 * Jacklyn Izsraael
 
-## Staff 
+## Staff
 
-Joan Baptist, Station Manager, & Wanique Shabazz, Operations Director. 
+Joan Baptist, Station Manager, & Wanique Shabazz, Operations Director.
 
 ## Contact
 
