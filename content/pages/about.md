@@ -24,7 +24,24 @@ Between 1977 and 1980, WRFG produced the 50-part “Living Atlanta” series on 
 
 In 2003, WRFG hosted the last FCC public hearing in the country on Media Deregulation. The event was broadcast nationally.
 
-To learn more, see our [milestones](/uploads/historical-milstones.pdf) and an [interview with Harlon Joye](/uploads/interview-with-harlon-joye.pdf), a founder and board member. 
+To learn more, see our [milestones](/uploads/historical-milstones.pdf), [Faces of WRFG](https://www.youtube.com/watch?v=QfLwA29AthI), and an [interview with Harlon Joye](/uploads/interview-with-harlon-joye.pdf), a founder and board member. 
+
+## Board
+
+* Cheryl Odeleye (President)
+* Dianne Mathiowetz (Vice President)
+* Harlon Joye (Treasurer)
+* Damani Zakee Aaquil (Member-At-Large)
+* John Askins (Secretary)
+* Heather Gray
+* Cliff Albright
+* Lovette Thompson
+* Tawhiyda Tupak-El
+* Jacklyn Izsraael
+
+## Staff 
+
+Joan Baptist, Station Manager, & Wanique Shabazz, Operations Director. 
 
 ## Contact
 
