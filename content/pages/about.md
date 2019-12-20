@@ -10,6 +10,22 @@ In the utilization of the Foundation’s facilities and in its programs the foll
 1. Those who continue to be denied free and open access to the broadcast media,
 2. Those who suffer oppression or exploitation based upon class, race, sex, age, creed, sexual orientation, disability, or immigrant status.
 
+## History
+
+WRFG 89.3 FM has been Atlanta’s community radio station, an independent, listener-supported, non-profit media outlet for local musicians, artists, community voices and progressive ideas for over four decades.
+
+Since going on the air in 1973, WRFG has filled a void on the Atlanta airwaves. Reflecting Atlanta’s emergence as an “international city”, it pioneered programming oriented toward the area’s growing Latin, African, Asian and Caribbean communities.
+
+WRFG was the first station to carry live broadcasts from the Arts Festival of Atlanta and the Georgia Grassroots Festival.
+
+WRFG’s achievements extend beyond music alone. WRFG produced live broadcasts of speakers at the Hungry Club, Atlanta’s famous weekly interracial forum.
+
+Between 1977 and 1980, WRFG produced the 50-part “Living Atlanta” series on Atlanta’s history. “Living Atlanta” won national awards and established a tradition of documentary excellence at WRFG.
+
+In 2003, WRFG hosted the last FCC public hearing in the country on Media Deregulation. The event was broadcast nationally.
+
+To learn more, see our [milestones](/uploads/historical-milstones.pdf) and an [interview with Harlon Joye](/uploads/interview-with-harlon-joye.pdf), a founder and board member. 
+
 ## Contact
 
 ##### Our Address
