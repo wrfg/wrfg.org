@@ -12,5 +12,3 @@ fields:
   config:
     required: false
   label: Mixcloud URL
-pages:
-- content/archives/jonathan-s-2018-show.md
