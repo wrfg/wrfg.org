@@ -153,6 +153,11 @@ fields:
       file: 
       path: 
   label: Duration
+- name: program
+  type: text
+  config:
+    required: false
+  label: Program
 pages:
 - content/shows/different-hues-of-the-blues.md
 - content/shows/hard-knock-radio.md
