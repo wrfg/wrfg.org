@@ -11,7 +11,7 @@ fields:
   type: select
   default: []
   config:
-    required: true
+    required: false
     options:
     - Sunday
     - Monday
@@ -30,7 +30,7 @@ fields:
   type: select
   default: []
   config:
-    required: true
+    required: false
     options:
     - 12:00a
     - 12:15a
@@ -138,7 +138,7 @@ fields:
   type: select
   default: []
   config:
-    required: true
+    required: false
     options:
     - '0:15'
     - '0:30'
