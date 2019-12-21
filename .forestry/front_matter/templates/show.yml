@@ -158,3 +158,5 @@ fields:
   config:
     required: false
   label: Program
+pages:
+- content/shows/m-a-p-p-t-i-m-e-jazz.md
