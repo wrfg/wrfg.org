@@ -155,9 +155,16 @@ fields:
       path: 
   label: Duration
 - name: program
-  type: text
+  type: select
+  default: []
   config:
     required: false
+    options: []
+    source:
+      type: pages
+      section: programs
+      file: 
+      path: 
   label: Program
 - name: airshifts
   type: field_group_list
