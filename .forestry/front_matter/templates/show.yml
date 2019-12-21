@@ -159,8 +159,6 @@ fields:
     required: false
   label: Program
 pages:
-- content/shows/hard-knock-radio.md
-- content/shows/just-peace.md
 - content/shows/labor-forum.md
 - content/shows/mellow-mondays.md
 - content/shows/musedaymashupmixer.md
