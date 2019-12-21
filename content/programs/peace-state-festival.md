@@ -1,4 +1,0 @@
----
-title: Peace State Festival
-
----

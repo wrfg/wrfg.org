@@ -9,12 +9,14 @@ export default ({ data }) => {
   return (
     <Layout>
       <h1>{page.frontmatter.title}</h1>
-      <h4>Shows</h4>
-      <ul>
-      {page.frontmatter.shows.map((show) => {
-        return (<li key={show.fields.slug}><Link to={show.fields.slug}>{show.frontmatter.title}</Link></li>)
-      })}
-      </ul>
+      {page.frontmatter.shows && (<>
+        <h4>Shows</h4>
+        <ul>
+        {page.frontmatter.shows.map((show) => {
+          return (<li key={show.fields.slug}><Link to={show.fields.slug}>{show.frontmatter.title}</Link></li>)
+        })}
+        </ul>
+      </>)}
     </Layout>
   )
 }
