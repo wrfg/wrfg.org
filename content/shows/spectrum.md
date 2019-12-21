@@ -3,6 +3,7 @@ day: Tuesday
 start: 10:00p
 duration: '2:00'
 title: Spectrum
-program: The Jazz Forum
+program: content/programs/the-jazz-forum.md
+airshifts: []
 
 ---
