@@ -158,6 +158,3 @@ fields:
   config:
     required: false
   label: Program
-pages:
-- content/shows/phases-jazz-on-a-moonday-night.md
-- content/shows/world-rhythm-nation.md
