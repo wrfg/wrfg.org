@@ -160,6 +160,7 @@ fields:
     required: false
   label: Program
 pages:
+- content/shows/african-experience-worldwide.md
 - content/shows/aj-s-kitchen.md
 - content/shows/alternative-perspectives.md
 - content/shows/amazing-grass.md
