@@ -159,6 +159,7 @@ fields:
     required: false
   label: Program
 pages:
+- content/shows/black-jack-blue-s-train.md
 - content/shows/democracy-now.md
 - content/shows/different-hues-of-the-blues.md
 - content/shows/hard-knock-radio.md
