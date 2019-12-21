@@ -1,6 +1,6 @@
 ---
 title: Americana Garage
-program: content/programs/peace-state-festival.md
+program: Peach State Festival
 airshifts:
 - day: Friday
   start: 8:00p

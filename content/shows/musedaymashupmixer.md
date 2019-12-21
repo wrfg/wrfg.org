@@ -1,6 +1,6 @@
 ---
 title: musedaymashupmixer
-program: content/programs/nightwatch.md
+program: NIGHTWATCH
 airshifts:
 - day: Tuesday
   start: 12:00a

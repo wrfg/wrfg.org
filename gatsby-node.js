@@ -54,12 +54,27 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   result.data.allMarkdownRemark.edges.map((edge) => edge.node).forEach((node) => {
     reporter.info(`New page at ${node.fields.slug} and it's a ${node.fields.kind}`)
+    const context = {
+      slug: node.fields.slug,
+    }
+
     createPage({
       path: node.fields.slug,
       component: path.resolve(`src/templates/${node.fields.kind}/single.js`),
-      context: {
-        slug: node.fields.slug
-      }
+      context: context
     })
   })
+}
+
+exports.sourceNodes = ({ actions }) => {
+  actions.createTypes(`
+    type MarkdownRemark implements Node {
+      frontmatter: Frontmatter
+    }
+
+    type Frontmatter {
+      program: MarkdownRemark @link(by: "frontmatter.title", from: "program")
+      shows: [MarkdownRemark] @link(by: "frontmatter.program.frontmatter.title", from: "title")
+    }
+  `)
 }

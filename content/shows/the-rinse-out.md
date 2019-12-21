@@ -1,6 +1,6 @@
 ---
 title: The Rinse Out
-program: content/programs/ruff-rugged-raw.md
+program: Ruff, Rugged, & Raw
 airshifts:
 - day: Tuesday
   start: 3:00a

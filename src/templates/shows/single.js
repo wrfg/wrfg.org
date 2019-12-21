@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { Link, graphql } from "gatsby"
 
 import Layout from "@/components/layout.js"
 
@@ -15,7 +15,11 @@ export default ({ data }) => {
   return (
     <Layout>
       <h1>{show.title}</h1>
-      <h6>Airshifts</h6>
+      {show.program && show.program.frontmatter.title && (<>
+        <h4>Program</h4>
+        <p><Link to={show.program.fields.slug}>{show.program.frontmatter.title}</Link></p>
+      </>)}
+      <h4>Airshifts</h4>
       <ul>
       {show.airshifts.map((airshift, index) => {
         return (
@@ -34,6 +38,14 @@ export const query = graphql`
       html
       frontmatter {
         title
+        program {
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+          }
+        }
         airshifts {
           day
           start

@@ -1,6 +1,6 @@
 ---
 title: Race Matters
-program: content/programs/progressive-news-hour.md
+program: Progressive News Hour
 airshifts:
 - day: Wednesday
   start: 12:00p

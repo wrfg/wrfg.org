@@ -1,6 +1,6 @@
 ---
 title: Spectrum
-program: content/programs/the-jazz-forum.md
+program: The Jazz Forum
 airshifts:
 - day: Tuesday
   start: 10:00p

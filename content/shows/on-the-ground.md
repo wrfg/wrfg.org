@@ -1,6 +1,6 @@
 ---
 title: On the Ground
-program: content/programs/progressive-news-hour.md
+program: Progressive News Hour
 airshifts:
 - day: Friday
   start: 12:00p

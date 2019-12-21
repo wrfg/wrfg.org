@@ -1,6 +1,6 @@
 ---
 title: Spam and Grits
-program: content/programs/peace-state-festival.md
+program: Peach State Festival
 airshifts:
 - day: Monday
   start: 8:00p

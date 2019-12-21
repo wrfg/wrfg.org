@@ -1,6 +1,6 @@
 ---
 title: The Soul Chamber
-program: content/programs/global-drumbeat.md
+program: Global Drumbeat
 airshifts:
 - day: Wednesday
   start: 2:00p

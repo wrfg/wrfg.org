@@ -1,6 +1,6 @@
 ---
 title: London to Louisiana
-program: content/programs/good-morning-blues-2.md
+program: Good Morning Blues 2
 airshifts:
 - day: Thursday
   start: 8:00a

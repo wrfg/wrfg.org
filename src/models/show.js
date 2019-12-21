@@ -50,6 +50,9 @@ class Show {
   get end() {
     return this.start.plus(this.duration)
   }
+  get program() {
+    return this.data.frontmatter.program
+  }
   get airshifts() {
     return this.data.frontmatter.airshifts.map((airshift) => {
       return {

@@ -1,6 +1,6 @@
 ---
 title: Counterspin
-program: content/programs/progressive-news-hour.md
+program: Progressive News Hour
 airshifts:
 - day: Tuesday
   start: 12:30p

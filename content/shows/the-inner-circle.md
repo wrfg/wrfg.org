@@ -1,6 +1,6 @@
 ---
 title: The Inner Circle
-program: content/programs/nightwatch.md
+program: NIGHTWATCH
 airshifts:
 - day: Friday
   start: 12:00a

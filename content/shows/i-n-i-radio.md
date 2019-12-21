@@ -1,6 +1,6 @@
 ---
 title: I n I Radio
-program: content/programs/soul-rhapsody.md
+program: Soul Rhapsody
 airshifts:
 - day: Friday
   start: 10:00a

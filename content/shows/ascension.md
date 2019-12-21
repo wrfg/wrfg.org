@@ -1,6 +1,6 @@
 ---
 title: Ascension
-program: content/programs/the-jazz-forum.md
+program: The Jazz Forum
 airshifts:
 - day: Thursday
   start: 10:00p

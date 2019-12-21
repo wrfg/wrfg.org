@@ -1,6 +1,6 @@
 ---
 title: The Blues Professor
-program: content/programs/good-morning-blues-1.md
+program: Good Morning Blues 1
 airshifts:
 - day: Wednesday
   start: 6:00a

@@ -1,6 +1,6 @@
 ---
 title: Rhythm and Resistance
-program: content/programs/soul-rhapsody.md
+program: Soul Rhapsody
 airshifts:
 - day: Wednesday
   start: 10:00a

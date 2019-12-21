@@ -1,6 +1,6 @@
 ---
 title: Radio Free Activists
-program: content/programs/progressive-news-hour.md
+program: Progressive News Hour
 airshifts:
 - day: Monday
   start: 12:00p

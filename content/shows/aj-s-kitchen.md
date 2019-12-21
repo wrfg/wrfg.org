@@ -1,6 +1,6 @@
 ---
 title: AJ's Kitchen
-program: content/programs/good-morning-blues-2.md
+program: Good Morning Blues 2
 airshifts:
 - day: Tuesday
   start: 8:00a
