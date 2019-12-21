@@ -159,6 +159,33 @@ fields:
   config:
     required: false
   label: Program
+- name: airshifts
+  type: field_group_list
+  fields:
+  - name: day
+    type: select
+    default: ''
+    config:
+      required: false
+      options:
+      - Sunday
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      - Saturday
+      source:
+        type: simple
+        section: 
+        file: 
+        path: 
+    label: Day
+  config:
+    min: 
+    max: 
+    labelField: 
+  label: airshifts
 pages:
 - content/shows/african-experience-worldwide.md
 - content/shows/aj-s-kitchen.md
