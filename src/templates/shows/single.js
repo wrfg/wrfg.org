@@ -3,13 +3,26 @@ import { graphql } from "gatsby"
 
 import Layout from "@/components/layout.js"
 
+import Show from "@/models/show.js"
+
+import Duration from "@/components/duration.js"
+import Time from "@/components/time.js"
+
 export default ({ data }) => {
   const page = data.markdownRemark
+  const show = new Show(page)
 
   return (
     <Layout>
-      <h1>{page.frontmatter.title}</h1>
-      <p>{page.frontmatter.day}s at {page.frontmatter.start} for {page.frontmatter.duration}</p>
+      <h1>{show.title}</h1>
+      <h6>Airshifts</h6>
+      <ul>
+      {show.airshifts.map((airshift, index) => {
+        return (
+          <li key={index}>{airshift.day}s at <Time value={airshift.start} /> for <Duration value={airshift.duration} /></li>
+        )
+      })}
+      </ul>
       <div dangerouslySetInnerHTML={{ __html: page.html }} />
     </Layout>
   )
@@ -21,9 +34,11 @@ export const query = graphql`
       html
       frontmatter {
         title
-        day
-        start
-        duration
+        airshifts {
+          day
+          start
+          duration
+        }
       }
     }
   }

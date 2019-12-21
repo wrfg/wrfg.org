@@ -50,6 +50,16 @@ class Show {
   get end() {
     return this.start.plus(this.duration)
   }
+  get airshifts() {
+    return this.data.frontmatter.airshifts.map((airshift) => {
+      return {
+        day: airshift.day,
+        start: toLocalTime(airshift.start),
+        duration: toDuration(airshift.duration),
+        end: toLocalTime(airshift.start).plus(toDuration(airshift.duration)),
+      }
+    })
+  }
   static factory(data) {
     return new Show(data)
   }

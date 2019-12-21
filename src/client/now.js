@@ -35,9 +35,11 @@ const Now = () => {
             id
             frontmatter {
               title
-              start
-              duration
-              day
+              airshifts {
+                start
+                duration
+                day
+              }
             }
             fields {
               slug
@@ -49,31 +51,35 @@ const Now = () => {
     `
   )
 
-  const shows = data.allMarkdownRemark.edges.map((edge) => edge.node).map(Show.factory).sort(sortByStart)
+  const shows = data.allMarkdownRemark.edges.map((edge) => edge.node).map(Show.factory)
+  const airshifts = shows.map((show) => show.airshifts.map((airshift) => [show, airshift])).reduce((accumulation, item) => accumulation.concat(item), []).sort((x, y) => sortByStart(x[1], y[1]))
 
-  const index = shows.reduce((accumulation, show, index) => {
+  const index = airshifts.reduce((accumulation, [show, airshift], index) => {
     if (accumulation !== null) {
       return accumulation
     }
 
-    if (spans(show, now)) {
+    if (spans(airshift, now)) {
       return index
     }
 
     return null
   }, null)
 
-  const current = index !== null ? shows[index] : null
-  const next = index !== null ? shows[(index + 1) % shows.length] : null
+  const current = index !== null ? airshifts[index] : null
+
+  if (!current) {
+    return null
+  }
+
+  const next = airshifts[index + 1] ? airshifts[index + 1][0] : null
+
+  const show = current[0]
 
   return (
     <>
-      <p>
-        The time is now {now.format(DateTimeFormatter.ofPattern('M/d/yyyy H:mm:ss'))} in Atlanta, Georgia.
-        {current && (<><br /><Link to={current.slug}>{current.title}</Link> is currently on air.</>)}
-        {next && (<><br />Up next is <Link to={next.slug}>{next.title}</Link>.</>)}
-        {!(current || next) && (<><br />Something is probably on air.</>)}
-      </p>
+      <p><Link to={show.slug}>{show.title}</Link> is currently on air.</p>
+      {next ? (<p>Up next is <Link to={next.slug}>{next.title}</Link>.</p>) : null}
     </>
   )
 }
