@@ -1,9 +1,9 @@
 ---
-day: Tuesday
-start: 10:00p
-duration: '2:00'
 title: Spectrum
 program: content/programs/the-jazz-forum.md
-airshifts: []
+airshifts:
+- day: Tuesday
+  start: 10:00p
+  duration: '2:00'
 
 ---
