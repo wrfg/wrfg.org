@@ -159,7 +159,6 @@ fields:
     required: false
   label: Program
 pages:
-- content/shows/different-hues-of-the-blues.md
 - content/shows/hard-knock-radio.md
 - content/shows/just-peace.md
 - content/shows/labor-forum.md
