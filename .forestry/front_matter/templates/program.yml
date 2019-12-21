@@ -8,6 +8,7 @@ fields:
     required: false
   label: Title
 pages:
+- content/programs/global-drumbeat.md
 - content/programs/good-morning-blues-1.md
 - content/programs/good-morning-blues-2.md
 - content/programs/nightwatch.md
