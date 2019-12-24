@@ -29,13 +29,15 @@ export default ({ data }) => {
       })}
       </ul>
       <h4>Archives</h4>
-      <ul>
-      {show.archives.map((archive, index) => {
-        return (
-          <li key={index}><Link to={archive.slug}>{archive.title}</Link></li>
-        )
-      })}
-      </ul>
+      {show.archives.length
+        ? (<ul>{show.archives.map((archive, index) => {
+          return (
+            <li key={index}><Link to={archive.slug}>{archive.title}</Link></li>
+          )
+        })
+        }</ul>)
+        : <p>No archives</p>
+      }
       <h4>Notes</h4>
       <div dangerouslySetInnerHTML={{ __html: page.html }} />
     </Layout>

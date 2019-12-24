@@ -66,7 +66,7 @@ class Show {
     })
   }
   get archives() {
-    return this.data.frontmatter.archives.map((data) => {
+    return (this.data.frontmatter.archives || []).map((data) => {
       return Archive.factory(data)
     })
   }
