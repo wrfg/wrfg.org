@@ -8,16 +8,9 @@ fields:
     required: true
   label: Title
 - name: program
-  type: select
-  default: []
+  type: text
   config:
     required: false
-    options: []
-    source:
-      type: pages
-      section: programs
-      file: 
-      path: 
   label: Program
 - name: airshifts
   type: field_group_list
@@ -188,10 +181,6 @@ pages:
 - content/shows/caribbean-runnings.md
 - content/shows/class-chronicles.md
 - content/shows/counterspin.md
-- content/shows/democracy-now-1.md
-- content/shows/democracy-now-2.md
-- content/shows/democracy-now-3.md
-- content/shows/democracy-now-4.md
 - content/shows/democracy-now.md
 - content/shows/different-hues-of-the-blues.md
 - content/shows/doo-wop-rhythm.md
@@ -201,10 +190,6 @@ pages:
 - content/shows/good-morning-blues-1.md
 - content/shows/good-morning-blues-2.md
 - content/shows/good-time-gospel.md
-- content/shows/hard-knock-radio-1.md
-- content/shows/hard-knock-radio-2.md
-- content/shows/hard-knock-radio-3.md
-- content/shows/hard-knock-radio-4.md
 - content/shows/hard-knock-radio.md
 - content/shows/health-issues-today.md
 - content/shows/i-n-i-radio.md
@@ -242,7 +227,6 @@ pages:
 - content/shows/second-opinion.md
 - content/shows/serenata-latina.md
 - content/shows/sister-s-time.md
-- content/shows/sojourner-truth-1.md
 - content/shows/spam-and-grits.md
 - content/shows/speaking-broadly.md
 - content/shows/spectrum.md
