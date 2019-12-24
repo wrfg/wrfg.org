@@ -8,6 +8,8 @@ import Archive from "@/models/archive.js"
 import Duration from "@/components/duration.js"
 import Time from "@/components/time.js"
 
+import MixcloudPlayer from "@/client/mixcloud-player.js"
+
 export default ({ data }) => {
   const page = data.markdownRemark
   const archive = Archive.factory(page)
@@ -20,7 +22,7 @@ export default ({ data }) => {
         <p><Link to={archive.show.slug}>{archive.show.title}</Link></p>
       </>)}
       <h4>Listen</h4>
-      <a href={archive.url}>Listen</a>
+      <MixcloudPlayer url={archive.url} />
       <div dangerouslySetInnerHTML={{ __html: page.html }} />
     </Layout>
   )
