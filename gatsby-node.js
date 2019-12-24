@@ -74,7 +74,9 @@ exports.sourceNodes = ({ actions }) => {
 
     type Frontmatter {
       program: MarkdownRemark @link(by: "frontmatter.title", from: "program")
+      show: MarkdownRemark @link(by: "frontmatter.title", from: "show")
       shows: [MarkdownRemark] @link(by: "frontmatter.program.frontmatter.title", from: "title")
+      archives: [MarkdownRemark] @link(by: "frontmatter.show.frontmatter.title", from: "title")
     }
   `)
 }

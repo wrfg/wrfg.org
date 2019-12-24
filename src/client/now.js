@@ -1,6 +1,6 @@
 import React from "react"
 
-import { ZonedDateTime, ZoneId, DateTimeFormatter } from "@js-joda/core"
+import { ZonedDateTime, ZoneId } from "@js-joda/core"
 import "@js-joda/timezone"
 
 import { Link, useStaticQuery, graphql } from "gatsby"

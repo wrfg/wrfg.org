@@ -1,6 +1,6 @@
 import React from "react"
 
-import { DateTimeFormatter, ChronoField } from "@js-joda/core"
+import { ChronoField } from "@js-joda/core"
 
 export default ({ value }) => {
   const meridiem = value.get(ChronoField.AMPM_OF_DAY) === 0 ? 'am' : 'pm'

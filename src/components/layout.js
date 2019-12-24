@@ -97,6 +97,11 @@ export default ({ children }) => (
               src="/images/facebook/f_logo_RGB-Black_100.png"
               alt="Facebook"
             />
+            <SocialImageLink
+              to="https://www.mixcloud.com/WRFG/"
+              src="/images/mixcloud/BlackOnTransparent.png"
+              alt="Mixcloud"
+            />
           </Right>
         </Clear>
       </ReadableContainer>

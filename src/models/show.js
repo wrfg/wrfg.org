@@ -1,5 +1,7 @@
 import { LocalTime, Duration } from "@js-joda/core"
 
+import Archive from "./archive.js"
+
 const toLocalTime = (time) => {
   let hours = parseInt(time.split(":")[0], 10)
   const minutes = parseInt(time.split(":")[1].substring(0, 2), 10)
@@ -63,8 +65,17 @@ class Show {
       }
     })
   }
+  get archives() {
+    return this.data.frontmatter.archives.map((data) => {
+      return Archive.factory(data)
+    })
+  }
   static factory(data) {
-    return new Show(data)
+    if (data.frontmatter.title) {
+      return new Show(data)
+    }
+
+    return null
   }
 }
 

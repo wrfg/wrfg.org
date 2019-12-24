@@ -4,6 +4,7 @@ import { Link, graphql } from "gatsby"
 import Layout from "@/components/layout.js"
 
 import Show from "@/models/show.js"
+import Archive from "@/models/archive.js"
 
 import Duration from "@/components/duration.js"
 import Time from "@/components/time.js"
@@ -27,6 +28,15 @@ export default ({ data }) => {
         )
       })}
       </ul>
+      <h4>Archives</h4>
+      <ul>
+      {show.archives.map((archive, index) => {
+        return (
+          <li key={index}><Link to={archive.slug}>{archive.title}</Link></li>
+        )
+      })}
+      </ul>
+      <h4>Notes</h4>
       <div dangerouslySetInnerHTML={{ __html: page.html }} />
     </Layout>
   )
@@ -44,6 +54,14 @@ export const query = graphql`
           }
           frontmatter {
             title
+          }
+        }
+        archives {
+          frontmatter {
+            title
+          }
+          fields {
+            slug
           }
         }
         airshifts {
