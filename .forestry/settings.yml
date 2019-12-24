@@ -9,6 +9,8 @@ sections:
   label: Archives
   create: all
   match: "**/*"
+  templates:
+  - archive
 - type: directory
   path: content/programs
   label: Programs
