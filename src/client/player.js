@@ -88,6 +88,7 @@ const Player = () => {
       </button>
       <span css={css`margin-left: .5em`}>LIVE NOW <PulsingRedCircle /></span>
       <audio preload="none" ref={audioElementRef}>
+        controls
         <source src="http://streaming.wrfg.org/" type="audio/mpeg" />
         <track kind="captions" />
       </audio>
