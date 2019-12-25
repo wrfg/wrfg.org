@@ -4,7 +4,6 @@ import { Link, graphql } from "gatsby"
 import Layout from "@/components/layout.js"
 
 import Show from "@/models/show.js"
-import Archive from "@/models/archive.js"
 
 import Duration from "@/components/duration.js"
 import Time from "@/components/time.js"

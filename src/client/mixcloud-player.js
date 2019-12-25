@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react"
+import React, { useRef, useState } from "react"
 
 import parse from "url-parse"
 
@@ -27,7 +27,7 @@ const MixcloudPlayer = ({ url }) => {
 
   const [ state, setState ] = useState("unloaded")
 
-  const [ loading, error ] = useScript({
+  useScript({
     src: 'https://widget.mixcloud.com/media/js/widgetApi.js',
     onload: () => {
       iframe.current.src = initialSrc
@@ -74,7 +74,7 @@ const MixcloudPlayer = ({ url }) => {
 
   return (<>
     {loaded && state === 'unloaded' && (<button onClick={(e) => toggle(e)}>{state === 'paused' || state === 'unloaded' ? 'play' : 'pause'}</button>)}
-    <iframe style={styles} ref={iframe} />
+    <iframe style={styles} ref={iframe} title="Mixcloud music player" />
   </>)
 }
 

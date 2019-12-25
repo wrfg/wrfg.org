@@ -5,9 +5,6 @@ import Layout from "@/components/layout.js"
 
 import Archive from "@/models/archive.js"
 
-import Duration from "@/components/duration.js"
-import Time from "@/components/time.js"
-
 import MixcloudPlayer from "@/client/mixcloud-player.js"
 
 export default ({ data }) => {
