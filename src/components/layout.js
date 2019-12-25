@@ -8,6 +8,8 @@ import { ReadableContainer, Section, Clear, Left, Right } from "./parts.js"
 
 import { LoadablePlayer } from "../client/player.js"
 
+import { Helmet } from "react-helmet";
+
 const NavLink = ({ children, ...props }) => {
   return (
     <Link {...props} css={css`
@@ -55,6 +57,14 @@ const SocialImageLink = ({ to, src, alt }) => {
 
 export default ({ children }) => (
   <>
+    <Helmet>
+      <meta charSet="utf-8" />
+      <meta name="apple-mobile-web-app-title" content="WRFG" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <link rel="apple-touch-startup-image" href="/images/logo-disk-white.png" />
+      <link rel="apple-touch-icon" href="/images/logo-disk-white.png" />
+      <title>WRFG</title>
+    </Helmet>
     <Global
       styles={css`
         body {
