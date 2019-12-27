@@ -113,7 +113,7 @@ export default ({ children }) => (
     </Section>
     <Section>
       <ReadableContainer>
-        <Player />
+        <Player id='stream' />
       </ReadableContainer>
     </Section>
     <ReadableContainer>

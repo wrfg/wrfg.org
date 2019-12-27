@@ -1,27 +1,25 @@
-import React, { Fragment, useState, useRef } from "react"
+import React, { Fragment, useState, useCallback } from "react"
 
 const Context = React.createContext()
 
 const Wrapper = ({ children }) => {
   const [ registry, setRegistry ] = useState({})
-  const [ state, setState ] = useState('paused')
 
-  const register = (id, player) => {
-    console.log(`registered ${id}`)
+  const register = useCallback((id, player) => {
     const addition = {}
     addition[id] = player
-    setRegistry(Object.assign({}, registry, addition))
-  }
+    setRegistry((registry) => Object.assign({}, registry, addition))
+  }, [])
 
-  const play = () => registry.stream.play()
-  const pause = () => registry.stream.pause()
+  const seize = useCallback((seizer) => {
+    const toPause = Object.entries(registry).filter(([ id, player ]) => id !== seizer)
+    toPause.forEach(([ id, player ]) => player.pause())
+  }, [registry])
 
   const value = {
     register: register,
-    play: play,
-    pause: pause,
-    state: state,
-    setState: setState,
+    seize: seize,
+    registry: registry,
   }
 
   return <Context.Provider value={value}>

@@ -61,43 +61,55 @@ const Piece = ({ children }) => {
 
 const streamUrl = 'http://streaming.wrfg.org/'
 
-const useStreamPlayer = (streamUrl, setState) => {
-  const audioElementRef = useRef(null)
+const useStreamPlayer = (id, streamUrl) => {
+  const [ state, setState ] = useState('paused')
+  const { register, seize } = useContext(PersistentPlayerContext)
 
-  const onPlay = () => {
+  const audioElementRef = useRef(null)
+  const play = () => audioElementRef.current.play()
+  const pause = () => audioElementRef.current.pause()
+
+  const onPlay = useRef(null)
+  onPlay.current = () => {
+    seize(id)
     audioElementRef.current.currentTime = 0
     setState('playing')
   }
 
-  const onPause = () => {
+  const onPause = useRef(null)
+  onPause.current = () => {
     setState('paused')
   }
 
-  const player = {
-    play: () => audioElementRef.current.play(),
-    pause: () => {},
-    element: (
-      <audio preload="none" ref={audioElementRef} onPlay={() => onPlay()} onPause={() => onPause()}>
-        controls
-        <source src={streamUrl} type="audio/mpeg" />
-        <track kind="captions" />
-      </audio>
-    ),
-  }
+  useEffect(() => {
+    register(id, {
+      pause: pause,
+      element: (
+        <audio preload="none" ref={audioElementRef} onPlay={() => onPlay.current()} onPause={() => onPause.current()}>
+          controls
+          <source src={streamUrl} type="audio/mpeg" />
+          <track kind="captions" />
+        </audio>
+      ),
+    })
+  }, [id, register, streamUrl])
 
-  return player
+  return {
+    play: play,
+    pause: pause,
+    state: state,
+  }
 }
 
-const Player = () => {
+const Player = ({ id }) => {
   const shows = useShows()
   const [ now ] = zeitgeist(shows)
 
-  const { register, play, pause, state, setState } = useContext(PersistentPlayerContext)
-  const player = useStreamPlayer(streamUrl, setState)
-
-  useEffect(() => {
-    register('stream', player)
-  }, [])
+  const {
+    play,
+    pause,
+    state,
+  } = useStreamPlayer(id, streamUrl)
 
   return (
     <>
