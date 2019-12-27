@@ -9,12 +9,11 @@ class Program {
     return this.data.fields.slug
   }
   static factory(data) {
-    const program = new Program(data)
-    if (!program.title) {
+    if (data === null) {
       return null
     }
 
-    return program
+    return new Program(data)
   }
 }
 
