@@ -4,8 +4,6 @@ import { Link } from "gatsby"
 
 import { Global, css } from "@emotion/core"
 
-import { HelmetProvider } from "react-helmet-async"
-
 import Head from './head.js'
 
 import { ReadableContainer, Section, Clear, Left, Right } from "./parts.js"

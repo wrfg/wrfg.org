@@ -1,6 +1,6 @@
-import React, { Fragment } from "react"
+import React from "react"
 
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "@/components/layout.js"
 
@@ -8,9 +8,7 @@ import Now from "@/client/now.js"
 
 import DailySchedule from "@/client/daily-schedule.js"
 
-import Show, { sortByStart } from "@/models/show.js"
-
-import Time from "@/components/time.js"
+import Show from "@/models/show.js"
 
 export default ({ data }) => {
   const shows = data.allMarkdownRemark.edges.map((edge) => edge.node).map(Show.factory)
