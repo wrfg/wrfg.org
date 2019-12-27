@@ -10,14 +10,14 @@ import Time from "@/components/time.js"
 
 export default ({ data }) => {
   const page = data.markdownRemark
-  const show = new Show(page)
+  const show = Show.factory(page)
 
   return (
     <Layout>
       <h1>{show.title}</h1>
-      {show.program && show.program.frontmatter.title && (<>
+      {show.program && (<>
         <h4>Program</h4>
-        <p><Link to={show.program.fields.slug}>{show.program.frontmatter.title}</Link></p>
+        <p><Link to={show.program.slug}>{show.program.title}</Link></p>
       </>)}
       <h4>Airshifts</h4>
       <ul>

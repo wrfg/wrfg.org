@@ -4,6 +4,7 @@ import { LocalTime, Duration, ZonedDateTime, ZoneId } from "@js-joda/core"
 import "@js-joda/timezone"
 
 import Archive from "./archive.js"
+import Program from "./program.js"
 
 const toLocalTime = (time) => {
   let hours = parseInt(time.split(":")[0], 10)
@@ -56,7 +57,7 @@ class Show {
     return this.start.plus(this.duration)
   }
   get program() {
-    return this.data.frontmatter.program
+    return Program.factory(this.data.frontmatter.program)
   }
   get airshifts() {
     return this.data.frontmatter.airshifts.map((airshift) => {
