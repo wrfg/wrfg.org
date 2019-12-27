@@ -52,6 +52,7 @@ const Player = () => {
 
   const onPlay = () => {
     setState('playing')
+    audioElementRef.current.currentTime = 0
   }
 
   const onPause = () => {
