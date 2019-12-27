@@ -1,4 +1,6 @@
-import React, { Fragment } from "react"
+import React, { Fragment, useState } from "react"
+
+import { css } from "@emotion/core"
 
 import { Link, useStaticQuery, graphql } from "gatsby"
 
@@ -6,8 +8,27 @@ import Show, { sortByStart } from "@/models/show.js"
 
 import Time from "@/components/time.js"
 
-const DailySchedule = ({ shows }) => {
+const Day = ({ day, airshifts }) => {
+  return (
+    <Fragment key={day}>
+      <h2>{day}</h2>
+      <table>
+        <tbody>
+          {airshifts.map(([show, airshift]) => {
+            return (
+              <tr key={show.id}>
+                <td><Time value={airshift.start} /> - <Time value={airshift.end} /></td>
+                <td><Link to={show.slug}>{show.title}</Link></td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </Fragment>
+  )
+}
 
+const DailySchedule = ({ shows }) => {
   const data = useStaticQuery(
     graphql`
       {
@@ -32,39 +53,38 @@ const DailySchedule = ({ shows }) => {
       }
     `
   )
+
   const allAirshifts = shows.map((show) => {
     return show.airshifts.map((airshift) => [show, airshift])
   }).reduce((accumulation, item) => accumulation.concat(item), [])
 
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
+  const [ day, setDay ] = useState(days[0])
+  const airshifts = allAirshifts.filter(([show, airshift]) => airshift.day === day).sort((x, y) => sortByStart(x[1], y[1]))
+
   return (
     <>
-      {days.map((day) => {
-        const airshifts = allAirshifts.filter(([show, airshift]) => airshift.day === day).sort((x, y) => sortByStart(x[1], y[1]))
-
-        if (airshifts.length === 0) {
-          return null
-        }
-
+      {days.map((givenDay) => {
         return (
-          <Fragment key={day}>
-            <h2>{day}</h2>
-            <table>
-              <tbody>
-                {airshifts.map(([show, airshift]) => {
-                  return (
-                    <tr key={show.id}>
-                      <td><Time value={airshift.start} /> - <Time value={airshift.end} /></td>
-                      <td><Link to={show.slug}>{show.title}</Link></td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
-          </Fragment>
+          <button
+            onClick={(e) => setDay(givenDay)}
+            css={css`
+              border: none;
+              color: blue;
+              text-decoration: underline;
+              background: transparent;
+              height: 1.6em;
+              text-align: center;
+              display: inline-block;
+            `}
+            key={givenDay}
+          >
+            {givenDay}
+          </button>
         )
       })}
+      <Day day={day} airshifts={airshifts} />
     </>
   )
 }
