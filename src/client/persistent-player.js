@@ -1,6 +1,9 @@
 import React, { Fragment, useState, useCallback } from "react"
 
-const Context = React.createContext()
+const Context = React.createContext({
+  register: () => {},
+  seize: () => {},
+})
 
 const Wrapper = ({ children }) => {
   const [ registry, setRegistry ] = useState({})
