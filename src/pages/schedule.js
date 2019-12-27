@@ -8,15 +8,17 @@ import Now from "@/client/now.js"
 
 import DailySchedule from "@/client/daily-schedule.js"
 
-import Show from "@/models/show.js"
+import Show, { zeitgeist } from "@/models/show.js"
 
 export default ({ data }) => {
   const shows = data.allMarkdownRemark.edges.map((edge) => edge.node).map(Show.factory)
 
+  const [ now, next ] = zeitgeist(shows)
+
   return (
     <Layout>
       <h1>Now</h1>
-      <Now shows={shows} />
+      <Now now={now} next={next} />
       <h1>Schedule</h1>
       <DailySchedule shows={shows}  />
     </Layout>

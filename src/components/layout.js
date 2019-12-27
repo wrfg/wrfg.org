@@ -8,7 +8,7 @@ import Head from './head.js'
 
 import { ReadableContainer, Section, Clear, Left, Right } from "./parts.js"
 
-import { LoadablePlayer } from "../client/player.js"
+import Player from "../client/player.js"
 
 const NavLink = ({ children, ...props }) => {
   return (
@@ -111,7 +111,7 @@ export default ({ children }) => (
     </Section>
     <Section>
       <ReadableContainer>
-        <LoadablePlayer />
+        <Player />
       </ReadableContainer>
     </Section>
     <ReadableContainer>

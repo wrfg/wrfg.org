@@ -1,4 +1,7 @@
-import { LocalTime, Duration } from "@js-joda/core"
+import { useStaticQuery, graphql } from "gatsby"
+
+import { LocalTime, Duration, ZonedDateTime, ZoneId } from "@js-joda/core"
+import "@js-joda/timezone"
 
 import Archive from "./archive.js"
 
@@ -109,5 +112,87 @@ const sortByStart = (x, y) => {
   throw new Error(`Somehow two times are not equal, not greater, and not less than each other`)
 }
 
+const spans = (show, now) => {
+  let next = now
+  while (next.dayOfWeek().name().toLowerCase() !== show.day.toLowerCase()) {
+    next = next.plusDays(1)
+  }
+  const start = next.with(show.start)
+  const end = start.plus(show.duration)
+
+  const atOrAfterStart = start.equals(now) || start.isBefore(now)
+  const beforeEnd = end.isAfter(now)
+
+  return atOrAfterStart && beforeEnd
+}
+
+const zeitgeist = (shows) => {
+  const time = ZonedDateTime.now(ZoneId.of("America/New_York"))
+
+  const airshifts = shows.map((show) => show.airshifts.map((airshift) => [show, airshift])).reduce((accumulation, item) => accumulation.concat(item), []).sort((x, y) => sortByStart(x[1], y[1]))
+
+  const index = airshifts.reduce((accumulation, [show, airshift], index) => {
+    if (accumulation !== null) {
+      return accumulation
+    }
+
+    if (spans(airshift, time)) {
+      return index
+    }
+
+    return null
+  }, null)
+
+  const now = index !== null
+    ? {
+      airshift: airshifts[index][1],
+      show: airshifts[index][0],
+    }
+    : null
+
+  const next = airshifts[index + 1]
+    ? {
+      airshift: airshifts[index + 1][1],
+      show: airshifts[index + 1][0],
+    }
+    : null
+
+  return [
+    now,
+    next,
+  ]
+}
+
+const useShows = () => {
+  const data = useStaticQuery(
+    graphql`
+      {
+      allMarkdownRemark(filter: {fields: {kind: {eq: "shows"}}}) {
+        edges {
+          node {
+            id
+            frontmatter {
+              title
+              airshifts {
+                start
+                duration
+                day
+              }
+            }
+            fields {
+              slug
+            }
+          }
+        }
+      }
+    }
+    `
+  )
+
+  const shows = data.allMarkdownRemark.edges.map((edge) => edge.node).map(Show.factory)
+
+  return shows
+}
+
 export default Show
-export { all, sortByStart }
+export { all, sortByStart, zeitgeist, useShows }
