@@ -11,7 +11,6 @@ import Time from "@/components/time.js"
 const Day = ({ day, airshifts }) => {
   return (
     <Fragment key={day}>
-      <h2>{day}</h2>
       <table>
         <tbody>
           {airshifts.map(([show, airshift]) => {
@@ -65,25 +64,27 @@ const DailySchedule = ({ shows }) => {
 
   return (
     <>
-      {days.map((givenDay) => {
-        return (
-          <button
-            onClick={(e) => setDay(givenDay)}
-            css={css`
-              border: none;
-              color: blue;
-              text-decoration: underline;
-              background: transparent;
-              height: 1.6em;
-              text-align: center;
-              display: inline-block;
-            `}
-            key={givenDay}
-          >
-            {givenDay}
-          </button>
-        )
-      })}
+      <p>
+        {days.map((givenDay) => {
+          return (
+            <button
+              onClick={(e) => setDay(givenDay)}
+              css={css`
+                border: none;
+                color: ${day === givenDay ? 'black' : 'blue'};
+                text-decoration: ${day === givenDay ? 'none' : 'underline'};
+                background: transparent;
+                height: 1.6em;
+                text-align: center;
+                display: inline-block;
+              `}
+              key={givenDay}
+            >
+              {givenDay}
+            </button>
+          )
+        })}
+      </p>
       <Day day={day} airshifts={airshifts} />
     </>
   )
