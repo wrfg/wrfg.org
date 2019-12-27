@@ -31,6 +31,27 @@ const toDuration = (duration) => {
   return Duration.ofHours(hours).plusMinutes(minutes)
 }
 
+class Airshift {
+  constructor(data) {
+    this.data = data
+  }
+  get day() {
+    return this.data.day
+  }
+  get start() {
+    return toLocalTime(this.data.start)
+  }
+  get end() {
+    return toLocalTime(this.data.start).plus(this.duration)
+  }
+  get duration() {
+    return toDuration(this.data.duration)
+  }
+  static factory(data) {
+    return new Airshift(data)
+  }
+}
+
 class Show {
   constructor(data) {
     this.data = data
@@ -60,14 +81,7 @@ class Show {
     return Program.factory(this.data.frontmatter.program)
   }
   get airshifts() {
-    return this.data.frontmatter.airshifts.map((airshift) => {
-      return {
-        day: airshift.day,
-        start: toLocalTime(airshift.start),
-        duration: toDuration(airshift.duration),
-        end: toLocalTime(airshift.start).plus(toDuration(airshift.duration)),
-      }
-    })
+    return this.data.frontmatter.airshifts.map((data) => Airshift.factory(data))
   }
   get archives() {
     return (this.data.frontmatter.archives || []).map((data) => {
