@@ -4,6 +4,7 @@ import { css } from "@emotion/core"
 
 import { Link, graphql } from "gatsby"
 
+import now from "@/now.js"
 import Layout from "@/components/layout.js"
 import Time from "@/components/time.js"
 
@@ -42,10 +43,12 @@ const DailySchedule = ({ shows }) => {
     return show.airshifts.map((airshift) => [show, airshift])
   }).reduce((accumulation, item) => accumulation.concat(item), [])
 
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
 
-  const [ day, setDay ] = useState(days[0])
-  const airshifts = allAirshifts.filter(([show, airshift]) => airshift.day === day).sort((x, y) => sortByStart(x[1], y[1]))
+  const [ day, setDay ] = useState(now.dayOfWeek().name().toLowerCase())
+  const airshifts = allAirshifts
+    .filter(([show, airshift]) => airshift.day.toLowerCase() === day.toLowerCase())
+    .sort((x, y) => sortByStart(x[1], y[1]))
 
   return (
     <>
@@ -56,8 +59,10 @@ const DailySchedule = ({ shows }) => {
               onClick={(e) => setDay(givenDay)}
               css={css`
                 border: none;
+                text-transform: capitalize;
                 color: ${day === givenDay ? 'black' : 'blue'};
                 text-decoration: ${day === givenDay ? 'none' : 'underline'};
+                font-family: serif;
                 background: transparent;
                 height: 1.6em;
                 text-align: center;
