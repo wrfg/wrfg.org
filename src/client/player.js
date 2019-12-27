@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useContext } from "react"
+import React, { useRef, useMemo, useCallback } from "react"
 
 import { Link } from "gatsby"
 
@@ -9,7 +9,7 @@ import { yellow } from "@/components/colors.js"
 
 import { useShows, zeitgeist } from "@/models/show.js"
 
-import { Context as PersistentPlayerContext } from './persistent-player.js'
+import { Context as PersistentPlayerContext, usePersistentPlayer } from './persistent-player.js'
 
 const PulsingRedCircle = () => {
   return (
@@ -62,37 +62,39 @@ const Piece = ({ children }) => {
 const streamUrl = 'http://streaming.wrfg.org/'
 
 const useStreamPlayer = (id, streamUrl) => {
-  const [ state, setState ] = useState('paused')
-  const { register, seize } = useContext(PersistentPlayerContext)
-
   const audioElementRef = useRef(null)
-  const play = () => audioElementRef.current.play()
-  const pause = () => audioElementRef.current.pause()
+  const onPlay = useRef(() => {})
+  const onPause = useRef(() => {})
+  const element = useMemo(() => {
+    return (
+      <audio preload="none" ref={audioElementRef} onPlay={() => onPlay.current()} onPause={() => onPause.current()}>
+        controls
+        <source src={streamUrl} type="audio/mpeg" />
+        <track kind="captions" />
+      </audio>
+    )
+  }, [])
 
-  const onPlay = useRef(null)
+  const {
+    state,
+    setState,
+    play,
+    pause,
+  } = usePersistentPlayer({
+    id: id,
+    play: useCallback(() => audioElementRef.current.play(), []),
+    pause: useCallback(() => audioElementRef.current.pause(), []),
+    element: element,
+  })
+
   onPlay.current = () => {
-    seize(id)
     audioElementRef.current.currentTime = 0
     setState('playing')
   }
 
-  const onPause = useRef(null)
   onPause.current = () => {
     setState('paused')
   }
-
-  useEffect(() => {
-    register(id, {
-      pause: pause,
-      element: (
-        <audio preload="none" ref={audioElementRef} onPlay={() => onPlay.current()} onPause={() => onPause.current()}>
-          controls
-          <source src={streamUrl} type="audio/mpeg" />
-          <track kind="captions" />
-        </audio>
-      ),
-    })
-  }, [id, register, streamUrl])
 
   return {
     play: play,
