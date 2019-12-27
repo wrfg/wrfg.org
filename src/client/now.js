@@ -23,35 +23,9 @@ const spans = (show, now) => {
   return atOrAfterStart && beforeEnd
 }
 
-const Now = () => {
+const Now = ({ shows }) => {
   const now = ZonedDateTime.now(ZoneId.of("America/New_York"))
 
-  const data = useStaticQuery(
-    graphql`
-      {
-      allMarkdownRemark(filter: {fields: {kind: {eq: "shows"}}}) {
-        edges {
-          node {
-            id
-            frontmatter {
-              title
-              airshifts {
-                start
-                duration
-                day
-              }
-            }
-            fields {
-              slug
-            }
-          }
-        }
-      }
-    }
-    `
-  )
-
-  const shows = data.allMarkdownRemark.edges.map((edge) => edge.node).map(Show.factory)
   const airshifts = shows.map((show) => show.airshifts.map((airshift) => [show, airshift])).reduce((accumulation, item) => accumulation.concat(item), []).sort((x, y) => sortByStart(x[1], y[1]))
 
   const index = airshifts.reduce((accumulation, [show, airshift], index) => {

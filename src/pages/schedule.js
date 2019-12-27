@@ -16,7 +16,7 @@ export default ({ data }) => {
   return (
     <Layout>
       <h1>Now</h1>
-      <Now />
+      <Now shows={shows} />
       <h1>Schedule</h1>
       <DailySchedule shows={shows}  />
     </Layout>
