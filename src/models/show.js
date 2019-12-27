@@ -1,7 +1,8 @@
 import { useStaticQuery, graphql } from "gatsby"
 
-import { LocalTime, Duration, ZonedDateTime, ZoneId } from "@js-joda/core"
-import "@js-joda/timezone"
+import { LocalTime, Duration } from "@js-joda/core"
+
+import now from "@/now.js"
 
 import Archive from "./archive.js"
 import Program from "./program.js"
@@ -142,7 +143,7 @@ const spans = (show, now) => {
 }
 
 const zeitgeist = (shows) => {
-  const time = ZonedDateTime.now(ZoneId.of("America/New_York"))
+  const time = now
 
   const airshifts = shows.map((show) => show.airshifts.map((airshift) => [show, airshift])).reduce((accumulation, item) => accumulation.concat(item), []).sort((x, y) => sortByStart(x[1], y[1]))
 
@@ -158,7 +159,7 @@ const zeitgeist = (shows) => {
     return null
   }, null)
 
-  const now = index !== null
+  const current = index !== null
     ? {
       airshift: airshifts[index][1],
       show: airshifts[index][0],
@@ -173,7 +174,7 @@ const zeitgeist = (shows) => {
     : null
 
   return [
-    now,
+    current,
     next,
   ]
 }

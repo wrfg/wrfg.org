@@ -9,10 +9,10 @@ import Time from "@/components/time.js"
 
 import Show, { sortByStart, zeitgeist } from "@/models/show.js"
 
-const Now = ({ now, next }) => {
+const Currently = ({ current, next }) => {
   return (
     <>
-      <p><Link to={now.show.slug}>{now.show.title}</Link> is currently on air.</p>
+      <p><Link to={current.show.slug}>{current.show.title}</Link> is currently on air.</p>
       {next ? (<p>Up next is <Link to={next.show.slug}>{next.show.title}</Link>.</p>) : null}
     </>
   )
@@ -78,12 +78,12 @@ const DailySchedule = ({ shows }) => {
 export default ({ data }) => {
   const shows = data.allMarkdownRemark.edges.map((edge) => edge.node).map(Show.factory)
 
-  const [ now, next ] = zeitgeist(shows)
+  const [ current, next ] = zeitgeist(shows)
 
   return (
     <Layout>
       <h1>Now</h1>
-      <Now now={now} next={next} />
+      <Currently current={current} next={next} />
       <h1>Schedule</h1>
       <DailySchedule shows={shows}  />
     </Layout>
