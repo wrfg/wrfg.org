@@ -68,6 +68,8 @@ export default ({ children }) => (
           -moz-box-sizing: border-box;
           -webkit-box-sizing: border-box;
           box-sizing: border-box;
+          color: black;
+          line-height: 1.4em;
         }
       `}
     />

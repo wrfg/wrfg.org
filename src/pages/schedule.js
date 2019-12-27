@@ -60,7 +60,6 @@ const DailySchedule = ({ shows }) => {
               css={css`
                 border: none;
                 text-transform: capitalize;
-                color: ${day === givenDay ? 'black' : 'blue'};
                 text-decoration: ${day === givenDay ? 'none' : 'underline'};
                 font-family: serif;
                 background: transparent;

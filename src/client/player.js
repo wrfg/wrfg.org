@@ -5,6 +5,7 @@ import { Link } from "gatsby"
 import { css } from "@emotion/core"
 
 import Time from "@/components/time.js"
+import { yellow } from "@/components/colors.js"
 
 import { useShows, zeitgeist } from "@/models/show.js"
 
@@ -24,7 +25,7 @@ const PulsingRedCircle = () => {
           }
         }
 
-        color: red;
+        color: ${yellow};
         opacity: 1;
         animation: pulsingAnimation 2s infinite;
       `}
