@@ -59,11 +59,45 @@ const Piece = ({ children }) => {
   )
 }
 
+const streamUrl = 'http://streaming.wrfg.org/'
+
+const useStreamPlayer = (streamUrl, setState) => {
+  const audioElementRef = useRef(null)
+
+  const onPlay = () => {
+    audioElementRef.current.currentTime = 0
+    setState('playing')
+  }
+
+  const onPause = () => {
+    setState('paused')
+  }
+
+  const player = {
+    play: () => audioElementRef.current.play(),
+    pause: () => {},
+    element: (
+      <audio preload="none" ref={audioElementRef} onPlay={() => onPlay()} onPause={() => onPause()}>
+        controls
+        <source src={streamUrl} type="audio/mpeg" />
+        <track kind="captions" />
+      </audio>
+    ),
+  }
+
+  return player
+}
+
 const Player = () => {
   const shows = useShows()
   const [ now ] = zeitgeist(shows)
 
-  const { play, pause, state } = useContext(PersistentPlayerContext)
+  const { register, play, pause, state, setState } = useContext(PersistentPlayerContext)
+  const player = useStreamPlayer(streamUrl, setState)
+
+  useEffect(() => {
+    register('stream', player)
+  }, [])
 
   return (
     <>

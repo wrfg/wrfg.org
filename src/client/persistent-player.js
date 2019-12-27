@@ -1,39 +1,34 @@
-import React, { useState, useRef } from "react"
+import React, { Fragment, useState, useRef } from "react"
 
-const Context = React.createContext({
-  install: () => {},
-  live: null,
-})
+const Context = React.createContext()
 
 const Wrapper = ({ children }) => {
-  const audioElementRef = useRef(null)
+  const [ registry, setRegistry ] = useState({})
   const [ state, setState ] = useState('paused')
 
-  const play = () => audioElementRef.current.play()
-  const pause = () => audioElementRef.current.pause()
+  const register = (id, player) => {
+    console.log(`registered ${id}`)
+    const addition = {}
+    addition[id] = player
+    setRegistry(Object.assign({}, registry, addition))
+  }
+
+  const play = () => registry.stream.play()
+  const pause = () => registry.stream.pause()
 
   const value = {
+    register: register,
     play: play,
     pause: pause,
     state: state,
-  }
-
-  const onPlay = () => {
-    setState('playing')
-    audioElementRef.current.currentTime = 0
-  }
-
-  const onPause = () => {
-    setState('paused')
+    setState: setState,
   }
 
   return <Context.Provider value={value}>
     {children}
-    <audio preload="none" ref={audioElementRef} onPlay={() => onPlay()} onPause={() => onPause()}>
-      controls
-      <source src="http://streaming.wrfg.org/" type="audio/mpeg" />
-      <track kind="captions" />
-    </audio>
+    {Object.entries(registry).map(([ id, player ]) => {
+      return <Fragment key={id}>{player.element}</Fragment>
+    })}
   </Context.Provider>
 }
 
