@@ -63,7 +63,7 @@ const Player = () => {
   const audioElementRef = useRef(null)
   const shows = useShows()
 
-  const [ now, next ] = zeitgeist(shows)
+  const [ now ] = zeitgeist(shows)
 
   const toggle = () => {
     if (state === "paused") {

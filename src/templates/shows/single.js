@@ -5,7 +5,6 @@ import Layout from "@/components/layout.js"
 
 import Show from "@/models/show.js"
 
-import Duration from "@/components/duration.js"
 import Time from "@/components/time.js"
 
 const Range = ({ start, end }) => {

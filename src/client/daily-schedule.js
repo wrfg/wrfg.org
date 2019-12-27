@@ -2,9 +2,9 @@ import React, { Fragment, useState } from "react"
 
 import { css } from "@emotion/core"
 
-import { Link, useStaticQuery, graphql } from "gatsby"
+import { Link } from "gatsby"
 
-import Show, { sortByStart } from "@/models/show.js"
+import { sortByStart } from "@/models/show.js"
 
 import Time from "@/components/time.js"
 
@@ -28,31 +28,6 @@ const Day = ({ day, airshifts }) => {
 }
 
 const DailySchedule = ({ shows }) => {
-  const data = useStaticQuery(
-    graphql`
-      {
-        allMarkdownRemark(filter: {fields: {kind: {eq: "shows"}}}) {
-          edges {
-            node {
-              id
-              frontmatter {
-                title
-                airshifts {
-                  start
-                  duration
-                  day
-                }
-              }
-              fields {
-                slug
-              }
-            }
-          }
-        }
-      }
-    `
-  )
-
   const allAirshifts = shows.map((show) => {
     return show.airshifts.map((airshift) => [show, airshift])
   }).reduce((accumulation, item) => accumulation.concat(item), [])
