@@ -30,53 +30,33 @@ const PulsingRedCircle = () => {
   )
 }
 
-/*
-const readStatus = async () => {
-  const body = await fetch("http://streaming.wrfg.org/7.html")
-  const [
-    currentListeners,
-    streamStatus,
-    peakListeners,
-    maxListeners,
-    uniqueListeners,
-    bitRate,
-    songTitle,
-  ] = body.split(",")
-
-  return {
-    currentListeners: currentListeners,
-    streamStatus: streamStatus,
-    peakListeners: peakListeners,
-    maxListeners: maxListeners,
-    uniqueListeners: uniqueListeners,
-    bitRate: bitRate,
-    songTitle: songTitle,
-  }
-}
-*/
-
 const Player = () => {
   // bug: operating system media buttons can act on the <audio> element, causing it to play, but the ui doesn't reflect that state
   // bug: full page reload causes player to stop
   const [ state, setState ] = useState("paused")
+  const audioElementRef = useRef(null)
 
   const toggle = () => {
     if (state === "paused") {
       audioElementRef.current.play()
-      setState("playing")
       return;
     }
 
     if (state === "playing") {
       audioElementRef.current.pause()
-      setState("paused")
       return;
     }
 
     throw new Error(`Invalid state ${state}`)
   }
 
-  const audioElementRef = useRef(null)
+  const onPlay = () => {
+    setState('playing')
+  }
+
+  const onPause = () => {
+    setState('paused')
+  }
 
   return (
     <>
@@ -87,7 +67,7 @@ const Player = () => {
         {state === "playing" ? "◼️" : "▶︎"}
       </button>
       <span css={css`margin-left: .5em`}>LIVE NOW <PulsingRedCircle /></span>
-      <audio preload="none" ref={audioElementRef}>
+      <audio preload="none" ref={audioElementRef} onPlay={() => onPlay()} onPause={() => onPause()}>
         controls
         <source src="http://streaming.wrfg.org/" type="audio/mpeg" />
         <track kind="captions" />
