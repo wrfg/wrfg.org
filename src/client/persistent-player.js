@@ -43,7 +43,7 @@ const Wrapper = ({ children }) => {
   const pause = useCallback((id) => {
     reset()
     registry[id].pause()
-  }, [registry])
+  }, [registry, reset])
 
   const value = {
     registry: registry,
@@ -78,7 +78,7 @@ const usePersistentPlayer = ({ id, play, pause, element, label }) => {
     return () => {
       unregister(id)
     }
-  }, [register, id, active, play, pause, element, label])
+  }, [register, id, active, play, pause, element, label, unregister])
 
   const state = active === id ? 'playing' : 'paused'
   return {

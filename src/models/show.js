@@ -1,3 +1,5 @@
+import { useMemo } from "react"
+
 import { useStaticQuery, graphql } from "gatsby"
 
 import { LocalTime, Duration } from "@js-joda/core"
@@ -205,7 +207,7 @@ const useShows = () => {
     `
   )
 
-  const shows = data.allMarkdownRemark.edges.map((edge) => edge.node).map(Show.factory)
+  const shows = useMemo(() => data.allMarkdownRemark.edges.map((edge) => edge.node).map(Show.factory), [data])
 
   return shows
 }

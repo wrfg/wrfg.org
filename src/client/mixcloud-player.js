@@ -6,8 +6,6 @@ import parse from "url-parse"
 
 import useScript from 'react-script-hook'
 
-import Loadable from "@loadable/component"
-
 import { usePersistentPlayer } from './persistent-player.js'
 import PlayPause from './play-pause.js'
 
@@ -92,7 +90,7 @@ const MixcloudPlayer = ({ title, slug, url }) => {
   }
 
   return (<>
-    <PlayPause play={play} pause={pause} state={state} />{' '}
+    <PlayPause play={play} disabled={!loaded} pause={pause} state={state} />{' '}
     {title}
   </>)
 }
