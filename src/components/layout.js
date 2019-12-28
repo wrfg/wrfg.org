@@ -8,7 +8,9 @@ import Head from './head.js'
 
 import { ReadableContainer, Section, Clear, Left, Right } from "./parts.js"
 
-import Player from "../client/player.js"
+import { useStreamPlayer } from "@/client/player.js"
+import { Context as PersistentPlayerContext } from "@/client/persistent-player.js"
+import PlayPause from '@/client/play-pause.js'
 
 const NavLink = ({ children, ...props }) => {
   return (
@@ -55,69 +57,86 @@ const SocialImageLink = ({ to, src, alt }) => {
   )
 }
 
-export default ({ children }) => (
-  <>
-    <Head />
-    <Global
-      styles={css`
-        body {
-          margin: 0;
-        }
+export default ({ children }) => {
+  useStreamPlayer('stream')
 
-        *, *:before, *:after {
-          -moz-box-sizing: border-box;
-          -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-          color: black;
-          line-height: 1.4em;
-        }
-      `}
-    />
-    <Section>
-      <ReadableContainer>
-        <Clear>
-          <Left>
-            <Link to="/">
-              <img
-                src="/images/logo.gif"
-                alt="WRFG"
-                css={css`
-                  height: 1.6em;
-                  margin-right: 0.6em;
-                `}
+  return (
+    <>
+      <Head />
+      <Global
+        styles={css`
+          body {
+            margin: 0;
+          }
+
+          *, *:before, *:after {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            color: black;
+            line-height: 1.4em;
+          }
+        `}
+      />
+      <Section>
+        <ReadableContainer>
+          <Clear>
+            <Left>
+              <Link to="/">
+                <img
+                  src="/images/logo.gif"
+                  alt="WRFG"
+                  css={css`
+                    height: 1.6em;
+                    margin-right: 0.6em;
+                  `}
+                />
+              </Link>
+              <NavLink to="/about">About</NavLink>
+              <NavLink to="/schedule">Schedule</NavLink>
+              <NavLink to="/support">Support</NavLink>
+            </Left>
+            <Right>
+              <SocialImageLink
+                to="https://www.instagram.com/wrfgatlanta/"
+                src="/images/instagram/glyph-logo_May2016.png"
+                alt="Instagram"
               />
-            </Link>
-            <NavLink to="/about">About</NavLink>
-            <NavLink to="/schedule">Schedule</NavLink>
-            <NavLink to="/support">Support</NavLink>
-          </Left>
-          <Right>
-            <SocialImageLink
-              to="https://www.instagram.com/wrfgatlanta/"
-              src="/images/instagram/glyph-logo_May2016.png"
-              alt="Instagram"
-            />
-            <SocialImageLink
-              to="https://www.facebook.com/pg/WRFG89.3/"
-              src="/images/facebook/f_logo_RGB-Black_100.png"
-              alt="Facebook"
-            />
-            <SocialImageLink
-              to="https://www.mixcloud.com/WRFG/"
-              src="/images/mixcloud/BlackOnTransparent.png"
-              alt="Mixcloud"
-            />
-          </Right>
-        </Clear>
-      </ReadableContainer>
-    </Section>
-    <Section>
+              <SocialImageLink
+                to="https://www.facebook.com/pg/WRFG89.3/"
+                src="/images/facebook/f_logo_RGB-Black_100.png"
+                alt="Facebook"
+              />
+              <SocialImageLink
+                to="https://www.mixcloud.com/WRFG/"
+                src="/images/mixcloud/BlackOnTransparent.png"
+                alt="Mixcloud"
+              />
+            </Right>
+          </Clear>
+        </ReadableContainer>
+      </Section>
+      <Section>
+        <ReadableContainer>
+          <PersistentPlayerContext.Consumer>
+            {({ registry, active, play, pause }) => {
+              return Object.entries(registry).map(([ id, player ]) => {
+                return <div key={id}>
+                  <PlayPause
+                    play={() => play(id)}
+                    pause={() => pause(id)}
+                    state={active === id ? 'playing' : 'paused'}
+                  />{' '}
+                  {player.label || id}
+                </div>
+              })
+            }}
+          </PersistentPlayerContext.Consumer>
+        </ReadableContainer>
+      </Section>
       <ReadableContainer>
-        <Player id='stream' />
+        {children}
       </ReadableContainer>
-    </Section>
-    <ReadableContainer>
-      {children}
-    </ReadableContainer>
-  </>
-)
+    </>
+  )
+}

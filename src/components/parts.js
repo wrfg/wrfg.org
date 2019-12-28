@@ -66,3 +66,25 @@ export const Right = ({ children }) => {
     </div>
   )
 }
+
+export const Piece = ({ children }) => {
+  return (
+    <div
+      css={css`
+        display: inline-block;
+        margin-left: 0.3em;
+        margin-right: 0.3em;
+
+        &:first-of-type {
+          margin-left: 0em;
+        }
+
+        &:last-of-type {
+          margin-right: 0em;
+        }
+      `}
+    >
+      {children}
+    </div>
+  )
+}

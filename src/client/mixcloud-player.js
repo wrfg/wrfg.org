@@ -1,5 +1,7 @@
 import React, { useRef, useState, useCallback, useMemo } from "react"
 
+import { Link } from "gatsby"
+
 import parse from "url-parse"
 
 import useScript from 'react-script-hook'
@@ -9,7 +11,7 @@ import Loadable from "@loadable/component"
 import { usePersistentPlayer } from './persistent-player.js'
 import PlayPause from './play-pause.js'
 
-const MixcloudPlayer = ({ title, url }) => {
+const MixcloudPlayer = ({ title, slug, url }) => {
   const parsed = parse(url)
   const cloudcastKey = parsed.pathname
 
@@ -76,6 +78,9 @@ const MixcloudPlayer = ({ title, url }) => {
         display: 'none',
       }} ref={iframe} title="Mixcloud music player" />
     }, []),
+    label: useMemo(() => {
+      return <Link to={slug}>{title}</Link>
+    }, [title, slug]),
   })
 
   onPause.current = () => {

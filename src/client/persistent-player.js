@@ -15,6 +15,16 @@ const Wrapper = ({ children }) => {
     setRegistry((registry) => Object.assign({}, registry, addition))
   }, [])
 
+  const unregister = useCallback((id) => {
+    setRegistry((registry) => {
+      const clone = Object.assign({}, registry)
+      if (id !== active) {
+        delete clone[id]
+      }
+      return clone
+    })
+  }, [active])
+
   const seize = useCallback((seizer) => {
     const toPause = Object.entries(registry).filter(([ id, player ]) => id !== seizer)
     toPause.forEach(([ id, player ]) => player.pause())
@@ -25,11 +35,25 @@ const Wrapper = ({ children }) => {
     setActive(null)
   }, [])
 
+  const play = useCallback((id) => {
+    registry[id].play()
+    seize(id)
+  }, [registry, seize])
+
+  const pause = useCallback((id) => {
+    reset()
+    registry[id].pause()
+  }, [registry])
+
   const value = {
+    registry: registry,
     register: register,
+    unregister: unregister,
     seize: seize,
     active: active,
     reset: reset,
+    play: play,
+    pause: pause,
   }
 
   return <Context.Provider value={value}>
@@ -40,25 +64,31 @@ const Wrapper = ({ children }) => {
   </Context.Provider>
 }
 
-const usePersistentPlayer = ({ id, play, pause, element }) => {
-  // the stream persists, but the `state` doesn't. that needs to be put inside something on persistent player context
-  const { register, seize, active, reset } = useContext(Context)
+const usePersistentPlayer = ({ id, play, pause, element, label }) => {
+  const { unregister, register, seize, active, reset } = useContext(Context)
 
   useEffect(() => {
     register(id, {
+      play: play,
       pause: pause,
       element: element,
+      label: label,
     })
-  }, [register, id, pause, element])
 
+    return () => {
+      unregister(id)
+    }
+  }, [register, id, active, play, pause, element, label])
+
+  const state = active === id ? 'playing' : 'paused'
   return {
-    state: active === id ? 'playing' : 'paused',
-    setState: (state) => {
-      if (state === 'playing') {
+    state: state,
+    setState: (updatedState) => {
+      if (state !== 'playing' && updatedState === 'playing') {
         seize(id)
       }
 
-      if (state === 'paused') {
+      if (state !== 'paused' && updatedState === 'paused') {
         reset()
       }
     },

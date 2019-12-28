@@ -19,7 +19,11 @@ export default ({ data }) => {
         <p><Link to={archive.show.slug}>{archive.show.title}</Link></p>
       </>)}
       <h4>Listen</h4>
-      <MixcloudPlayer title={archive.title} url={archive.url} />
+      <MixcloudPlayer
+        title={archive.title}
+        slug={archive.slug}
+        url={archive.url}
+      />
       <div dangerouslySetInnerHTML={{ __html: page.html }} />
     </Layout>
   )
