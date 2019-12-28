@@ -10,6 +10,7 @@ import { yellow } from "@/components/colors.js"
 import { useShows, zeitgeist } from "@/models/show.js"
 
 import { Context as PersistentPlayerContext, usePersistentPlayer } from './persistent-player.js'
+import PlayPause from './play-pause.js'
 
 const PulsingRedCircle = () => {
   return (
@@ -116,12 +117,7 @@ const Player = ({ id }) => {
   return (
     <>
       <Piece>
-        <button
-          onClick={() => state === 'paused' ? play() : pause()}
-          css={css`border: none; background: transparent; width: 1.6em; height: 1.6em; text-align: center; padding: 0;`}
-        >
-          {state === "playing" ? "◼️" : "▶︎"}
-        </button>
+        <PlayPause play={play} pause={pause} state={state} />
       </Piece>
       <Piece>LIVE NOW <PulsingRedCircle /></Piece>
       {now && (
