@@ -7,6 +7,7 @@ import useScript from 'react-script-hook'
 import Loadable from "@loadable/component"
 
 import { usePersistentPlayer } from './persistent-player.js'
+import PlayPause from './play-pause.js'
 
 const MixcloudPlayer = ({ url }) => {
   const parsed = parse(url)
@@ -86,12 +87,8 @@ const MixcloudPlayer = ({ url }) => {
   }
 
   return (<>
-    <button
-      disabled={!loaded}
-      onClick={(e) => state === 'playing' ? pause() : play()}
-    >
-      {state === 'playing' ? 'pause' : 'play'}
-    </button>
+    <PlayPause play={play} pause={pause} state={state} />{' '}
+    Archive
   </>)
 }
 
