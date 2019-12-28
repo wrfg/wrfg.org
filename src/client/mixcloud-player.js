@@ -51,14 +51,6 @@ const MixcloudPlayer = ({ url }) => {
     }
   })
 
-  const element = useMemo(() => {
-    return <iframe style={{
-      border: 0,
-      width: '100%',
-      display: 'none',
-    }} ref={iframe} title="Mixcloud music player" />
-  }, [])
-
   const {
     state,
     setState,
@@ -76,7 +68,13 @@ const MixcloudPlayer = ({ url }) => {
         mixcloudWidgetRef.current && mixcloudWidgetRef.current.pause()
       })
     }, []),
-    element: element,
+    element: useMemo(() => {
+      return <iframe style={{
+        border: 0,
+        width: '100%',
+        display: 'none',
+      }} ref={iframe} title="Mixcloud music player" />
+    }, []),
   })
 
   onPause.current = () => {
@@ -88,9 +86,12 @@ const MixcloudPlayer = ({ url }) => {
   }
 
   return (<>
-    {loaded && (
-      <button onClick={(e) => state === 'playing' ? pause() : play()}>{state === 'playing' ? 'pause' : 'play'}</button>
-    )}
+    <button
+      disabled={!loaded}
+      onClick={(e) => state === 'playing' ? pause() : play()}
+    >
+      {state === 'playing' ? 'pause' : 'play'}
+    </button>
   </>)
 }
 
