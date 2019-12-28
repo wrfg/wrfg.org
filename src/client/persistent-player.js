@@ -6,71 +6,77 @@ const Context = React.createContext({
 })
 
 const Wrapper = ({ children }) => {
-  const [ registry, setRegistry ] = useState({})
+  const [ registry, setRegistry ] = useState({items: {}, order: []})
   const [ active, setActive ] = useState(null)
 
   const register = useCallback((id, player) => {
     const addition = {}
     addition[id] = player
-    setRegistry((registry) => Object.assign({}, registry, addition))
+    setRegistry((registry) => {
+      return {
+        items: Object.assign({}, registry.items, addition),
+        order: registry.order.indexOf(id) === -1 ? registry.order.concat([id]) : registry.order,
+      }
+    })
   }, [])
 
   const unregister = useCallback((id) => {
     setRegistry((registry) => {
-      const clone = Object.assign({}, registry)
+      const clone = Object.assign({}, registry.items)
       if (id !== active) {
         delete clone[id]
       }
-      return clone
+      return {
+        items: clone,
+        order: registry.order,
+      }
     })
   }, [active])
 
-  const seize = useCallback((seizer) => {
-    const toPause = Object.entries(registry).filter(([ id, player ]) => id !== seizer)
-    toPause.forEach(([ id, player ]) => player.pause())
-    setActive(seizer)
+  const seize = useCallback(() => {
+    Object.entries(registry.items).forEach(([ id, player ]) => player.pause())
   }, [registry])
 
-  const reset = useCallback(() => {
-    setActive(null)
-  }, [])
-
   const play = useCallback((id) => {
-    registry[id].play()
-    seize(id)
-  }, [registry, seize])
+    seize()
+    registry.items[id].play()
+    setActive(id)
+  }, [registry, seize, setActive])
 
   const pause = useCallback((id) => {
-    reset()
-    registry[id].pause()
-  }, [registry, reset])
+    seize()
+    setActive(null)
+  }, [seize, setActive])
 
   const value = {
-    registry: registry,
+    registry: registry.items,
+    order: registry.order,
     register: register,
     unregister: unregister,
     seize: seize,
     active: active,
-    reset: reset,
+    setActive: setActive,
     play: play,
     pause: pause,
   }
 
   return <Context.Provider value={value}>
     {children}
-    {Object.entries(registry).map(([ id, player ]) => {
-      return <Fragment key={id}>{player.element}</Fragment>
-    })}
+    {registry.order.map((id) => (registry.items[id] && <Fragment key={id}>{registry.items[id].element}</Fragment>))}
   </Context.Provider>
 }
 
-const usePersistentPlayer = ({ id, play, pause, element, label }) => {
-  const { unregister, register, seize, active, reset } = useContext(Context)
+const usePersistentPlayer = (args) => {
+  const { id, element, label } = args
+  const playArg = args.play
+  const pauseArg = args.pause
+
+  const { unregister, register, seize, play, pause, setActive, active } = useContext(Context)
 
   useEffect(() => {
     register(id, {
-      play: play,
-      pause: pause,
+      play: playArg,
+      pause: pauseArg,
       element: element,
       label: label,
     })
@@ -78,26 +84,25 @@ const usePersistentPlayer = ({ id, play, pause, element, label }) => {
     return () => {
       unregister(id)
     }
-  }, [register, id, active, play, pause, element, label, unregister])
+  }, [register, id, active, playArg, pauseArg, element, label, unregister])
 
   const state = active === id ? 'playing' : 'paused'
   return {
     state: state,
     setState: (updatedState) => {
       if (state !== 'playing' && updatedState === 'playing') {
-        seize(id)
+        setActive(id)
       }
 
       if (state !== 'paused' && updatedState === 'paused') {
-        reset()
+        setActive(null)
       }
     },
     play: () => {
-      seize(id)
-      play()
+      play(id)
     },
     pause: () => {
-      pause()
+      pause(id)
     },
   }
 }

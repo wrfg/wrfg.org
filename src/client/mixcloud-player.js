@@ -10,6 +10,7 @@ import { usePersistentPlayer } from './persistent-player.js'
 import PlayPause from './play-pause.js'
 
 const MixcloudPlayer = ({ title, slug, url }) => {
+  const id = 'mixcloud'
   const parsed = parse(url)
   const cloudcastKey = parsed.pathname
 
@@ -39,7 +40,6 @@ const MixcloudPlayer = ({ title, slug, url }) => {
       mixcloudWidgetRef.current = widget
 
       widget.ready.then(() => {
-        setLoaded(true)
         return widget.load(cloudcastKey, false)
       }).then(() => {
         mixcloudWidgetRef.current.events.play.on(() => onPlay.current())
@@ -57,8 +57,9 @@ const MixcloudPlayer = ({ title, slug, url }) => {
     setState,
     play,
     pause,
+    setActive,
   } = usePersistentPlayer({
-    id: 'mixcloud',
+    id: id,
     play: useCallback(() => {
       ready.current.then(() => {
         mixcloudWidgetRef.current && mixcloudWidgetRef.current.play()
@@ -81,12 +82,12 @@ const MixcloudPlayer = ({ title, slug, url }) => {
     }, [title, slug]),
   })
 
-  onPause.current = () => {
-    setState('paused')
-  }
-
   onPlay.current = () => {
     setState('playing')
+  }
+
+  onPause.current = () => {
+    setState('paused')
   }
 
   return (<>

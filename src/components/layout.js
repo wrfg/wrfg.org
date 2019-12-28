@@ -119,15 +119,16 @@ export default ({ children }) => {
       <Section>
         <ReadableContainer>
           <PersistentPlayerContext.Consumer>
-            {({ registry, active, play, pause }) => {
-              return Object.entries(registry).map(([ id, player ]) => {
+            {({ registry, order, active, play, pause }) => {
+              return order.map((id) => {
+                const { label } = registry[id]
                 return <div key={id}>
                   <PlayPause
                     play={() => play(id)}
                     pause={() => pause(id)}
                     state={active === id ? 'playing' : 'paused'}
                   />{' '}
-                  {player.label || id}
+                  {label || id}
                 </div>
               })
             }}
