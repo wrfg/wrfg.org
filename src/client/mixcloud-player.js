@@ -9,7 +9,7 @@ import Loadable from "@loadable/component"
 import { usePersistentPlayer } from './persistent-player.js'
 import PlayPause from './play-pause.js'
 
-const MixcloudPlayer = ({ url }) => {
+const MixcloudPlayer = ({ title, url }) => {
   const parsed = parse(url)
   const cloudcastKey = parsed.pathname
 
@@ -88,7 +88,7 @@ const MixcloudPlayer = ({ url }) => {
 
   return (<>
     <PlayPause play={play} pause={pause} state={state} />{' '}
-    Archive
+    {title}
   </>)
 }
 
