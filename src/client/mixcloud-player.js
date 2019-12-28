@@ -95,7 +95,3 @@ const MixcloudPlayer = ({ url }) => {
 }
 
 export default MixcloudPlayer
-
-const LoadableMixcloudPlayer = Loadable(() => import("./mixcloud-player"))
-
-export { LoadableMixcloudPlayer }
