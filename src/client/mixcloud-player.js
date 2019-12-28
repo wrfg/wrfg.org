@@ -1,10 +1,12 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useCallback, useMemo } from "react"
 
 import parse from "url-parse"
 
 import useScript from 'react-script-hook'
 
 import Loadable from "@loadable/component"
+
+import { usePersistentPlayer } from './persistent-player.js'
 
 const MixcloudPlayer = ({ url }) => {
   const parsed = parse(url)
@@ -25,8 +27,6 @@ const MixcloudPlayer = ({ url }) => {
     })
   }
 
-  const [ state, setState ] = useState("unloaded")
-
   useScript({
     src: 'https://widget.mixcloud.com/media/js/widgetApi.js',
     onload: () => {
@@ -46,35 +46,42 @@ const MixcloudPlayer = ({ url }) => {
     }
   })
 
-  const toggle = (e) => {
-    if (state === 'paused' || state === 'unloaded') {
+  const element = useMemo(() => {
+    return <iframe style={{
+      border: 0,
+      width: '100%',
+      display: 'none',
+    }} ref={iframe} title="Mixcloud music player" />
+  }, [])
+
+  const {
+    state,
+    setState,
+    play,
+    pause,
+  } = usePersistentPlayer({
+    id: 'mixcloud',
+    play: useCallback(() => {
       ready.current.then(() => {
         mixcloudWidgetRef.current && mixcloudWidgetRef.current.play()
-        setState("playing")
       })
-      return
-    }
-
-    if (state === 'playing') {
+    }, []),
+    pause: useCallback(() => {
       ready.current.then(() => {
         mixcloudWidgetRef.current && mixcloudWidgetRef.current.pause()
-        setState("paused")
       })
-      return
-    }
+    }, []),
+    element: element,
+  })
 
-    throw new Error('Invalid state')
   }
 
-  const styles = {
-    border: 0,
-    width: '100%',
-    display: state === 'unloaded' ? 'none' : 'block',
   }
 
   return (<>
-    {loaded && state === 'unloaded' && (<button onClick={(e) => toggle(e)}>{state === 'paused' || state === 'unloaded' ? 'play' : 'pause'}</button>)}
-    <iframe style={styles} ref={iframe} title="Mixcloud music player" />
+    {loaded && (
+      <button onClick={(e) => state === 'playing' ? pause() : play()}>{state === 'playing' ? 'pause' : 'play'}</button>
+    )}
   </>)
 }
 
