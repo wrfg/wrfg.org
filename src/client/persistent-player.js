@@ -1,6 +1,8 @@
 import React, { Fragment, useContext, useState, useEffect, useCallback } from "react"
 
 const Context = React.createContext({
+  registry: {},
+  order: [],
   register: () => {},
   seize: () => {},
 })
