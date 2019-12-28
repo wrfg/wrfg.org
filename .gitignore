@@ -7,3 +7,6 @@ public
 
 # Mac files
 .DS_Store
+
+# for notes during development
+scratch
