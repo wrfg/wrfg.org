@@ -73,7 +73,7 @@ const usePersistentPlayer = (args) => {
   const playArg = args.play
   const pauseArg = args.pause
 
-  const { unregister, register, seize, play, pause, setActive, active } = useContext(Context)
+  const { unregister, register, play, pause, setActive, active } = useContext(Context)
 
   useEffect(() => {
     register(id, {

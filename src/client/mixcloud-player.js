@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback, useMemo } from "react"
+import React, { useRef, useCallback, useMemo } from "react"
 
 import { Link } from "gatsby"
 
@@ -18,7 +18,6 @@ const MixcloudPlayer = ({ title, slug, url }) => {
     + "?hide_cover=1&autoplay=false&mini=1&light=1&feed=" + encodeURIComponent(cloudcastKey)
 
   const iframe = useRef(null)
-  const [ loaded, setLoaded ] = useState(false)
   const mixcloudWidgetRef = useRef(null)
   const onPlay = useRef(() => {})
   const onPause = useRef(() => {})
@@ -57,7 +56,6 @@ const MixcloudPlayer = ({ title, slug, url }) => {
     setState,
     play,
     pause,
-    setActive,
   } = usePersistentPlayer({
     id: id,
     play: useCallback(() => {
@@ -91,7 +89,7 @@ const MixcloudPlayer = ({ title, slug, url }) => {
   }
 
   return (<>
-    <PlayPause play={play} disabled={!loaded} pause={pause} state={state} />{' '}
+    <PlayPause play={play} pause={pause} state={state} />{' '}
     {title}
   </>)
 }
