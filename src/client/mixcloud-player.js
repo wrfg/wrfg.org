@@ -15,10 +15,11 @@ const MixcloudPlayer = ({ url }) => {
   const initialSrc = "https://www.mixcloud.com/widget/iframe/"
     + "?hide_cover=1&autoplay=false&mini=1&light=1&feed=" + encodeURIComponent(cloudcastKey)
 
-
   const iframe = useRef(null)
   const [ loaded, setLoaded ] = useState(false)
   const mixcloudWidgetRef = useRef(null)
+  const onPlay = useRef(() => {})
+  const onPause = useRef(() => {})
   const resolver = useRef(null)
   const ready = useRef(null)
   if (ready.current === null) {
@@ -39,6 +40,10 @@ const MixcloudPlayer = ({ url }) => {
       widget.ready.then(() => {
         setLoaded(true)
         return widget.load(cloudcastKey, false)
+      }).then(() => {
+        mixcloudWidgetRef.current.events.play.on(() => onPlay.current())
+        mixcloudWidgetRef.current.events.pause.on(() => onPause.current())
+        mixcloudWidgetRef.current.events.ended.on(() => onPause.current())
       }).then(() => {
         resolver.current()
       })
@@ -74,8 +79,12 @@ const MixcloudPlayer = ({ url }) => {
     element: element,
   })
 
+  onPause.current = () => {
+    setState('paused')
   }
 
+  onPlay.current = () => {
+    setState('playing')
   }
 
   return (<>
