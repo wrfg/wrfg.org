@@ -86,8 +86,10 @@ export default ({ data }) => {
 
   return (
     <Layout>
-      <h1>Now</h1>
-      <Currently current={current} next={next} />
+      {current && (<>
+        <h1>Now</h1>
+        <Currently current={current} next={next} />
+      </>)}
       <h1>Schedule</h1>
       <DailySchedule shows={shows}  />
     </Layout>

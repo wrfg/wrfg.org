@@ -121,6 +121,9 @@ export default ({ children }) => {
           <PersistentPlayerContext.Consumer>
             {({ registry, order, active, play, pause }) => {
               return order.map((id) => {
+                if (!registry[id]) {
+                  return
+                }
                 const { label } = registry[id]
                 return <div key={id}>
                   <PlayPause
