@@ -13,7 +13,12 @@ class Program {
       return null
     }
 
-    return new Program(data)
+    const program = new Program(data)
+    if (!program.title) {
+      return null
+    }
+
+    return program
   }
 }
 
