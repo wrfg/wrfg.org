@@ -48,7 +48,7 @@ Joan Baptist, Station Manager, & Wanique Shabazz, Operations Director.
 ##### Our Address
 
 WRFG 89.3 FM (Radio Free Georgia)  
-1083 Austin Avenue, NE  
+1083 Austin Avenue NE  
 Suite 500  
 Atlanta, GA 30307-1940
 
