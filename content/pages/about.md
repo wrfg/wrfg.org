@@ -49,7 +49,6 @@ Joan Baptist, Station Manager, & Wanique Shabazz, Operations Director.
 
 WRFG 89.3 FM (Radio Free Georgia)  
 1083 Austin Avenue NE  
-Suite 500  
 Atlanta, GA 30307-1940
 
 ##### Business Office
@@ -57,5 +56,3 @@ Atlanta, GA 30307-1940
 Email: office@wrfg.org  
 Phone: (404) 523-3471  
 Fax: (404) 523-8990
-
-This is an example.
