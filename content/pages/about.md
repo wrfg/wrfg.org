@@ -57,3 +57,5 @@ Atlanta, GA 30307-1940
 Email: office@wrfg.org  
 Phone: (404) 523-3471  
 Fax: (404) 523-8990
+
+This is an example.
