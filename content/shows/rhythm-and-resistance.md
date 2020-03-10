@@ -2,9 +2,8 @@
 title: Rhythm and Resistance
 program: Soul Rhapsody
 airshifts:
-- day: Wednesday
+- day: Friday
   start: 10:00a
   duration: '2:00'
 
 ---
-1st & 3rd Wednesdays
