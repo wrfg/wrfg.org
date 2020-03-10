@@ -18,6 +18,7 @@ const NavLink = ({ children, ...props }) => {
       display: inline-block;
       vertical-align: top;
       padding: 0.3em;
+      padding-top: 0.7em;
     `}>
       {children}
     </Link>
@@ -44,6 +45,7 @@ const SocialImageLink = ({ to, src, alt }) => {
       css={css`
         display: inline-block;
         padding: 0.3em;
+        padding-top: 0.7em;
       `}>
       <img
         src={src}
@@ -87,7 +89,7 @@ export default ({ children }) => {
                   src="/images/logo.gif"
                   alt="WRFG"
                   css={css`
-                    height: 1.6em;
+                    height: 2.6em;
                     margin-right: 0.6em;
                   `}
                 />
