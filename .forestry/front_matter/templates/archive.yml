@@ -11,3 +11,5 @@ fields:
 - type: text
   name: url
   label: url
+pages:
+- content/archives/rhythm-and-resistance-21-february-2020.md
