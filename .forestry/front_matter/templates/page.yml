@@ -5,7 +5,9 @@ fields:
 - name: sections
   type: blocks
   label: Sections
-  template_types: []
+  template_types:
+  - image
+  - text
   config:
     min: 
     max: 
