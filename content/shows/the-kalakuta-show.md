@@ -1,6 +1,6 @@
 ---
 title: The Kalakuta Show
-program: Global Drumbeat
+program: content/programs/global-drumbeat.md
 airshifts:
 - day: Tuesday
   start: 2:00p

@@ -1,6 +1,6 @@
 ---
 title: The Show
-program: NIGHTWATCH
+program: content/programs/nightwatch.md
 airshifts:
 - day: Thursday
   start: 12:00a

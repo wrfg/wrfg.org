@@ -1,6 +1,6 @@
 ---
 title: Revolutionary African Perspectives
-program: RAP
+program: content/programs/rap.md
 airshifts:
 - day: Monday
   start: 7:00p

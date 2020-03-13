@@ -1,6 +1,6 @@
 ---
 title: Making Contact
-program: Progressive News Hour
+program: content/programs/progressive-news-hour.md
 airshifts:
 - day: Tuesday
   start: 12:00p

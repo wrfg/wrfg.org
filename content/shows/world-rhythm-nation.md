@@ -1,6 +1,6 @@
 ---
 title: World Rhythm Nation
-program: Global Drumbeat
+program: content/programs/global-drumbeat.md
 airshifts:
 - day: Monday
   start: 2:00p

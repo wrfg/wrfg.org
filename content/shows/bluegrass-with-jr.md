@@ -1,6 +1,6 @@
 ---
 title: Bluegrass with JR
-program: Peach State Festival
+program: content/programs/peach-state-festival.md
 airshifts:
 - day: Wednesday
   start: 8:00p

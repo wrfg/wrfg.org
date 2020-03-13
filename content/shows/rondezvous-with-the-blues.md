@@ -1,6 +1,6 @@
 ---
 title: Rondezvous with the Blues
-program: Good Morning Blues 1
+program: content/programs/good-morning-blues-1.md
 airshifts:
 - day: Thursday
   start: 6:00a

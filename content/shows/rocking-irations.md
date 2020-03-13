@@ -1,6 +1,6 @@
 ---
 title: Rocking Irations
-program: Ruff, Rugged, & Raw
+program: content/programs/ruff-rugged-raw.md
 airshifts:
 - day: Thursday
   start: 3:00a

@@ -1,6 +1,6 @@
 ---
 title: Americana Pie
-program: Peach State Festival
+program: content/programs/peach-state-festival.md
 airshifts:
 - day: Tuesday
   start: 8:00p

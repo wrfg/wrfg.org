@@ -1,6 +1,6 @@
 ---
 title: The After Set
-program: Ruff Rugged, & Raw
+program: content/programs/ruff-rugged-raw.md
 airshifts:
 - day: Monday
   start: 3:00a

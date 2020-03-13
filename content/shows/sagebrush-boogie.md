@@ -1,6 +1,6 @@
 ---
 title: Sagebrush Boogie
-program: Peach State Festival
+program: content/programs/peach-state-festival.md
 airshifts:
 - day: Thursday
   start: 8:00p

@@ -1,6 +1,6 @@
 ---
 title: Last Stop On the 4 Train
-program: The Jazz Forum
+program: content/programs/the-jazz-forum.md
 airshifts:
 - day: Friday
   start: 10:00p

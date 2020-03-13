@@ -1,6 +1,6 @@
 ---
 title: The Ancestral Rock
-program: Global Drumbeat
+program: content/programs/global-drumbeat.md
 airshifts: 
 - day: Thursday
   start: 2:00p

@@ -1,6 +1,6 @@
 ---
 title: Ellington, Monk, Trane, & more.
-program: The Jazz Forum
+program: content/programs/the-jazz-forum.md
 airshifts:
 - day: Wednesday
   start: 10:00p

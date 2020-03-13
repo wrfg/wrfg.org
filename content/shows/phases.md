@@ -1,6 +1,6 @@
 ---
 title: Phases
-program: The Jazz Forum
+program: content/programs/the-jazz-forum.md
 airshifts:
 - day: Monday
   start: 10:00p

@@ -1,6 +1,6 @@
 ---
 title: Survive the Drive
-program: Good Morning Blues 2
+program: content/programs/good-morning-blues-2.md
 airshifts:
 - day: Monday
   start: 8:00a

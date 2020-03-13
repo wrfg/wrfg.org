@@ -1,6 +1,6 @@
 ---
 title: Mellow Mondays
-program:  Soul Rhapsody
+program: content/programs/soul-rhapsody.md
 airshifts:
 - day: Monday
   start: 10:00a

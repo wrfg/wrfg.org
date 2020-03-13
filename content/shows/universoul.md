@@ -1,6 +1,6 @@
 ---
 title: UniverSOUL
-program: Ruff, Rugged, & Raw
+program: content/programs/ruff-rugged-raw.md
 airshifts:
 - day: Wednesday
   start: 3:00a

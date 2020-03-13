@@ -1,6 +1,6 @@
 ---
 title: Organized Fusion
-program: Soul Rhapsody
+program: content/programs/soul-rhapsody.md
 airshifts:
 - day: Wednesday
   start: 10:00a

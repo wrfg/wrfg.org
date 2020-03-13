@@ -1,6 +1,6 @@
 ---
 title: Nightwatch Expressions
-program: NIGHTWATCH
+program: content/programs/nightwatch.md
 airshifts:
 - day: Wednesday
   start: 12:00a

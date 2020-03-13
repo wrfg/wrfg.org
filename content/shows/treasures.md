@@ -1,6 +1,6 @@
 ---
 title: Treasures
-program: Soul Rhapsody
+program: content/programs/soul-rhapsody.md
 airshifts:
 - day: Tuesday
   start: 10:00a

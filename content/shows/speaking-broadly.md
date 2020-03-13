@@ -1,6 +1,6 @@
 ---
 title: Speaking Broadly
-program: Progressive News Hour
+program: content/programs/progressive-news-hour.md
 airshifts:
 - day: Thursday
   start: 12:00p
