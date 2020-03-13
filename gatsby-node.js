@@ -16,8 +16,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
 
   if (node.internal.type === `MarkdownRemark`) {
-    const relativePath = path.relative(`${__dirname}/content/`, node.fileAbsolutePath)
-    const kind = relativePath.split(path.sep)[0]
+    const kind = path.relative(`${__dirname}/content/`, node.fileAbsolutePath).split(path.sep)[0]
 
     const slug = createFilePath({ node, getNode, basePath: kind === "pages" ? `pages/` : `` })
     createNodeField({
@@ -30,6 +29,13 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       node,
       name: `kind`,
       value: kind,
+    })
+
+    const relativePath = path.relative(__dirname, node.fileAbsolutePath)
+    createNodeField({
+      node,
+      name: `path`,
+      value: relativePath,
     })
   }
 }
@@ -75,6 +81,7 @@ exports.sourceNodes = ({ actions }) => {
     type Frontmatter {
       program: MarkdownRemark @link(by: "frontmatter.title", from: "program")
       show: MarkdownRemark @link(by: "frontmatter.title", from: "show")
+      show2: MarkdownRemark @link(by: "fields.path", from: "show2")
       shows: [MarkdownRemark] @link(by: "frontmatter.program.frontmatter.title", from: "title")
       archives: [MarkdownRemark] @link(by: "frontmatter.show.frontmatter.title", from: "title")
     }

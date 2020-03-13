@@ -43,6 +43,14 @@ export const query = graphql`
             slug
           }
         }
+        show2 {
+          frontmatter {
+            title
+          }
+          fields {
+            slug
+          }
+        }
         url
       }
       fields {
