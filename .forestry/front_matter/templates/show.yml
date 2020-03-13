@@ -166,7 +166,7 @@ fields:
   config:
     min: 
     max: 
-    labelField: 
+    labelField: day
   label: airshifts
 pages:
 - content/shows/african-experience-worldwide.md
