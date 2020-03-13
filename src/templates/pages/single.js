@@ -17,7 +17,7 @@ export default ({ data }) => {
       {sections && sections.map((section, index) => {
         switch (section.template) {
           case "image":
-            return <img key={index} src={section.image} css={css`width: 100%; margin: 1em 0`} />
+            return <img key={index} alt={section.alt} src={section.image} css={css`width: 100%; margin: 1em 0`} />
           case "text":
             return <div key={index} dangerouslySetInnerHTML={{ __html: remark().use(html).processSync(section.content).toString() }}></div>
           default:
@@ -36,6 +36,7 @@ export const query = graphql`
         sections {
           template
           image
+          alt
           content
         }
       }
