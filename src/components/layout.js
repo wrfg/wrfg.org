@@ -124,7 +124,7 @@ export default ({ children }) => {
             {({ registry, order, active, play, pause }) => {
               return order.map((id) => {
                 if (!registry[id]) {
-                  return
+                  return null
                 }
                 const { label } = registry[id]
                 return <div key={id}>
