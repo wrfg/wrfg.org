@@ -1,7 +1,6 @@
 ---
 title: Rhythm and Resistance - 21 February 2020
-show: Rhythm and Resistance
 url: https://www.mixcloud.com/RhythmandResistance/february-21-2020-rhythm-and-resistance/
-show2: content/shows/rhythm-and-resistance.md
+show: content/shows/rhythm-and-resistance.md
 
 ---
