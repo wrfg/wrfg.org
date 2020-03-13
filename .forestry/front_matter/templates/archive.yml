@@ -6,12 +6,9 @@ fields:
   name: title
   label: title
 - type: text
-  name: show
-  label: show
-- type: text
   name: url
   label: url
-- name: show2
+- name: show
   type: select
   default: []
   config:
@@ -22,7 +19,7 @@ fields:
       section: shows-22b1a91a-bd11-48be-982a-5f70818ae321
       file: 
       path: 
-  label: Show (temporary)
+  label: Show
 pages:
 - content/archives/rhythm-and-resistance-21-february-2020.md
 - content/archives/rhythm-and-resistance-28-february-2020.md
