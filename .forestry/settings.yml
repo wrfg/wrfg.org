@@ -7,7 +7,7 @@ sections:
 - type: directory
   path: content/archives
   label: Archives
-  create: all
+  create: documents
   match: "**/*"
   templates:
   - archive
