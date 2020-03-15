@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:8
-    working_directory: ~/unofficial-wrfg
+    working_directory: ~/wrfg.org
     steps:
       - checkout
       - run:
