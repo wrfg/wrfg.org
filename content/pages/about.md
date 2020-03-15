@@ -33,5 +33,6 @@ sections:
     Our Address\n\nWRFG 89.3 FM (Radio Free Georgia)  \n1083 Austin Avenue NE  \nAtlanta,
     GA 30307-1940\n\n##### Business Office\n\nEmail: office@wrfg.org  \nPhone: (404)
     523-3471  \nFax: (404) 523-8990"
+title: About
 
 ---
