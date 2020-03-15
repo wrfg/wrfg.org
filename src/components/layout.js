@@ -59,13 +59,13 @@ const SocialImageLink = ({ to, src, alt }) => {
   )
 }
 
-export default ({ children }) => {
+export default ({ title, children }) => {
   useStreamPlayer('stream')
 
   return (
     <>
       <Helmet
-        title={`WRFG`}
+        title={[title, 'WRFG'].filter((x) => !!x).join(' - ')}
         meta={[
           {name: 'charset', content: 'utf-8'},
           {name: 'apple-mobile-web-app-title', content: 'WRFG'},
