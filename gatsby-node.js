@@ -75,14 +75,20 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 exports.sourceNodes = ({ actions }) => {
   actions.createTypes(`
     type MarkdownRemark implements Node {
-      frontmatter: Frontmatter
-    }
+      # $KIND have a $PROPERTY identified by the $KIND's $FROM value matching a $TYPE's $BY value
+      # $PROPERTY: $TYPE @link(by: $BY, from: $FROM)
 
-    type Frontmatter {
-      program: MarkdownRemark @link(by: "frontmatter.title", from: "program")
-      show: MarkdownRemark @link(by: "fields.path", from: "show")
-      shows: [MarkdownRemark] @link(by: "frontmatter.program.frontmatter.title", from: "title")
-      archives: [MarkdownRemark] @link(by: "frontmatter.show.frontmatter.title", from: "title")
+      # shows have a program identified by the show's frontmatter.program value matching a MarkdownRemark's fields.path value
+      program: MarkdownRemark @link(by: "fields.path", from: "frontmatter.program")
+      
+      # archives have a show identified by the archive's frontmatter.show value matching a MarkdownRemark's fields.path value
+      show: MarkdownRemark @link(by: "fields.path", from: "frontmatter.show")
+
+      # programs have a shows identified by the program's field.path value matching a MarkdownRemark's frontmatter.program value
+      shows: [MarkdownRemark] @link(by: "frontmatter.program", from: "fields.path")
+
+      # shows havea a archives identified by the show's frontmatter.show value matching any MarkdownRemark's frontmatter.show value
+      archives: [MarkdownRemark] @link(by: "frontmatter.show", from: "fields.path")
     }
   `)
 }

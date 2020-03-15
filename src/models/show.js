@@ -81,13 +81,13 @@ class Show {
     return this.start.plus(this.duration)
   }
   get program() {
-    return Program.factory(this.data.frontmatter.program)
+    return Program.factory(this.data.program)
   }
   get airshifts() {
     return this.data.frontmatter.airshifts.map((data) => Airshift.factory(data))
   }
   get archives() {
-    return (this.data.frontmatter.archives || []).map((data) => {
+    return (this.data.archives || []).map((data) => {
       return Archive.factory(data)
     })
   }

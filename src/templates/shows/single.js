@@ -106,26 +106,26 @@ export const query = graphql`
       html
       frontmatter {
         title
-        program {
-          fields {
-            slug
-          }
-          frontmatter {
-            title
-          }
-        }
-        archives {
-          frontmatter {
-            title
-          }
-          fields {
-            slug
-          }
-        }
         airshifts {
           day
           start
           duration
+        }
+      }
+      program {
+        fields {
+          slug
+        }
+        frontmatter {
+          title
+        }
+      }
+      archives {
+        frontmatter {
+          title
+        }
+        fields {
+          slug
         }
       }
     }

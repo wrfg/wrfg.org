@@ -11,7 +11,7 @@ class Archive {
     return this.data.fields.slug
   }
   get show() {
-    return Show.factory(this.data.frontmatter.show)
+    return Show.factory(this.data.show)
   }
   get url() {
     return this.data.frontmatter.url

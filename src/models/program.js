@@ -1,3 +1,5 @@
+import Show from "./show"
+
 class Program {
   constructor(data) {
     this.data = data
@@ -8,8 +10,11 @@ class Program {
   get slug() {
     return this.data.fields.slug
   }
+  get shows() {
+    return (this.data.shows || []).map((show) => Show.factory(show))
+  }
   static factory(data) {
-    if (data === null) {
+    if (!data) {
       return null
     }
 

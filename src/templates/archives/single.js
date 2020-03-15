@@ -35,18 +35,18 @@ export const query = graphql`
       html
       frontmatter {
         title
-        show {
-          frontmatter {
-            title
-          }
-          fields {
-            slug
-          }
-        }
         url
       }
       fields {
         slug
+      }
+      show {
+        fields {
+          slug
+        }
+        frontmatter {
+          title
+        }
       }
     }
   }
