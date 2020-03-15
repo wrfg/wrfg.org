@@ -73,7 +73,7 @@ export default ({ data }) => {
   const show = Show.factory(page)
 
   return (
-    <Layout>
+    <Layout title={show.title}>
       <h1>{show.title}</h1>
       {show.program && (<>
         <h4>Program</h4>

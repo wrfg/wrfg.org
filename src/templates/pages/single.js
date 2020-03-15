@@ -13,7 +13,7 @@ export default ({ data }) => {
   const sections = page.frontmatter.sections
 
   return (
-    <Layout>
+    <Layout title={page.frontmatter.title}>
       {sections && sections.map((section, index) => {
         switch (section.template) {
           case "image":
@@ -33,6 +33,7 @@ export const query = graphql`
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
       frontmatter {
+        title
         sections {
           template
           image

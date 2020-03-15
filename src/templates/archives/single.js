@@ -12,7 +12,7 @@ export default ({ data }) => {
   const archive = Archive.factory(page)
 
   return (
-    <Layout>
+    <Layout title={archive.title}>
       <h1>{archive.title}</h1>
       {archive.show && (<>
         <h4>Show</h4>

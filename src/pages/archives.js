@@ -10,7 +10,7 @@ export default ({ data }) => {
   const archives = data.allMarkdownRemark.edges.map((edge) => edge.node).map(Archive.factory)
 
   return (
-    <Layout>
+    <Layout title="Archives">
       <h1>Archives</h1>
       <ul>
       {archives.map((archive) => {

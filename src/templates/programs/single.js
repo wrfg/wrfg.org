@@ -10,7 +10,7 @@ export default ({ data }) => {
   const program = Program.factory(page)
 
   return (
-    <Layout>
+    <Layout title={program.title}>
       <h1>{program.title}</h1>
       <h4>Shows</h4>
       {program.shows.length

@@ -85,7 +85,7 @@ export default ({ data }) => {
   const [ current, next ] = zeitgeist(shows)
 
   return (
-    <Layout>
+    <Layout title="Schedule">
       {current && (<>
         <h1>Now</h1>
         <Currently current={current} next={next} />
