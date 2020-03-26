@@ -2,7 +2,7 @@
 title: In Tune To Nature
 program: ''
 airshifts:
-- day: Tuesday
+- day: Wednesday
   start: 6:30p
   duration: '0:30'
 
