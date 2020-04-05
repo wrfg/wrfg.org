@@ -27,8 +27,12 @@ const Day = ({ day, airshifts }) => {
           {airshifts.map(([show, airshift]) => {
             return (
               <tr key={show.id}>
-                <td><Time value={airshift.start} /> - <Time value={airshift.end} /></td>
-                <td><Link to={show.slug}>{show.title}</Link></td>
+                <td css={css`vertical-align: top;`}>
+                  <Time value={airshift.start} />&nbsp;-&nbsp;<Time value={airshift.end} />
+                </td>
+                <td css={css`vertical-align: top;`}>
+                  <Link to={show.slug}>{show.title}</Link>
+                </td>
               </tr>
             )
           })}
@@ -87,10 +91,10 @@ export default ({ data }) => {
   return (
     <Layout title="Schedule">
       {current && (<>
-        <h1>Now</h1>
+        <h2>Now</h2>
         <Currently current={current} next={next} />
       </>)}
-      <h1>Schedule</h1>
+      <h2>Schedule</h2>
       <DailySchedule shows={shows}  />
     </Layout>
   )
