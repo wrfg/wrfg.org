@@ -105,6 +105,8 @@ export default ({ title, children }) => {
                   `}
                 />
               </Link>
+            </Left>
+            <Left>
               <NavLink to="/about">About</NavLink>
               <NavLink to="/schedule">Schedule</NavLink>
               <NavLink to="/support">Support</NavLink>
