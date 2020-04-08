@@ -22,7 +22,7 @@ sections:
 
     WRFG is licensed to broadcast at 100,000 watts of power, has a 100 mile [broadcast radius](/uploads/coverage-map.gif) and streams worldwide 24 hours a day/7 days a week. No other station can claim the audience diversity and loyalty that WRFG has enjoyed for over four decades. As varied as our programs are, you will find a perfect fit for your announcements on WRFG.
 
-    For more information, email [office@wrfg.org](email:office@wrfg.org) or call [(404) 523-3471](tel:4045233471).
+    For more information, email [office@wrfg.org](mailto:office@wrfg.org) or call [(404) 523-3471](tel:4045233471).
 
     #### Paid Public Services Announcements
 
@@ -36,13 +36,13 @@ sections:
 
     All PSAs are followed by the tag line “This public service announcement is brought to you by your community sponsored and supported radio station, WRFG 89.3FM, wrfg.org, your station for progressive information.”
 
-    For more information, email [office@wrfg.org](email:office@wrfg.org) or call [(404) 523-3471](tel:4045233471).
+    For more information, email [office@wrfg.org](mailto:office@wrfg.org) or call [(404) 523-3471](tel:4045233471).
 
     #### Volunteer Opportunities
 
     If you would like to join our team of volunteers, we would appreciate your help with our three times a year pledge drives and annual fundraising events.
 
-    To join in, fill out the [Volunteer Application](https://app.forestry.io/sites/miwn7qefub-aba/body-media//uploads/volunteer-application.pdf) form, and email it to [admin@wrfg.org]().
+    To join in, fill out the [Volunteer Application](/uploads/volunteer-application.pdf) form, and email it to [admin@wrfg.org](mailto:admin@wrfg.org).
 title: Support
 
 ---
