@@ -109,7 +109,7 @@ export default ({ title, children }) => {
             <Left>
               <NavLink to="/about">About</NavLink>
               <NavLink to="/schedule">Schedule</NavLink>
-              <NavLink to="/support">Support</NavLink>
+              <NavLink to="/donate">Donate</NavLink>
             </Left>
             <Right>
               <SocialImageLink
