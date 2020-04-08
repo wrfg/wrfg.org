@@ -22,6 +22,6 @@ sections:
     Now that’s scary!
 
     In order to remain independent, financially stable, and relevant to the needs of the community, WRFG 89.3 FM relies on the continuing support of people who understand the urgent need for noncommercial, diverse, community radio. We hope you will become a donor to WRFG.  The end of the year is coming fast and you can make your 2019 tax-deductible donation at wrfg.org, or mail it to WRFG 1083 Austin Ave. NE, Atlanta, GA. 30307.
-title: Home page
+title: Home
 
 ---
