@@ -58,14 +58,14 @@ const Radio = ({ name, label, options, value, onChange }) => {
         const id = `${name}-${option.value}`
 
         return (
-          <div>
+          <div key={id}>
             <input
               type="radio"
               id={id}
               name={name}
               value={option.value}
               checked={value === option.value}
-              onClick={() => onChange(option.value)}
+              onChange={() => onChange(option.value)}
             />
             <label htmlFor={id}>{option.label}</label>
           </div>

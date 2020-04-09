@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from "react"
+import React, { useState, useEffect, useRef } from "react"
 
 import { Link, graphql } from "gatsby"
 import { loadStripe } from "@stripe/stripe-js"
