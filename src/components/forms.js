@@ -17,7 +17,14 @@ const Form = ({ initialValues, onSubmit, children }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Context.Provider value={{values: state, onChange}}>
-        {children}
+        {React.Children.map(children, (child, index) => {
+          return (
+            <>
+              {index >= 1 ? <br /> : null}
+              {child}
+            </>
+          )
+        })}
       </Context.Provider>
     </form>
   )
