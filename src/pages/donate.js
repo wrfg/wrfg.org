@@ -9,15 +9,42 @@ import config from "@/config.js"
 
 const url = (path) => (new URL(path, document.URL)).href
 
-const registry = (frequency) => {
-  switch (frequency) {
-    case "ONCE":
-      return { sku: config.stripe.skus.donate2000, quantity: 1 }
-    case "MONTHLY":
-      return { plan: config.stripe.plans.monthly2000, quantity: 1 }
-    default:
-      throw new Error(`Unknown frequency \`${frequency}\``);
+const registry = (frequency, amount) => {
+  if (frequency === "ONCE") {
+    const sku = {
+      "1000": config.stripe.skus.donate1000,
+      "2000": config.stripe.skus.donate2000,
+      "5000": config.stripe.skus.donate5000,
+    }[amount]
+
+    if (!sku) {
+      throw new Error(`No sku found for one-time donation of amount \`${amount}\``)
+    }
+
+    return {
+      sku: sku,
+      quantity: 1
+    }
   }
+
+  if (frequency === "MONTHLY") {
+    const plan = {
+      "1000": config.stripe.plans.monthly1000,
+      "2000": config.stripe.plans.monthly2000,
+      "5000": config.stripe.plans.monthly5000,
+    }[amount]
+
+    if (!plan) {
+      throw new Error(`No plan found for monthly donation of amount \`${amount}\``)
+    }
+
+    return {
+      plan: plan,
+      quantity: 1
+    }
+  }
+
+  throw new Error(`Unknown frequency \`${frequency}\``)
 }
 
 export default () => {
@@ -40,7 +67,7 @@ export default () => {
     }
 
     stripe.redirectToCheckout({
-      items: [registry(values.frequency)],
+      items: [registry(values.frequency, values.amount)],
       successUrl: url("/thank-you"),
       cancelUrl: url("/donate"),
     })
@@ -55,6 +82,16 @@ export default () => {
           label="Select donation frequency"
           presentation={Radio}
           options={[{value: "ONCE", label: "One time"}, {value: "MONTHLY", label: "Monthly"}]}
+        />
+        <Input
+          name="amount"
+          label="Select amount"
+          presentation={Radio}
+          options={[
+            {value: "1000", label: "$10"},
+            {value: "2000", label: "$20"},
+            {value: "5000", label: "$50"},
+          ]}
         />
         <div>
           <Submit disabled={isLoading}>Donate with credit card</Submit>
