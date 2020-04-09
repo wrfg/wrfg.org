@@ -5,6 +5,7 @@ const defaultEnvironment = { stripeMode: 'LIVE' }
 const EnvironmentContext = createContext({
   environment: defaultEnvironment,
   set: (name, value) => {},
+  reset: () => {},
 })
 
 const stripeConfig = (mode) => {
@@ -61,7 +62,7 @@ const EnvironmentWrapper = ({ children }) => {
     },
     (encodedValue) => {
       try {
-        return JSON.parse(encodedValue)
+        return JSON.parse(encodedValue) || defaultEnvironment
       } catch (e) {
         return defaultEnvironment
       }
@@ -70,7 +71,9 @@ const EnvironmentWrapper = ({ children }) => {
 
   const set = (name, value) => setEnvironment({...environment, [name]: value})
 
-  return <EnvironmentContext.Provider value={{ environment, set }}>
+  const reset = () => setValue(null)
+
+  return <EnvironmentContext.Provider value={{ environment, set, reset }}>
     {children}
   </EnvironmentContext.Provider>
 }

@@ -6,7 +6,7 @@ import { ReadableContainer } from './parts'
 import { Radio } from './forms'
 
 const HackerPanel = () => {
-  const { environment, set } = useContext(EnvironmentContext)
+  const { environment, set, reset } = useContext(EnvironmentContext)
 
   return (
     <ReadableContainer>
@@ -20,6 +20,7 @@ const HackerPanel = () => {
         value={environment.stripeMode}
         onChange={(value) => set('stripeMode', value)}
       />
+      <button onClick={() => reset()}>Reset environment</button>
     </ReadableContainer>
   )
 }
