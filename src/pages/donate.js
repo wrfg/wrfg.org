@@ -1,20 +1,21 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect, useRef } from 'react'
 
-import { Link, graphql } from "gatsby"
-import { loadStripe } from "@stripe/stripe-js"
+import { Link } from 'gatsby'
+import { loadStripe } from '@stripe/stripe-js'
 
-import Layout from "@/components/layout.js"
-import { Form, Input, Radio, Submit } from "@/components/forms.js"
-import config from "@/config.js"
+import DevTip from '@/components/DevTip'
+import Layout from '@/components/layout.js'
+import { Form, Input, Radio, Submit } from '@/components/forms.js'
+import { useConfig } from '@/config.js'
 
 const url = (path) => (new URL(path, document.URL)).href
 
-const registry = (frequency, amount) => {
-  if (frequency === "ONCE") {
+const registry = (stripeConfig, frequency, amount) => {
+  if (frequency === 'ONCE') {
     const sku = {
-      "1000": config.stripe.skus.donate1000,
-      "2000": config.stripe.skus.donate2000,
-      "5000": config.stripe.skus.donate5000,
+      '1000': stripeConfig.skus.donate1000,
+      '2000': stripeConfig.skus.donate2000,
+      '5000': stripeConfig.skus.donate5000,
     }[amount]
 
     if (!sku) {
@@ -27,11 +28,11 @@ const registry = (frequency, amount) => {
     }
   }
 
-  if (frequency === "MONTHLY") {
+  if (frequency === 'MONTHLY') {
     const plan = {
-      "1000": config.stripe.plans.monthly1000,
-      "2000": config.stripe.plans.monthly2000,
-      "5000": config.stripe.plans.monthly5000,
+      '1000': stripeConfig.plans.monthly1000,
+      '2000': stripeConfig.plans.monthly2000,
+      '5000': stripeConfig.plans.monthly5000,
     }[amount]
 
     if (!plan) {
@@ -51,15 +52,16 @@ export default () => {
   const [{ isLoading }, setState] = useState({ isLoading: true })
   const stripeRef = useRef(null)
   const { current: stripe } = stripeRef
+  const { stripe: stripeConfig } = useConfig()
 
   useEffect(() => {
-    loadStripe(config.stripe.publishableApiKey).then((value) => {
+    loadStripe(stripeConfig.publishableApiKey).then((value) => {
       stripeRef.current = value
       setState((s) => {
         return { ...s, isLoading: false }
       })
     })
-  }, [])
+  }, [stripeConfig.publishableApiKey])
 
   const openCheckout = (values) => {
     if (isLoading) {
@@ -67,60 +69,40 @@ export default () => {
     }
 
     stripe.redirectToCheckout({
-      items: [registry(values.frequency, values.amount)],
-      successUrl: url("/thank-you"),
-      cancelUrl: url("/donate"),
+      items: [registry(stripeConfig, values.frequency, values.amount)],
+      successUrl: url('/thank-you'),
+      cancelUrl: url('/donate'),
     })
   }
 
   return (
-    <Layout title="Donate">
+    <Layout title='Donate'>
       <h2>Donate</h2>
-      <Form initialValues={{ frequency: "ONCE" }} onSubmit={openCheckout}>
+      <Form initialValues={{ frequency: 'ONCE', amount: '2000' }} onSubmit={openCheckout}>
         <Input
-          name="frequency"
-          label="Select donation frequency"
+          name='frequency'
+          label='Select donation frequency'
           presentation={Radio}
-          options={[{value: "ONCE", label: "One time"}, {value: "MONTHLY", label: "Monthly"}]}
+          options={[{value: 'ONCE', label: 'One time'}, {value: 'MONTHLY', label: 'Monthly'}]}
         />
         <Input
-          name="amount"
-          label="Select amount"
+          name='amount'
+          label='Select amount'
           presentation={Radio}
           options={[
-            {value: "1000", label: "$10"},
-            {value: "2000", label: "$20"},
-            {value: "5000", label: "$50"},
+            {value: '1000', label: '$10'},
+            {value: '2000', label: '$20'},
+            {value: '5000', label: '$50'},
           ]}
         />
+        <DevTip visible={stripeConfig.mode === 'TEST'}>
+          You can use credit card <code>4242 4242 4242 4242</code> with any future expiration and any 3-digit CVV to submit the donation.
+        </DevTip>
         <div>
           <Submit disabled={isLoading}>Donate with credit card</Submit>
         </div>
       </Form>
-      <p>Interested in donating your time or skills? Learn how you can <Link to="/support">support the station</Link>.</p>
+      <p>Interested in donating your time or skills? Learn how you can <Link to='/support'>support the station</Link>.</p>
     </Layout>
   )
 }
-
-export const query = graphql`
-  {
-    allMarkdownRemark(filter: {fields: {kind: {eq: "shows"}}}) {
-      edges {
-        node {
-          id
-          frontmatter {
-            title
-            airshifts {
-              start
-              duration
-              day
-            }
-          }
-          fields {
-            slug
-          }
-        }
-      }
-    }
-  }
-`

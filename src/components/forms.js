@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useState } from 'react'
 
 const Context = React.createContext({})
 
@@ -46,7 +46,7 @@ const Input = ({ name, label, presentation, options }) => {
 
 const Submit = ({ disabled, children }) => {
   return (
-    <button disabled={disabled} type="submit">{children}</button>
+    <button disabled={disabled} type='submit'>{children}</button>
   )
 }
 
@@ -60,7 +60,7 @@ const Radio = ({ name, label, options, value, onChange }) => {
         return (
           <div key={id}>
             <input
-              type="radio"
+              type='radio'
               id={id}
               name={name}
               value={option.value}

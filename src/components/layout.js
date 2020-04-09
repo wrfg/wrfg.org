@@ -1,16 +1,18 @@
-import React from "react"
+import React, { useState, useEffect, useCallback } from 'react'
 
-import { Link } from "gatsby"
+import { Link } from 'gatsby'
 
-import { Global, css } from "@emotion/core"
+import { Global, css } from '@emotion/core'
 
-import { Helmet } from "react-helmet-async"
+import { Helmet } from 'react-helmet-async'
 
-import { ReadableContainer, Section, Clear, Left, Right } from "./parts.js"
+import { ReadableContainer, Section, Clear, Left, Right } from './parts'
 
-import { useStreamPlayer } from "@/client/player.js"
-import { Context as PersistentPlayerContext } from "@/client/persistent-player.js"
-import PlayPause from '@/client/play-pause.js'
+import { useStreamPlayer } from '@/client/player'
+import { Context as PersistentPlayerContext } from '@/client/persistent-player'
+import PlayPause from '@/client/play-pause'
+
+import HackerPanel from './HackerPanel'
 
 const NavLink = ({ children, ...props }) => {
   return (
@@ -26,13 +28,13 @@ const NavLink = ({ children, ...props }) => {
 }
 
 const ExternalLink = ({ children, ...props }) => {
-  if (props.hasOwnProperty("to")) {
+  if (props.hasOwnProperty('to')) {
     props.href = props.to
     delete props.to
   }
 
   return (
-    <a {...props} target="_blank" rel="noopener nofollow">
+    <a {...props} target='_blank' rel='noopener nofollow'>
       {children}
     </a>
   )
@@ -59,8 +61,35 @@ const SocialImageLink = ({ to, src, alt }) => {
   )
 }
 
+const useDocumentListener = (event, handler) => {
+  useEffect(() => {
+    document.body.addEventListener(event, handler)
+    return () => {
+      document.body.removeEventListener(event, handler)
+    }
+  })
+}
+
 export default ({ title, children }) => {
   useStreamPlayer('stream')
+
+  const [lastThreeKeys, setLastThreeKeys] = useState([null, null, null])
+  const resetLastThreeKeys = useCallback(() => setLastThreeKeys([null, null, null]), [setLastThreeKeys])
+  useDocumentListener('keydown', (e) => {
+    setLastThreeKeys([e.code, ...lastThreeKeys].slice(0, 3))
+  })
+
+  const [mode, setMode] = useState('NORMAL')
+  useEffect(() => {
+    if (lastThreeKeys.every((key) => key === 'Escape')) {
+      setMode(mode === 'HACKER' ? 'NORMAL' : 'HACKER')
+      resetLastThreeKeys()
+    }
+  }, [mode, lastThreeKeys, setMode, resetLastThreeKeys]);
+
+  if (mode === 'HACKER') {
+    return <HackerPanel />
+  }
 
   return (
     <>
@@ -95,10 +124,10 @@ export default ({ title, children }) => {
         <ReadableContainer>
           <Clear>
             <Left>
-              <Link to="/">
+              <Link to='/'>
                 <img
-                  src="/images/logo.gif"
-                  alt="WRFG"
+                  src='/images/logo.gif'
+                  alt='WRFG'
                   css={css`
                     height: 2.6em;
                     margin-right: 0.6em;
@@ -107,25 +136,25 @@ export default ({ title, children }) => {
               </Link>
             </Left>
             <Left>
-              <NavLink to="/about">About</NavLink>
-              <NavLink to="/schedule">Schedule</NavLink>
-              <NavLink to="/donate">Donate</NavLink>
+              <NavLink to='/about'>About</NavLink>
+              <NavLink to='/schedule'>Schedule</NavLink>
+              <NavLink to='/donate'>Donate</NavLink>
             </Left>
             <Right>
               <SocialImageLink
-                to="https://www.instagram.com/wrfgatlanta/"
-                src="/images/instagram/glyph-logo_May2016.png"
-                alt="Instagram"
+                to='https://www.instagram.com/wrfgatlanta/'
+                src='/images/instagram/glyph-logo_May2016.png'
+                alt='Instagram'
               />
               <SocialImageLink
-                to="https://www.facebook.com/pg/WRFG89.3/"
-                src="/images/facebook/f_logo_RGB-Black_100.png"
-                alt="Facebook"
+                to='https://www.facebook.com/pg/WRFG89.3/'
+                src='/images/facebook/f_logo_RGB-Black_100.png'
+                alt='Facebook'
               />
               <SocialImageLink
-                to="https://www.mixcloud.com/WRFG/"
-                src="/images/mixcloud/BlackOnTransparent.png"
-                alt="Mixcloud"
+                to='https://www.mixcloud.com/WRFG/'
+                src='/images/mixcloud/BlackOnTransparent.png'
+                alt='Mixcloud'
               />
             </Right>
           </Clear>

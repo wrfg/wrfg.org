@@ -1,16 +1,16 @@
-import React from "react"
+import React from 'react'
 
-import { Link, graphql } from "gatsby"
+import { Link, graphql } from 'gatsby'
 
-import Layout from "@/components/layout.js"
+import Layout from '@/components/layout.js'
 
-import Archive from "@/models/archive.js"
+import Archive from '@/models/archive.js'
 
 export default ({ data }) => {
   const archives = data.allMarkdownRemark.edges.map((edge) => edge.node).map(Archive.factory)
 
   return (
-    <Layout title="Archives">
+    <Layout title='Archives'>
       <h1>Archives</h1>
       <ul>
       {archives.map((archive) => {
