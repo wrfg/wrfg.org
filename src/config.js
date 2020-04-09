@@ -4,6 +4,9 @@ const config = {
     skus: {
       donate2000: 'sku_H3pfXA8NLouPeJ',
     },
+    plans: {
+      monthly2000: 'plan_H3zHNcxxYClrQW',
+    }
   }
 };
 
