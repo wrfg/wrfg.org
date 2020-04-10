@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState } from 'react'
 
 import { Link } from 'gatsby'
 
@@ -83,11 +83,11 @@ const useSecretKnock = (openSesame) => {
 export default ({ title, children }) => {
   useStreamPlayer('stream')
 
-  const [mode, setMode] = useState('')
+  const [mode, setMode] = useState('HACKER')
   const knock = useSecretKnock(() => setMode(mode === 'HACKER' ? 'NORMAL' : 'HACKER'))
 
   if (mode === 'HACKER') {
-    return <HackerPanel />
+    return <HackerPanel exit={() => setMode('NORMAL')} />
   }
 
   return (
@@ -123,7 +123,7 @@ export default ({ title, children }) => {
         <ReadableContainer>
           <Clear>
             <Left>
-              <Link to='/'>
+              <Link to='/' onClick={() => knock()}>
                 <img
                   src='/images/logo.gif'
                   alt='WRFG'
@@ -131,7 +131,6 @@ export default ({ title, children }) => {
                     height: 2.6em;
                     margin-right: 0.6em;
                   `}
-                  onClick={() => knock()}
                 />
               </Link>
             </Left>

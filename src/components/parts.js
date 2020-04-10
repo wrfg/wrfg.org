@@ -88,3 +88,25 @@ export const Piece = ({ children }) => {
     </div>
   )
 }
+
+
+export const Spacer = ({ size }) => {
+  const multiplier = {
+    sm: 1,
+    md: 2,
+    lg: 4,
+    xl: 8,
+  }[size]
+
+  if (!multiplier) {
+    throw new Error(`No such size ${size}`)
+  }
+
+  return (
+    <div
+      css={css`
+        margin-bottom: calc(${multiplier} * 8px)
+      `}
+    />
+  )
+}
