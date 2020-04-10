@@ -1,6 +1,6 @@
-import React from "react"
+import React from 'react'
 
-import { css } from "@emotion/core"
+import { css } from '@emotion/core'
 
 const PlayPause = ({ play, pause, state }) => {
   return (
@@ -8,7 +8,7 @@ const PlayPause = ({ play, pause, state }) => {
       onClick={() => state === 'paused' ? play() : pause()}
       css={css`border: none; background: transparent; width: 1.6em; height: 1.6em; text-align: center; padding: 0;`}
     >
-      {state === "playing" ? "◼️" : "▶︎"}
+      {state === 'playing' ? '◼️' : '▶︎'}
     </button>
   )
 }

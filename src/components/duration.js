@@ -2,7 +2,7 @@ import React from "react"
 
 import pluralize from "pluralize"
 
-export default ({ value }) => {
+const format = ({ value }) => {
   const hours = parseInt(value.toHours(), 10)
   const minutes = value.minusHours(hours).toMinutes()
 
@@ -16,3 +16,5 @@ export default ({ value }) => {
 
   return (<span>{hours} {pluralize('hour', hours)} and {minutes} {pluralize('minute', minutes)}</span>)
 }
+
+export default format

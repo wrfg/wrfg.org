@@ -1,15 +1,14 @@
-import React, { useRef, useMemo, useCallback } from "react"
+import React, { useRef, useMemo, useCallback } from 'react'
 
-import { Link } from "gatsby"
+import { Link } from 'gatsby'
 
-import Time from "@/components/time.js"
-import { Piece } from '@/components/parts.js'
+import Time from '@/components/time'
+import { Piece } from '@/components/parts'
 
-import { useShows, zeitgeist } from "@/models/show.js"
+import { useShows, zeitgeist } from '@/models/show'
 
-import { usePersistentPlayer } from './persistent-player.js'
-import LivePulse from './live-pulse.js'
-
+import { usePersistentPlayer } from './persistent-player'
+import LivePulse from './live-pulse'
 
 const streamUrl = 'http://streaming.wrfg.org/'
 const useStreamPlayer = (id) => {
@@ -31,10 +30,10 @@ const useStreamPlayer = (id) => {
     pause: useCallback(() => audioElementRef.current.pause(), []),
     element: useMemo(() => {
       return (
-        <audio preload="none" ref={audioElementRef} onPlay={() => onPlay.current()} onPause={() => onPause.current()}>
+        <audio preload='none' ref={audioElementRef} onPlay={() => onPlay.current()} onPause={() => onPause.current()}>
           controls
-          <source src={streamUrl} type="audio/mpeg" />
-          <track kind="captions" />
+          <source src={streamUrl} type='audio/mpeg' />
+          <track kind='captions' />
         </audio>
       )
     }, []),

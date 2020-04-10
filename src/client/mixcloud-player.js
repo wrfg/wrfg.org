@@ -1,8 +1,8 @@
-import React, { useRef, useCallback, useMemo } from "react"
+import React, { useRef, useCallback, useMemo } from 'react'
 
-import { Link } from "gatsby"
+import { Link } from 'gatsby'
 
-import parse from "url-parse"
+import parse from 'url-parse'
 
 import useScript from 'react-script-hook'
 
@@ -14,8 +14,8 @@ const MixcloudPlayer = ({ title, slug, url }) => {
   const parsed = parse(url)
   const cloudcastKey = parsed.pathname
 
-  const initialSrc = "https://www.mixcloud.com/widget/iframe/"
-    + "?hide_cover=1&autoplay=false&mini=1&light=1&feed=" + encodeURIComponent(cloudcastKey)
+  const initialSrc = 'https://www.mixcloud.com/widget/iframe/'
+    + '?hide_cover=1&autoplay=false&mini=1&light=1&feed=' + encodeURIComponent(cloudcastKey)
 
   const iframe = useRef(null)
   const mixcloudWidgetRef = useRef(null)
@@ -73,7 +73,7 @@ const MixcloudPlayer = ({ title, slug, url }) => {
         border: 0,
         width: '100%',
         display: 'none',
-      }} ref={iframe} title="Mixcloud music player" />
+      }} ref={iframe} title='Mixcloud music player' />
     }, []),
     label: useMemo(() => {
       return <Link to={slug}>{title}</Link>
