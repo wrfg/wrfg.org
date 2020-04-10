@@ -102,8 +102,11 @@ export const Item = ({ baseCss, keep, order, children }) => {
   return <div css={[baseCss, css`width: 0px; align-items: center; display: flex; justify-content: ${contentJustification}; order: ${order}; flex-grow: 1;`]}>{children}</div>
 }
 
-export const hideSmall = css`@media (max-width: 375px) {display: none;}`
-export const showSmall = css`@media (min-width: 376px) {display: none;}`
+// at and below this value, a viewport is considered "small"
+const small = 575
+
+export const hideSmall = css`@media (max-width: ${small}px) {display: none;}`
+export const showSmall = css`@media (min-width: ${small + 1}px) {display: none;}`
 
 export const Spacer = ({ size }) => {
   const multiplier = {
