@@ -6,7 +6,7 @@ import { Global, css } from '@emotion/core'
 
 import { Helmet } from 'react-helmet-async'
 
-import { ReadableContainer, Section, Clear, Left, Right } from './parts'
+import { ReadableContainer, Section, Row, Item, hideSmall, showSmall } from './parts'
 
 import { useStreamPlayer } from '@/client/player'
 import { Context as PersistentPlayerContext } from '@/client/persistent-player'
@@ -90,6 +90,55 @@ export default ({ title, children }) => {
     return <HackerPanel exit={() => setMode('NORMAL')} />
   }
 
+  const NavItem = () => {
+    return (
+      <Item keep="left">
+        <NavLink to='/about'>About</NavLink>
+        <NavLink to='/schedule'>Schedule</NavLink>
+        <NavLink to='/donate'>Donate</NavLink>
+      </Item>
+    )
+  }
+
+  const LogoItem = ({ baseCss }) => {
+    return (
+      <Item baseCss={baseCss}>
+        <Link to='/' onClick={() => knock()}>
+          <img
+            src='/images/logo.gif'
+            alt='WRFG'
+            css={css`
+              height: 2.6em;
+              margin-right: 0.6em;
+            `}
+          />
+        </Link>
+      </Item>
+    )
+  }
+
+  const SocialItem = () => {
+    return (
+      <Item keep="right">
+        <SocialImageLink
+          to='https://www.instagram.com/wrfgatlanta/'
+          src='/images/instagram/glyph-logo_May2016.png'
+          alt='Instagram'
+        />
+        <SocialImageLink
+          to='https://www.facebook.com/pg/WRFG89.3/'
+          src='/images/facebook/f_logo_RGB-Black_100.png'
+          alt='Facebook'
+        />
+        <SocialImageLink
+          to='https://www.mixcloud.com/WRFG/'
+          src='/images/mixcloud/BlackOnTransparent.png'
+          alt='Mixcloud'
+        />
+      </Item>
+    )
+  }
+
   return (
     <>
       <Helmet
@@ -121,42 +170,12 @@ export default ({ title, children }) => {
       />
       <Section>
         <ReadableContainer>
-          <Clear>
-            <Left>
-              <Link to='/' onClick={() => knock()}>
-                <img
-                  src='/images/logo.gif'
-                  alt='WRFG'
-                  css={css`
-                    height: 2.6em;
-                    margin-right: 0.6em;
-                  `}
-                />
-              </Link>
-            </Left>
-            <Left>
-              <NavLink to='/about'>About</NavLink>
-              <NavLink to='/schedule'>Schedule</NavLink>
-              <NavLink to='/donate'>Donate</NavLink>
-            </Left>
-            <Right>
-              <SocialImageLink
-                to='https://www.instagram.com/wrfgatlanta/'
-                src='/images/instagram/glyph-logo_May2016.png'
-                alt='Instagram'
-              />
-              <SocialImageLink
-                to='https://www.facebook.com/pg/WRFG89.3/'
-                src='/images/facebook/f_logo_RGB-Black_100.png'
-                alt='Facebook'
-              />
-              <SocialImageLink
-                to='https://www.mixcloud.com/WRFG/'
-                src='/images/mixcloud/BlackOnTransparent.png'
-                alt='Mixcloud'
-              />
-            </Right>
-          </Clear>
+          <Row baseCss={[showSmall]}><LogoItem /></Row>
+          <Row>
+            <NavItem />
+            <LogoItem baseCss={[hideSmall]} />
+            <SocialItem />
+          </Row>
         </ReadableContainer>
       </Section>
       <Section>

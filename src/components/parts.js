@@ -89,6 +89,21 @@ export const Piece = ({ children }) => {
   )
 }
 
+export const Row = ({ baseCss, children }) => {
+  return <div css={[baseCss, css`display: flex; align-items: center; flex-wrap: wrap;`]}>{children}</div>
+}
+
+export const Item = ({ baseCss, keep, order, children }) => {
+  const contentJustification = {
+    left: "flex-start",
+    right: "flex-end",
+  }[keep] || "center"
+
+  return <div css={[baseCss, css`width: 0px; align-items: center; display: flex; justify-content: ${contentJustification}; order: ${order}; flex-grow: 1;`]}>{children}</div>
+}
+
+export const hideSmall = css`@media (max-width: 375px) {display: none;}`
+export const showSmall = css`@media (min-width: 376px) {display: none;}`
 
 export const Spacer = ({ size }) => {
   const multiplier = {
