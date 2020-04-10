@@ -61,31 +61,30 @@ const SocialImageLink = ({ to, src, alt }) => {
   )
 }
 
-const useDocumentListener = (event, handler) => {
-  useEffect(() => {
-    document.body.addEventListener(event, handler)
-    return () => {
-      document.body.removeEventListener(event, handler)
+const useSecretKnock = (openSesame) => {
+  const [knocks, setKnocks] = useState([])
+  const resetKnocks = () => setKnocks([])
+  const thresholdInMilliseconds = 1000
+  const meetsCriteria = ([thirdKnock, _, firstKnock]) => thirdKnock - firstKnock < thresholdInMilliseconds
+
+  const knock = () => {
+    const newKnocks = [new Date(), ...knocks].slice(0, 3)
+    if (meetsCriteria(newKnocks)) {
+      resetKnocks()
+      openSesame()
+    } else {
+      setKnocks(newKnocks)
     }
-  })
+  }
+
+  return knock
 }
 
 export default ({ title, children }) => {
   useStreamPlayer('stream')
 
-  const [lastThreeKeys, setLastThreeKeys] = useState([null, null, null])
-  const resetLastThreeKeys = useCallback(() => setLastThreeKeys([null, null, null]), [setLastThreeKeys])
-  useDocumentListener('keydown', (e) => {
-    setLastThreeKeys([e.code, ...lastThreeKeys].slice(0, 3))
-  })
-
-  const [mode, setMode] = useState('NORMAL')
-  useEffect(() => {
-    if (lastThreeKeys.every((key) => key === 'Escape')) {
-      setMode(mode === 'HACKER' ? 'NORMAL' : 'HACKER')
-      resetLastThreeKeys()
-    }
-  }, [mode, lastThreeKeys, setMode, resetLastThreeKeys]);
+  const [mode, setMode] = useState('')
+  const knock = useSecretKnock(() => setMode(mode === 'HACKER' ? 'NORMAL' : 'HACKER'))
 
   if (mode === 'HACKER') {
     return <HackerPanel />
@@ -132,6 +131,7 @@ export default ({ title, children }) => {
                     height: 2.6em;
                     margin-right: 0.6em;
                   `}
+                  onClick={() => knock()}
                 />
               </Link>
             </Left>
