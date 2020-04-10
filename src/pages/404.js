@@ -4,8 +4,11 @@ import Layout from '@/components/layout'
 import { Link } from 'gatsby'
 
 const NotFound = () => {
-  const url = new URL(window.location.href)
-  const path = url.pathname + url.search + url.hash
+  let path = '404.html'
+  if (window && window.URL) {
+    const url = new URL(window.location.href)
+    path = url.pathname + url.search + url.hash
+  }
 
   return (
     <Layout>
