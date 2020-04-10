@@ -10,19 +10,28 @@ const HackerPanel = ({ exit }) => {
 
   return (
     <ReadableContainer>
+      <button onClick={() => exit()}>Exit quietly</button>
       <h1>Hacker!</h1>
-      <button onClick={() => exit()}>Exit</button>
-      <Spacer size="sm" />
+      <Spacer size="lg" />
+      <h3>Internal settings</h3>
+      <Spacer size="md" />
       <Radio
-        label='Stripe keys'
+        label='Donations mode'
         name='stripeMode'
         presentation={Radio}
-        options={[{ label: 'Test', value: 'TEST' }, { label: 'Live', value: 'LIVE' }]}
+        options={[
+          { value: 'LIVE', label: 'Live - Charges you, like for real (default)' },
+          { value: 'TEST', label: 'Test - Supports fake credit cards like *4242, and doesn\'t actually charge you' },
+        ]}
         value={environment.stripeMode}
         onChange={(value) => set('stripeMode', value)}
       />
-      <Spacer size="sm" />
-      <button onClick={() => reset()}>Reset environment</button>
+      <Spacer size="md" />
+      <p>Changes are automatically saved.</p>
+      <Spacer size="lg" />
+      <h3>Nuclear option</h3>
+      <Spacer size="md" />
+      <button onClick={() => reset()}>Reset all internal settings to their defaults</button>
     </ReadableContainer>
   )
 }
