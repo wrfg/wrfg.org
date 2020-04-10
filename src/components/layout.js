@@ -83,7 +83,7 @@ const useSecretKnock = (openSesame) => {
 export default ({ title, children }) => {
   useStreamPlayer('stream')
 
-  const [mode, setMode] = useState('HACKER')
+  const [mode, setMode] = useState('NORMAL')
   const knock = useSecretKnock(() => setMode(mode === 'HACKER' ? 'NORMAL' : 'HACKER'))
 
   if (mode === 'HACKER') {
