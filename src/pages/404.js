@@ -5,7 +5,7 @@ import { Link } from 'gatsby'
 
 const NotFound = () => {
   let path = '/404'
-  if (URL) {
+  if (typeof window !== 'undefined') {
     const url = new URL(window.location.href)
     path = url.pathname + url.search + url.hash
   }
