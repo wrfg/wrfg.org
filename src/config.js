@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 
-const defaultEnvironment = { stripeMode: 'LIVE' }
+const defaultEnvironment = { stripeMode: 'TEST' }
 
 const EnvironmentContext = createContext({
   environment: defaultEnvironment,
