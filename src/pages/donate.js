@@ -3,9 +3,11 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'gatsby'
 import { loadStripe } from '@stripe/stripe-js'
 
+import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
+
 import DevTip from '@/components/DevTip'
 import Layout from '@/components/layout.js'
-import { Form, Input, Radio, Submit } from '@/components/forms.js'
+import { Form, Input, Radio, Dropdown, Submit } from '@/components/forms.js'
 import { useConfig } from '@/config.js'
 
 const url = (path) => (new URL(path, document.URL)).href
@@ -76,6 +78,8 @@ export default () => {
       return
     }
 
+    trackCustomEvent({category: 'Donation', action: 'Submit', label: values.frequency === 'ONCE' ? 'One time' : 'Monthly', value: parseInt(values.amount, 10)})
+    trackCustomEvent({category: 'Donation', action: 'In support of', label: values.inSupportOf})
     stripe.redirectToCheckout({
       items: [registry(stripeConfig, values.frequency, values.amount)],
       successUrl: url('/thank-you'),
@@ -105,6 +109,15 @@ export default () => {
             {value: '12000', label: '$120'},
             {value: '25000', label: '$250'},
             {value: '50000', label: '$500'},
+          ]}
+        />
+        <Input
+          name='inSupportOf'
+          label='In support of'
+          presentation={Dropdown}
+          options={[
+            {value: 'station', label: 'The station as a whole'},
+            {value: 'route66', label: 'Route 66'},
           ]}
         />
         <DevTip visible={stripeConfig.mode === 'TEST'}>

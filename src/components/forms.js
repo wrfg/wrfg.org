@@ -52,7 +52,7 @@ const Submit = ({ disabled, children }) => {
 
 const Radio = ({ name, label, options, value, onChange }) => {
   return (
-    <>
+    <div>
       <div>{label}</div>
       {options.map((option) => {
         const id = `${name}-${option.value}`
@@ -71,8 +71,19 @@ const Radio = ({ name, label, options, value, onChange }) => {
           </div>
         )
       })}
-    </>
+    </div>
   )
 }
 
-export { Form, Input, Radio, Submit }
+const Dropdown = ({ name, label, options, value, onChange }) => {
+  return (
+    <div>
+      <div>{label}</div>
+      <select value={value} onChange={(e) => onChange(e.target.value)}>
+        {options.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
+      </select>
+    </div>
+  )
+}
+
+export { Form, Input, Radio, Dropdown, Submit }
