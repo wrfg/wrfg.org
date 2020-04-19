@@ -13,6 +13,11 @@ fields:
   config:
     required: false
   label: Program
+- name: website_url
+  type: text
+  config:
+    required: false
+  label: Website URL
 - name: airshifts
   type: field_group_list
   fields:
