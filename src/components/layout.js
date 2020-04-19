@@ -93,9 +93,9 @@ export default ({ title, children }) => {
   const NavItem = () => {
     return (
       <Item keep="left">
-        <NavLink to='/about'>About</NavLink>
         <NavLink to='/schedule'>Schedule</NavLink>
         <NavLink to='/donate'>Donate</NavLink>
+        <NavLink to='/about'>About</NavLink>
       </Item>
     )
   }
