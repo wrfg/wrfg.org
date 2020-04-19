@@ -90,7 +90,7 @@ export default () => {
   return (
     <Layout title='Donate'>
       <h2>Donate</h2>
-      <Form initialValues={{ frequency: 'ONCE', amount: '2000' }} onSubmit={openCheckout}>
+      <Form initialValues={{ frequency: 'ONCE', amount: '2000', inSupportOf: 'station' }} onSubmit={openCheckout}>
         <Input
           name='frequency'
           label='Select donation frequency'
