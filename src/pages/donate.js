@@ -16,6 +16,10 @@ const registry = (stripeConfig, frequency, amount) => {
       '1000': stripeConfig.skus.donate1000,
       '2000': stripeConfig.skus.donate2000,
       '5000': stripeConfig.skus.donate5000,
+      '8930': stripeConfig.skus.donate8930,
+      '12000': stripeConfig.skus.donate12000,
+      '25000': stripeConfig.skus.donate25000,
+      '50000': stripeConfig.skus.donate50000,
     }[amount]
 
     if (!sku) {
@@ -33,6 +37,10 @@ const registry = (stripeConfig, frequency, amount) => {
       '1000': stripeConfig.plans.monthly1000,
       '2000': stripeConfig.plans.monthly2000,
       '5000': stripeConfig.plans.monthly5000,
+      '8930': stripeConfig.plans.monthly8930,
+      '12000': stripeConfig.plans.monthly12000,
+      '25000': stripeConfig.plans.monthly25000,
+      '50000': stripeConfig.plans.monthly50000,
     }[amount]
 
     if (!plan) {
@@ -93,6 +101,10 @@ export default () => {
             {value: '1000', label: '$10'},
             {value: '2000', label: '$20'},
             {value: '5000', label: '$50'},
+            {value: '8930', label: '$89.30'},
+            {value: '12000', label: '$120'},
+            {value: '25000', label: '$250'},
+            {value: '50000', label: '$500'},
           ]}
         />
         <DevTip visible={stripeConfig.mode === 'TEST'}>
