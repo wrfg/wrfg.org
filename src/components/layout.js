@@ -109,8 +109,7 @@ export default ({ title, children }) => {
             src='/images/logo.gif'
             alt='WRFG'
             css={css`
-              height: 2.6em;
-              margin-right: 0.6em;
+              height: 3.5em;
             `}
           />
         </Link>
