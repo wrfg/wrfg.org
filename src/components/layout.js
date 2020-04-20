@@ -6,7 +6,7 @@ import { Global, css } from '@emotion/core'
 
 import { Helmet } from 'react-helmet-async'
 
-import { ReadableContainer, Section, Row, Item, hideSmall, showSmall, ExternalLink } from './parts'
+import { ReadableContainer, Section, hideSmall, showSmall, ExternalLink } from './parts'
 
 import { useStreamPlayer } from '@/client/player'
 import { Context as PersistentPlayerContext } from '@/client/persistent-player'
@@ -14,13 +14,16 @@ import PlayPause from '@/client/play-pause'
 
 import HackerPanel from './HackerPanel'
 
+const Row = ({ baseCss = [], children }) => {
+  return <div css={[css`display: flex; flex-wrap: wrap;`, ...baseCss]}>{children}</div>
+}
+
 const NavLink = ({ children, ...props }) => {
   return (
     <Link {...props} css={css`
-      display: inline-block;
-      vertical-align: top;
-      padding: 0.3em;
-      padding-top: 0.7em;
+      &:not(:last-child) {
+        margin-right: 0.5em;
+      }
     `}>
       {children}
     </Link>
@@ -32,9 +35,9 @@ const SocialImageLink = ({ to, src, alt }) => {
     <ExternalLink
       to={to}
       css={css`
-        display: inline-block;
-        padding: 0.3em;
-        padding-top: 0.7em;
+        &:not(:first-child) {
+          margin-left: 0.5em;
+        }
       `}>
       <img
         src={src}
@@ -77,52 +80,17 @@ export default ({ title, children }) => {
     return <HackerPanel exit={() => setMode('NORMAL')} />
   }
 
-  const NavItem = () => {
+  const LogoItem = () => {
     return (
-      <Item keep="left">
-        <NavLink to='/'>Home</NavLink>
-        <NavLink to='/schedule'>Schedule</NavLink>
-        <NavLink to='/donate'>Donate</NavLink>
-        <NavLink to='/about'>About</NavLink>
-      </Item>
-    )
-  }
-
-  const LogoItem = ({ baseCss }) => {
-    return (
-      <Item baseCss={baseCss}>
-        <Link to='/' onClick={() => knock()}>
-          <img
-            src='/images/logo.gif'
-            alt='WRFG'
-            css={css`
-              height: 3.5em;
-            `}
-          />
-        </Link>
-      </Item>
-    )
-  }
-
-  const SocialItem = () => {
-    return (
-      <Item keep="right">
-        <SocialImageLink
-          to='https://www.instagram.com/wrfgatlanta/'
-          src='/images/instagram/glyph-logo_May2016.png'
-          alt='Instagram'
+      <Link to='/' onClick={() => knock()}>
+        <img
+          src='/images/logo.gif'
+          alt='WRFG'
+          css={css`
+            height: 3.5em;
+          `}
         />
-        <SocialImageLink
-          to='https://www.facebook.com/pg/WRFG89.3/'
-          src='/images/facebook/f_logo_RGB-Black_100.png'
-          alt='Facebook'
-        />
-        <SocialImageLink
-          to='https://www.mixcloud.com/WRFG/'
-          src='/images/mixcloud/BlackOnTransparent.png'
-          alt='Mixcloud'
-        />
-      </Item>
+      </Link>
     )
   }
 
@@ -151,17 +119,38 @@ export default ({ title, children }) => {
             -webkit-box-sizing: border-box;
             box-sizing: border-box;
             color: black;
-            line-height: 1.4em;
+            line-height: 1.5em;
+            border-spacing: 0;
           }
         `}
       />
       <Section>
         <ReadableContainer>
-          <Row baseCss={[showSmall]}><LogoItem /></Row>
-          <Row>
-            <NavItem />
-            <LogoItem baseCss={[hideSmall]} />
-            <SocialItem />
+          <Row baseCss={[css`justify-content: center`]}><LogoItem /></Row>
+          <Row baseCss={[css`justify-content: space-between`]}>
+            <div>
+              <NavLink to='/'>Home</NavLink>
+              <NavLink to='/schedule'>Schedule</NavLink>
+              <NavLink to='/donate'>Donate</NavLink>
+              <NavLink to='/about'>About</NavLink>
+            </div>
+            <div>
+              <SocialImageLink
+                to='https://www.instagram.com/wrfgatlanta/'
+                src='/images/instagram/glyph-logo_May2016.png'
+                alt='Instagram'
+              />
+              <SocialImageLink
+                to='https://www.facebook.com/pg/WRFG89.3/'
+                src='/images/facebook/f_logo_RGB-Black_100.png'
+                alt='Facebook'
+              />
+              <SocialImageLink
+                to='https://www.mixcloud.com/WRFG/'
+                src='/images/mixcloud/BlackOnTransparent.png'
+                alt='Mixcloud'
+              />
+            </div>
           </Row>
         </ReadableContainer>
       </Section>

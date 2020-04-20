@@ -8,13 +8,17 @@ import now from "@/now.js"
 import Layout from "@/components/layout.js"
 import Time from "@/components/time.js"
 
+import { Dropdown } from '@/components/forms'
+
 import Show, { sortByStart, zeitgeist } from "@/models/show.js"
 
 const Currently = ({ current, next }) => {
   return (
     <>
-      <p><Link to={current.show.slug}>{current.show.title}</Link> is currently on air.</p>
-      {next ? (<p>Up next is <Link to={next.show.slug}>{next.show.title}</Link>.</p>) : null}
+      <div><Link to={current.show.slug}>{current.show.title}</Link> is currently on air.</div>
+      {next && (
+        <div>Up next is <Link to={next.show.slug}>{next.show.title}</Link>.</div>
+      )}
     </>
   )
 }
@@ -47,8 +51,6 @@ const DailySchedule = ({ shows }) => {
     return show.airshifts.map((airshift) => [show, airshift])
   }).reduce((accumulation, item) => accumulation.concat(item), [])
 
-  const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
-
   const [ day, setDay ] = useState(now.dayOfWeek().name().toLowerCase())
   const airshifts = allAirshifts
     .filter(([show, airshift]) => airshift.day.toLowerCase() === day.toLowerCase())
@@ -56,28 +58,19 @@ const DailySchedule = ({ shows }) => {
 
   return (
     <>
-      <p>
-        {days.map((givenDay) => {
-          return (
-            <button
-              onClick={(e) => setDay(givenDay)}
-              css={css`
-                border: none;
-                text-transform: capitalize;
-                text-decoration: ${day === givenDay ? 'none' : 'underline'};
-                font-family: serif;
-                background: transparent;
-                height: 1.6em;
-                text-align: center;
-                display: inline-block;
-              `}
-              key={givenDay}
-            >
-              {givenDay}
-            </button>
-          )
-        })}
-      </p>
+      <Dropdown
+        value={day}
+        onChange={setDay}
+        options={[
+          {value: 'sunday', label: 'Sunday'},
+          {value: 'monday', label: 'Monday'},
+          {value: 'tuesday', label: 'Tuesday'},
+          {value: 'wednesday', label: 'Wednesday'},
+          {value: 'thursday', label: 'Thursday'},
+          {value: 'friday', label: 'Friday'},
+          {value: 'saturday', label: 'Saturday'},
+        ]}
+      />
       <Day day={day} airshifts={airshifts} />
     </>
   )

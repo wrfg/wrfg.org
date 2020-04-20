@@ -89,19 +89,6 @@ export const Piece = ({ children }) => {
   )
 }
 
-export const Row = ({ baseCss, children }) => {
-  return <div css={[baseCss, css`display: flex; align-items: center; flex-wrap: wrap;`]}>{children}</div>
-}
-
-export const Item = ({ baseCss, keep, order, children }) => {
-  const contentJustification = {
-    left: "flex-start",
-    right: "flex-end",
-  }[keep] || "center"
-
-  return <div css={[baseCss, css`width: 0px; align-items: center; display: flex; justify-content: ${contentJustification}; order: ${order}; flex-grow: 1;`]}>{children}</div>
-}
-
 // at and below this value, a viewport is considered "small"
 const small = 575
 
