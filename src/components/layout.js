@@ -6,13 +6,26 @@ import { Global, css } from '@emotion/core'
 
 import { Helmet } from 'react-helmet-async'
 
-import { Stack, ReadableContainer, Section, ExternalLink } from './parts'
+import { ReadableContainer, ExternalLink } from './parts'
 
 import { useStreamPlayer } from '@/client/player'
 import { Context as PersistentPlayerContext } from '@/client/persistent-player'
 import PlayPause from '@/client/play-pause'
 
 import HackerPanel from './HackerPanel'
+
+const Section = ({ children }) => {
+  return (
+    <div
+      css={css`
+        padding: 0.5em 0;
+        border-bottom: 1px solid #ccc;
+      `}
+    >
+      {children}
+    </div>
+  )
+}
 
 const Row = ({ baseCss = [], children }) => {
   return <div css={[css`display: flex; flex-wrap: wrap;`, ...baseCss]}>{children}</div>
@@ -76,10 +89,6 @@ export default ({ title, children }) => {
   const [mode, setMode] = useState('NORMAL')
   const knock = useSecretKnock(() => setMode(mode === 'HACKER' ? 'NORMAL' : 'HACKER'))
 
-  if (mode === 'HACKER') {
-    return <HackerPanel exit={() => setMode('NORMAL')} />
-  }
-
   const LogoItem = () => {
     return (
       <Link to='/' onClick={() => knock()}>
@@ -128,66 +137,71 @@ export default ({ title, children }) => {
           }
         `}
       />
-      <Section>
-        <ReadableContainer>
-          <Row baseCss={[css`justify-content: center`]}><LogoItem /></Row>
-          <Row baseCss={[css`justify-content: space-between`]}>
-            <div>
-              <NavLink to='/'>Home</NavLink>
-              <NavLink to='/schedule'>Schedule</NavLink>
-              <NavLink to='/donate'>Donate</NavLink>
-              <NavLink to='/about'>About</NavLink>
-            </div>
-            <div>
-              <SocialImageLink
-                to='https://www.instagram.com/wrfgatlanta/'
-                src='/images/instagram/glyph-logo_May2016.png'
-                alt='Instagram'
-              />
-              <SocialImageLink
-                to='https://www.facebook.com/pg/WRFG89.3/'
-                src='/images/facebook/f_logo_RGB-Black_100.png'
-                alt='Facebook'
-              />
-              <SocialImageLink
-                to='https://www.mixcloud.com/WRFG/'
-                src='/images/mixcloud/BlackOnTransparent.png'
-                alt='Mixcloud'
-              />
-            </div>
-          </Row>
-        </ReadableContainer>
-      </Section>
-      <Section>
-        <ReadableContainer>
-          <PersistentPlayerContext.Consumer>
-            {({ registry, order, active, play, pause }) => {
-              return order.map((id) => {
-                if (!registry[id]) {
-                  return null
-                }
-                const { label } = registry[id]
-                return <div key={id}>
-                  <PlayPause
-                    play={() => play(id)}
-                    pause={() => pause(id)}
-                    state={active === id ? 'playing' : 'paused'}
-                  />{' '}
-                  {label || id}
+      {mode === 'HACKER'
+        ? <HackerPanel exit={() => setMode('NORMAL')} />
+        : (<>
+          <Section>
+            <ReadableContainer>
+              <Row baseCss={[css`justify-content: center`]}><LogoItem /></Row>
+              <Row baseCss={[css`justify-content: space-between`]}>
+                <div>
+                  <NavLink to='/'>Home</NavLink>
+                  <NavLink to='/schedule'>Schedule</NavLink>
+                  <NavLink to='/donate'>Donate</NavLink>
+                  <NavLink to='/about'>About</NavLink>
                 </div>
-              })
-            }}
-          </PersistentPlayerContext.Consumer>
-        </ReadableContainer>
-      </Section>
-      <ReadableContainer>
-        <br />
-        {children}
-      </ReadableContainer>
-      <div>
-        <br />
-        <br />
-      </div>
+                <div>
+                  <SocialImageLink
+                    to='https://www.instagram.com/wrfgatlanta/'
+                    src='/images/instagram/glyph-logo_May2016.png'
+                    alt='Instagram'
+                  />
+                  <SocialImageLink
+                    to='https://www.facebook.com/pg/WRFG89.3/'
+                    src='/images/facebook/f_logo_RGB-Black_100.png'
+                    alt='Facebook'
+                  />
+                  <SocialImageLink
+                    to='https://www.mixcloud.com/WRFG/'
+                    src='/images/mixcloud/BlackOnTransparent.png'
+                    alt='Mixcloud'
+                  />
+                </div>
+              </Row>
+            </ReadableContainer>
+          </Section>
+          <Section>
+            <ReadableContainer>
+              <PersistentPlayerContext.Consumer>
+                {({ registry, order, active, play, pause }) => {
+                  return order.map((id) => {
+                    if (!registry[id]) {
+                      return null
+                    }
+                    const { label } = registry[id]
+                    return <div key={id}>
+                      <PlayPause
+                        play={() => play(id)}
+                        pause={() => pause(id)}
+                        state={active === id ? 'playing' : 'paused'}
+                      />{' '}
+                      {label || id}
+                    </div>
+                  })
+                }}
+              </PersistentPlayerContext.Consumer>
+            </ReadableContainer>
+          </Section>
+          <ReadableContainer>
+            <br />
+            {children}
+          </ReadableContainer>
+          <div>
+            <br />
+            <br />
+          </div>
+        </>)
+      }
     </>
   )
 }

@@ -3,6 +3,8 @@ import { graphql } from "gatsby"
 
 import Layout from "@/components/layout.js"
 
+import { PlainHtml, FullWidthImage } from '@/components/parts'
+
 import { css } from "@emotion/core"
 
 import remark from "remark"
@@ -17,9 +19,9 @@ export default ({ data }) => {
       {sections && sections.map((section, index) => {
         switch (section.template) {
           case "image":
-            return <img key={index} alt={section.alt} src={section.image} css={css`width: 100%; margin: 1em 0`} />
+            return <FullWidthImage key={index} alt={section.alt} src={section.image} />
           case "text":
-            return <div key={index} dangerouslySetInnerHTML={{ __html: remark().use(html).processSync(section.content).toString() }}></div>
+            return <PlainHtml key={index} html={remark().use(html).processSync(section.content).toString()} />
           default:
             throw new Error(`Unknown section template \`${section.template}\``)
         }

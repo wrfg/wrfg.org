@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 
 import { EnvironmentContext } from '@/config'
 
-import { ReadableContainer, Spacer } from './parts'
+import { ReadableContainer, Spacer, Stack } from './parts'
 import { Radio } from './forms'
 
 const HackerPanel = ({ exit }) => {
@@ -10,28 +10,33 @@ const HackerPanel = ({ exit }) => {
 
   return (
     <ReadableContainer>
-      <button onClick={() => exit()}>Exit quietly</button>
-      <h1>Hacker!</h1>
-      <Spacer size="lg" />
-      <h3>Internal settings</h3>
-      <Spacer size="md" />
-      <Radio
-        label='Donations mode'
-        name='stripeMode'
-        presentation={Radio}
-        options={[
-          { value: 'LIVE', label: 'Live - Charges you, like for real (default)' },
-          { value: 'TEST', label: 'Test - Supports fake credit cards like *4242, and doesn\'t actually charge you' },
-        ]}
-        value={environment.stripeMode}
-        onChange={(value) => set('stripeMode', value)}
-      />
-      <Spacer size="md" />
-      <p>Changes are automatically saved.</p>
-      <Spacer size="lg" />
-      <h3>Nuclear option</h3>
-      <Spacer size="md" />
-      <button onClick={() => reset()}>Reset all internal settings to their defaults</button>
+      <Stack>
+        <div>
+          <button onClick={() => exit()}>Exit quietly</button>
+        </div>
+        <div>
+          <h1>Hacker!</h1>
+          <p>Changes are automatically saved.</p>
+        </div>
+        <div>
+          <h3>Internal settings</h3>
+          <Radio
+            label='Donations mode'
+            name='stripeMode'
+            presentation={Radio}
+            options={[
+              { value: 'LIVE', label: 'Live - Charges you, like for real (default)' },
+              { value: 'TEST', label: 'Test - Supports fake credit cards like *4242, and doesn\'t actually charge you' },
+            ]}
+            value={environment.stripeMode}
+            onChange={(value) => set('stripeMode', value)}
+          />
+        </div>
+        <div>
+          <h3>Nuclear option</h3>
+          <button onClick={() => reset()}>Reset all internal settings to their defaults</button>
+        </div>
+      </Stack>
     </ReadableContainer>
   )
 }

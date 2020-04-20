@@ -7,81 +7,9 @@ export const ReadableContainer = ({ children }) => {
     <div
       css={css`
         margin: 0 auto;
-        max-width: 740px;
-        padding: 0 10px;
+        max-width: 46em;
+        padding: 0 1em;
         width: 100%;
-      `}
-    >
-      {children}
-    </div>
-  )
-}
-
-export const Section = ({ children }) => {
-  return (
-    <div
-      css={css`
-        padding: 0.3em 0;
-        border-bottom: 1px solid #ccc;
-      `}
-    >
-      {children}
-    </div>
-  )
-}
-
-export const Clear = ({ children }) => {
-  return (
-    <div
-      css={css`
-        overflow: auto;
-        width: 100%;
-      `}
-    >
-      {children}
-    </div>
-  )
-}
-
-export const Left = ({ children }) => {
-  return (
-    <div
-      css={css`
-        float: left;
-      `}
-    >
-      {children}
-    </div>
-  )
-}
-
-export const Right = ({ children }) => {
-  return (
-    <div
-      css={css`
-        float: right;
-      `}
-    >
-      {children}
-    </div>
-  )
-}
-
-export const Piece = ({ children }) => {
-  return (
-    <div
-      css={css`
-        display: inline-block;
-        margin-left: 0.3em;
-        margin-right: 0.3em;
-
-        &:first-of-type {
-          margin-left: 0em;
-        }
-
-        &:last-of-type {
-          margin-right: 0em;
-        }
       `}
     >
       {children}
@@ -100,6 +28,14 @@ export const Stack = ({ children }) => {
 
 export const FullWidthImage = ({ src }) => {
   return <img css={css`width: 100%;`} src={src} />
+}
+
+export const PlainHtml = ({ html }) => {
+  return <div css={css`
+    h1, h2, h3, h4, h5, h6, p, ol, ul {
+      margin: 0 0 1em;
+    }
+  `} dangerouslySetInnerHTML={{ __html: html }}></div>
 }
 
 // at and below this value, a viewport is considered "small"

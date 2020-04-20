@@ -10,6 +10,8 @@ import Time from "@/components/time.js"
 
 import { Dropdown } from '@/components/forms'
 
+import { Stack } from '@/components/parts'
+
 import Show, { sortByStart, zeitgeist } from "@/models/show.js"
 
 const Currently = ({ current, next }) => {
@@ -83,12 +85,16 @@ export default ({ data }) => {
 
   return (
     <Layout title="Schedule">
-      {current && (<>
-        <h2>Now</h2>
-        <Currently current={current} next={next} />
-      </>)}
-      <h2>Schedule</h2>
-      <DailySchedule shows={shows}  />
+      <Stack>
+        {current && (<div>
+          <h2>Now</h2>
+          <Currently current={current} next={next} />
+        </div>)}
+        <div>
+          <h2>Schedule</h2>
+          <DailySchedule shows={shows}  />
+        </div>
+      </Stack>
     </Layout>
   )
 }

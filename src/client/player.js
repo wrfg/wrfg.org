@@ -2,13 +2,37 @@ import React, { useRef, useMemo, useCallback } from 'react'
 
 import { Link } from 'gatsby'
 
+import { css } from "@emotion/core"
+
 import Time from '@/components/time'
-import { Piece } from '@/components/parts'
 
 import { useShows, zeitgeist } from '@/models/show'
 
 import { usePersistentPlayer } from './persistent-player'
 import LivePulse from './live-pulse'
+
+const Piece = ({ children }) => {
+  return (
+    <div
+      css={css`
+        display: inline-block;
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+
+        &:first-of-type {
+          margin-left: 0;
+        }
+
+        &:last-of-type {
+          margin-right: 0;
+        }
+      `}
+    >
+      {children}
+    </div>
+  )
+}
+
 
 const streamUrl = 'https://s2.radio.co/s2133c4bad/listen'
 const useStreamPlayer = (id) => {
