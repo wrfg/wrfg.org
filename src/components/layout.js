@@ -6,7 +6,7 @@ import { Global, css } from '@emotion/core'
 
 import { Helmet } from 'react-helmet-async'
 
-import { ReadableContainer, Section, hideSmall, showSmall, ExternalLink } from './parts'
+import { ReadableContainer, Section, ExternalLink } from './parts'
 
 import { useStreamPlayer } from '@/client/player'
 import { Context as PersistentPlayerContext } from '@/client/persistent-player'

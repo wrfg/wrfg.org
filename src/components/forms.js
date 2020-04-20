@@ -79,7 +79,7 @@ const Dropdown = ({ name, label, options, value, onChange }) => {
   return (
     <div>
       <div>{label}</div>
-      <select value={value} onChange={(e) => onChange(e.target.value)}>
+      <select value={value} onBlur={(e) => onChange(e.target.value)} onChange={(e) => onChange(e.target.value)}>
         {options.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
       </select>
     </div>
