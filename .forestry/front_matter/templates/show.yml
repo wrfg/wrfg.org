@@ -13,6 +13,12 @@ fields:
   config:
     required: false
   label: Program
+- name: banner_image
+  type: file
+  config:
+    maxSize: 250
+  label: Banner image
+  description: This image will be displayed on the show's page.
 - name: website_url
   type: text
   config:
