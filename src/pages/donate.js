@@ -10,6 +10,8 @@ import Layout from '@/components/layout.js'
 import { Form, Input, Radio, Dropdown, Submit } from '@/components/forms.js'
 import { useConfig } from '@/config.js'
 
+import Show from "@/models/show.js"
+
 const url = (path) => (new URL(path, document.URL)).href
 
 const registry = (stripeConfig, frequency, amount) => {
@@ -58,7 +60,9 @@ const registry = (stripeConfig, frequency, amount) => {
   throw new Error(`Unknown frequency \`${frequency}\``)
 }
 
-export default () => {
+export default ({ data }) => {
+  const shows = data.allMarkdownRemark.edges.map((edge) => edge.node).map(Show.factory)
+
   const [{ isLoading }, setState] = useState({ isLoading: true })
   const stripeRef = useRef(null)
   const { current: stripe } = stripeRef
@@ -117,7 +121,12 @@ export default () => {
           presentation={Dropdown}
           options={[
             {value: 'station', label: 'The station as a whole'},
-            {value: 'route66', label: 'Route 66'},
+            ...shows.map((show) => {
+              return {
+                value: show.title,
+                label: show.title,
+              }
+            }),
           ]}
         />
         <DevTip visible={stripeConfig.mode === 'TEST'}>
@@ -131,3 +140,21 @@ export default () => {
     </Layout>
   )
 }
+
+export const query = graphql`
+  {
+    allMarkdownRemark(filter: {fields: {kind: {eq: "shows"}}}) {
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+          }
+          fields {
+            slug
+          }
+        }
+      }
+    }
+  }
+`
