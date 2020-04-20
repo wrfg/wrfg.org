@@ -74,6 +74,9 @@ class Show {
   get websiteUrl() {
     return this.data.frontmatter.website_url
   }
+  get bannerImageUrl() {
+    return this.data.frontmatter.banner_image
+  }
   get start() {
     return toLocalTime(this.data.frontmatter.start)
   }

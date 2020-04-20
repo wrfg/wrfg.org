@@ -89,6 +89,19 @@ export const Piece = ({ children }) => {
   )
 }
 
+export const Stack = ({ children }) => {
+  return <div
+    css={css`
+      display: grid;
+      grid-gap: 1em;
+    `}
+  >{children}</div>
+}
+
+export const FullWidthImage = ({ src }) => {
+  return <img css={css`width: 100%;`} src={src} />
+}
+
 // at and below this value, a viewport is considered "small"
 const small = 575
 

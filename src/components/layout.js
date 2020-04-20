@@ -6,7 +6,7 @@ import { Global, css } from '@emotion/core'
 
 import { Helmet } from 'react-helmet-async'
 
-import { ReadableContainer, Section, ExternalLink } from './parts'
+import { Stack, ReadableContainer, Section, ExternalLink } from './parts'
 
 import { useStreamPlayer } from '@/client/player'
 import { Context as PersistentPlayerContext } from '@/client/persistent-player'
@@ -122,6 +122,10 @@ export default ({ title, children }) => {
             line-height: 1.5em;
             border-spacing: 0;
           }
+
+          h1, h2, h3, h4, h5, h6, p {
+            margin: 0;
+          }
         `}
       />
       <Section>
@@ -177,6 +181,7 @@ export default ({ title, children }) => {
         </ReadableContainer>
       </Section>
       <ReadableContainer>
+        <br />
         {children}
       </ReadableContainer>
       <div>
