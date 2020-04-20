@@ -18,4 +18,5 @@ fields:
     max: 
 pages:
 - content/pages/support.md
+- content/pages/test.md
 - content/pages/thank-you.md
