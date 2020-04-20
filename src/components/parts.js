@@ -128,3 +128,16 @@ export const Spacer = ({ size }) => {
     />
   )
 }
+
+export const ExternalLink = ({ children, ...props }) => {
+  if (props.hasOwnProperty('to')) {
+    props.href = props.to
+    delete props.to
+  }
+
+  return (
+    <a {...props} target='_blank' rel='noopener nofollow'>
+      {children}
+    </a>
+  )
+}

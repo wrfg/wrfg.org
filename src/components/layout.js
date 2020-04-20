@@ -6,7 +6,7 @@ import { Global, css } from '@emotion/core'
 
 import { Helmet } from 'react-helmet-async'
 
-import { ReadableContainer, Section, Row, Item, hideSmall, showSmall } from './parts'
+import { ReadableContainer, Section, Row, Item, hideSmall, showSmall, ExternalLink } from './parts'
 
 import { useStreamPlayer } from '@/client/player'
 import { Context as PersistentPlayerContext } from '@/client/persistent-player'
@@ -24,19 +24,6 @@ const NavLink = ({ children, ...props }) => {
     `}>
       {children}
     </Link>
-  )
-}
-
-const ExternalLink = ({ children, ...props }) => {
-  if (props.hasOwnProperty('to')) {
-    props.href = props.to
-    delete props.to
-  }
-
-  return (
-    <a {...props} target='_blank' rel='noopener nofollow'>
-      {children}
-    </a>
   )
 }
 
