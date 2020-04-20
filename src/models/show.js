@@ -71,6 +71,9 @@ class Show {
   get day() {
     return this.data.frontmatter.day
   }
+  get websiteUrl() {
+    return this.data.frontmatter.website_url
+  }
   get start() {
     return toLocalTime(this.data.frontmatter.start)
   }

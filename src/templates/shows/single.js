@@ -3,6 +3,8 @@ import { Link, graphql } from "gatsby"
 
 import Layout from "@/components/layout.js"
 
+import { ExternalLink } from '@/components/parts'
+
 import Show from "@/models/show.js"
 
 import Time from "@/components/time.js"
@@ -77,25 +79,33 @@ export default ({ data }) => {
       <h1>{show.title}</h1>
       {show.program && (<>
         <h4>Program</h4>
-        <p><Link to={show.program.slug}>{show.program.title}</Link></p>
+        <div><Link to={show.program.slug}>{show.program.title}</Link></div>
       </>)}
       <h4>On air</h4>
-      <ShiftSummary airshifts={show.airshifts} />
+      <div><ShiftSummary airshifts={show.airshifts} /></div>
+      {show.websiteUrl && (<>
+        <h4>Links</h4>
+        <div><ExternalLink to={show.websiteUrl}>Website</ExternalLink></div>
+      </>)}
       <h4>Archives</h4>
-      {show.archives.length
-        ? (<ul>{show.archives.map((archive, index) => {
-          return (
-            <li key={index}><Link to={archive.slug}>{archive.title}</Link></li>
-          )
-        })
-        }</ul>)
-        : <p>No archives</p>
-      }
+      <div>
+        {show.archives.length
+          ? (<ul>{show.archives.map((archive, index) => {
+            return (
+              <li key={index}><Link to={archive.slug}>{archive.title}</Link></li>
+            )
+          })
+          }</ul>)
+          : 'No archives'
+        }
+      </div>
       <h4>Notes</h4>
-      {page.html
-        ? <div dangerouslySetInnerHTML={{ __html: page.html }} />
-        : 'None available'
-      }
+      <div>
+        {page.html
+          ? <div dangerouslySetInnerHTML={{ __html: page.html }} />
+          : 'None available'
+        }
+      </div>
     </Layout>
   )
 }
@@ -106,6 +116,7 @@ export const query = graphql`
       html
       frontmatter {
         title
+        website_url
         airshifts {
           day
           start
