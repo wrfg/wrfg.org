@@ -21,7 +21,7 @@ const Row = ({ baseCss = [], children }) => {
 const NavLink = ({ children, ...props }) => {
   return (
     <Link {...props} css={css`
-      &:not(:last-child) {
+      &:not(:last-of-type) {
         margin-right: 0.5em;
       }
     `}>
@@ -35,7 +35,7 @@ const SocialImageLink = ({ to, src, alt }) => {
     <ExternalLink
       to={to}
       css={css`
-        &:not(:first-child) {
+        &:not(:first-of-type) {
           margin-left: 0.5em;
         }
       `}>
