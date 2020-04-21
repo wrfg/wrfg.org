@@ -128,12 +128,12 @@ export default ({ title, children }) => {
             -webkit-box-sizing: border-box;
             box-sizing: border-box;
             color: black;
-            line-height: 1.5em;
             border-spacing: 0;
           }
 
-          h1, h2, h3, h4, h5, h6, p {
+          h1, h2, h3, h4, h5, h6, p, ul, ol {
             margin: 0;
+            line-height: 1.5em;
           }
         `}
       />

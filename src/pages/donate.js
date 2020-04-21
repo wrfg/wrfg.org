@@ -7,6 +7,7 @@ import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
 
 import DevTip from '@/components/DevTip'
 import Layout from '@/components/layout.js'
+import { Stack } from '@/components/parts'
 import { Form, Input, Radio, Dropdown, Submit } from '@/components/forms.js'
 import { useConfig } from '@/config.js'
 
@@ -93,50 +94,55 @@ export default ({ data }) => {
 
   return (
     <Layout title='Donate'>
-      <h2>Donate</h2>
-      <Form initialValues={{ frequency: 'ONCE', amount: '2000', inSupportOf: 'station' }} onSubmit={openCheckout}>
-        <Input
-          name='frequency'
-          label='Select donation frequency'
-          presentation={Radio}
-          options={[{value: 'ONCE', label: 'One time'}, {value: 'MONTHLY', label: 'Monthly'}]}
-        />
-        <Input
-          name='amount'
-          label='Select amount'
-          presentation={Radio}
-          options={[
-            {value: '1000', label: '$10'},
-            {value: '2000', label: '$20'},
-            {value: '5000', label: '$50'},
-            {value: '8930', label: '$89.30'},
-            {value: '12000', label: '$120'},
-            {value: '25000', label: '$250'},
-            {value: '50000', label: '$500'},
-          ]}
-        />
-        <Input
-          name='inSupportOf'
-          label='In support of'
-          presentation={Dropdown}
-          options={[
-            {value: 'station', label: 'The station as a whole'},
-            ...shows.map((show) => {
-              return {
-                value: show.title,
-                label: show.title,
-              }
-            }),
-          ]}
-        />
-        <DevTip visible={stripeConfig.mode === 'TEST'}>
-          You can use credit card <code>4242 4242 4242 4242</code> with any future expiration and any 3-digit CVV to submit the donation.
-        </DevTip>
+      <Stack>
+        <h2>Donate</h2>
+        <Form initialValues={{ frequency: 'ONCE', amount: '2000', inSupportOf: 'station' }} onSubmit={openCheckout}>
+          <Input
+            name='frequency'
+            label='Select donation frequency'
+            presentation={Radio}
+            options={[{value: 'ONCE', label: 'One time'}, {value: 'MONTHLY', label: 'Monthly'}]}
+          />
+          <Input
+            name='amount'
+            label='Select amount'
+            presentation={Radio}
+            options={[
+              {value: '1000', label: '$10'},
+              {value: '2000', label: '$20'},
+              {value: '5000', label: '$50'},
+              {value: '8930', label: '$89.30'},
+              {value: '12000', label: '$120'},
+              {value: '25000', label: '$250'},
+              {value: '50000', label: '$500'},
+            ]}
+          />
+          <Input
+            name='inSupportOf'
+            label='In support of'
+            presentation={Dropdown}
+            options={[
+              {value: 'station', label: 'The station as a whole'},
+              ...shows.map((show) => {
+                return {
+                  value: show.title,
+                  label: show.title,
+                }
+              }),
+            ]}
+          />
+          <DevTip visible={stripeConfig.mode === 'TEST'}>
+            You can use credit card <code>4242 4242 4242 4242</code> with any future expiration and any 3-digit CVV to submit the donation.
+          </DevTip>
+          <div>
+            <Submit disabled={isLoading}>Donate with credit card</Submit>
+          </div>
+        </Form>
         <div>
-          <Submit disabled={isLoading}>Donate with credit card</Submit>
+          <p>Interested in donating your time or skills? Learn how you can <Link to='/support'>support the station</Link>.</p>
+          <p>You can also donate via phone at <a href="tel:+14045233471">(404) 523-3471</a>, or by mailing a check to <Link to="/about">our address</Link>.</p>
         </div>
-      </Form>
-      <p>Interested in donating your time or skills? Learn how you can <Link to='/support'>support the station</Link>.</p>
+      </Stack>
     </Layout>
   )
 }
