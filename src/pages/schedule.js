@@ -86,12 +86,14 @@ export default ({ data }) => {
   return (
     <Layout title="Schedule">
       <Stack>
-        {current && (<div>
-          <h2>Now</h2>
-          <Currently current={current} next={next} />
-        </div>)}
+        {current && (<>
+          <div><h2>Now</h2></div>
+          <div><Currently current={current} next={next} /></div>
+        </>)}
         <div>
           <h2>Schedule</h2>
+        </div>
+        <div>
           <DailySchedule shows={shows}  />
         </div>
       </Stack>
