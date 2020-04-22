@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 
 import { Link } from 'gatsby'
-import { loadStripe } from '@stripe/stripe-js'
 
 import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
 
@@ -9,7 +8,7 @@ import DevTip from '@/components/DevTip'
 import Layout from '@/components/layout.js'
 import { Stack } from '@/components/parts'
 import { Form, Input, Radio, Dropdown, Dollars, Submit, Context as FormContext } from '@/components/forms.js'
-import { useConfig } from '@/config.js'
+import { useEnvironmentVariable } from '@/config'
 
 import Show from "@/models/show.js"
 
@@ -22,27 +21,10 @@ const endpoint = (url, params) => {
 }
 
 export default ({ data }) => {
+  const stripeMode = useEnvironmentVariable('stripeMode')
   const shows = data.allMarkdownRemark.edges.map((edge) => edge.node).map(Show.factory)
 
-  const [{ isLoading }, setState] = useState({ isLoading: true })
-  const stripeRef = useRef(null)
-  const { current: stripe } = stripeRef
-  const { stripe: stripeConfig } = useConfig()
-
-  useEffect(() => {
-    loadStripe(stripeConfig.publishableApiKey).then((value) => {
-      stripeRef.current = value
-      setState((s) => {
-        return { ...s, isLoading: false }
-      })
-    })
-  }, [stripeConfig.publishableApiKey])
-
   const openCheckout = (values) => {
-    if (isLoading) {
-      return
-    }
-
     const amount = values.amount === 'other' ? values.customAmount : values.amount;
     trackCustomEvent({ category: 'Donation', action: 'Submit', label: values.frequency === 'ONCE' ? 'One time' : 'Monthly', value: amount })
     trackCustomEvent({ category: 'Donation', action: 'In support of', label: values.inSupportOf })
@@ -53,6 +35,7 @@ export default ({ data }) => {
         successUrl: url('/thank-you'),
         cancelUrl: url('/donate'),
         frequency: values.frequency,
+        stripeMode: stripeMode,
       })
     ).then((response) => response.json()).then(({ id }) => {
       stripe.redirectToCheckout({ sessionId: id });
@@ -63,7 +46,7 @@ export default ({ data }) => {
     <Layout title='Donate'>
       <Stack>
         <h2>Donate</h2>
-        <Form initialValues={{ frequency: 'ONCE', amount: 'other', inSupportOf: 'station', customAmount: 4000 }} onSubmit={openCheckout}>
+        <Form initialValues={{ frequency: 'ONCE', amount: '2000', inSupportOf: 'station', customAmount: 4000 }} onSubmit={openCheckout}>
           <Input
             name='frequency'
             label='Select donation frequency'
@@ -119,7 +102,7 @@ export default ({ data }) => {
             <FormContext.Consumer>{({ values }) => {
               const recurringAndOther = values.frequency !== 'ONCE' && values.amount === 'other'
               const otherAndEmpty = values.amount === 'other' && !values.customAmount
-              const disabled = isLoading || recurringAndOther || otherAndEmpty
+              const disabled = recurringAndOther || otherAndEmpty
 
               return <Submit disabled={disabled}>Donate with credit card</Submit>
             }}</FormContext.Consumer>
