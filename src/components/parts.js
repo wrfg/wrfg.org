@@ -50,10 +50,24 @@ export const Button = ({ type, onClick, children, behavior = 'button' }) => {
   `
 
   const styles = {
-    primary: css`${base}; border-color: black; background-color: ${nearBlack}; color: white`,
-    secondary: css`${base}; background-color: ${lightGrey};`,
-    tertiary: css`${base}; background-color: white;`,
+    primary: css`
+      ${base};
+      border-color: black;
+      background-color: ${nearBlack};
+      color: white;
+      &:hover {
+        background-color: #444;
+      }`,
+    secondary: css`
+      ${base};
+      background-color: ${lightGrey};
+    `,
+    tertiary: css`
+      ${base};
+      background-color: white;
+    `,
   }[type]
+
   return <button css={styles} type={behavior} onClick={onClick}>{children}</button>
 }
 
