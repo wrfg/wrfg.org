@@ -5,8 +5,6 @@ import Layout from "@/components/layout.js"
 
 import { Stack, PlainHtml, FullWidthImage } from '@/components/parts'
 
-import { css } from "@emotion/core"
-
 import remark from "remark"
 import html from "remark-html"
 

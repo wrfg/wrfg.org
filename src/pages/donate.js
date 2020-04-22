@@ -21,52 +21,6 @@ const endpoint = (url, params) => {
   }, new URL(url));
 }
 
-const registry = (stripeConfig, frequency, amount) => {
-  if (frequency === 'ONCE') {
-    const sku = {
-      '1000': stripeConfig.skus.donate1000,
-      '2000': stripeConfig.skus.donate2000,
-      '5000': stripeConfig.skus.donate5000,
-      '8930': stripeConfig.skus.donate8930,
-      '12000': stripeConfig.skus.donate12000,
-      '25000': stripeConfig.skus.donate25000,
-      '50000': stripeConfig.skus.donate50000,
-    }[amount]
-
-    if (!sku) {
-      throw new Error(`No sku found for one-time donation of amount \`${amount}\``)
-    }
-
-    return {
-      sku: sku,
-      quantity: 1
-    }
-  }
-
-  if (frequency === 'MONTHLY') {
-    const plan = {
-      '1000': stripeConfig.plans.monthly1000,
-      '2000': stripeConfig.plans.monthly2000,
-      '5000': stripeConfig.plans.monthly5000,
-      '8930': stripeConfig.plans.monthly8930,
-      '12000': stripeConfig.plans.monthly12000,
-      '25000': stripeConfig.plans.monthly25000,
-      '50000': stripeConfig.plans.monthly50000,
-    }[amount]
-
-    if (!plan) {
-      throw new Error(`No plan found for monthly donation of amount \`${amount}\``)
-    }
-
-    return {
-      plan: plan,
-      quantity: 1
-    }
-  }
-
-  throw new Error(`Unknown frequency \`${frequency}\``)
-}
-
 export default ({ data }) => {
   const shows = data.allMarkdownRemark.edges.map((edge) => edge.node).map(Show.factory)
 

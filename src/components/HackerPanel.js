@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 
 import { EnvironmentContext } from '@/config'
 
-import { ReadableContainer, Spacer, Stack } from './parts'
+import { ReadableContainer, Stack } from './parts'
 import { Radio } from './forms'
 
 const HackerPanel = ({ exit }) => {

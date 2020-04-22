@@ -26,8 +26,8 @@ export const Stack = ({ children }) => {
   >{children}</div>
 }
 
-export const FullWidthImage = ({ src }) => {
-  return <img css={css`width: 100%;`} src={src} />
+export const FullWidthImage = ({ alt, src }) => {
+  return <img css={css`width: 100%;`} alt={alt} src={src} />
 }
 
 export const PlainHtml = ({ html }) => {
