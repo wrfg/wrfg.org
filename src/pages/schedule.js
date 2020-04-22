@@ -16,35 +16,26 @@ import Show, { sortByStart, zeitgeist } from "@/models/show.js"
 
 const Currently = ({ current, next }) => {
   return (
-    <>
+    <Stack gap={1}>
       <div><Link to={current.show.slug}>{current.show.title}</Link> is currently on air.</div>
       {next && (
         <div>Up next is <Link to={next.show.slug}>{next.show.title}</Link>.</div>
       )}
-    </>
+    </Stack>
   )
 }
 
 const Day = ({ day, airshifts }) => {
   return (
-    <Fragment key={day}>
-      <table>
-        <tbody>
-          {airshifts.map(([show, airshift]) => {
-            return (
-              <tr key={show.id}>
-                <td css={css`vertical-align: top;`}>
-                  <Time value={airshift.start} />&nbsp;-&nbsp;<Time value={airshift.end} />
-                </td>
-                <td css={css`vertical-align: top;`}>
-                  <Link to={show.slug}>{show.title}</Link>
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
-    </Fragment>
+    <Stack gap={1}>
+      {airshifts.map(([show, airshift]) => {
+        return (
+          <div key={show.id}>
+            <Time value={airshift.start} />&nbsp;-&nbsp;<Time value={airshift.end} />{' '}<Link to={show.slug}>{show.title}</Link>
+          </div>
+        )
+      })}
+    </Stack>
   )
 }
 
@@ -59,7 +50,7 @@ const DailySchedule = ({ shows }) => {
     .sort((x, y) => sortByStart(x[1], y[1]))
 
   return (
-    <>
+    <Stack gap={1}>
       <Dropdown
         value={day}
         onChange={setDay}
@@ -74,7 +65,7 @@ const DailySchedule = ({ shows }) => {
         ]}
       />
       <Day day={day} airshifts={airshifts} />
-    </>
+    </Stack>
   )
 }
 
