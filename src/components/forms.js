@@ -66,6 +66,7 @@ const Radio = ({ name, label, options, value, onChange }) => {
               value={option.value}
               checked={value === option.value}
               onChange={() => onChange(option.value)}
+              disabled={'disabled' in option && option.disabled}
             />
             <label htmlFor={id}>{option.label}</label>
           </div>
