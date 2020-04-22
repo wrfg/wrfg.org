@@ -22,14 +22,9 @@ const Form = ({ initialValues, onSubmit, children }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Context.Provider value={{values: state, onChange}}>
-        {React.Children.map(children, (child, index) => {
-          return (
-            <>
-              {index >= 1 ? <br /> : null}
-              {child}
-            </>
-          )
-        })}
+        <Stack>
+          {children}
+        </Stack>
       </Context.Provider>
     </form>
   )
@@ -165,8 +160,14 @@ export const Buttons = ({ name, options, value, onChange }) => {
     <div>
       <div css={css`
         display: flex;
-        & > *:not(:last-of-type) {
-          margin-right: 0.5em;
+        flex-wrap: wrap;
+        margin-bottom: -0.5em;
+
+        & > * {
+          margin-bottom: 0.5em;
+          &:not(:last-of-type) {
+            margin-right: 0.5em;
+          }
         }
       `}>
         {options.map((option) => <Button key={option.value} type={value === option.value ? 'secondary' : 'tertiary'} onClick={() => onChange(option.value)}>{option.label}</Button>)}
