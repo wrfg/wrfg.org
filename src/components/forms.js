@@ -87,4 +87,20 @@ const Dropdown = ({ name, label, options, value, onChange }) => {
   )
 }
 
-export { Form, Input, Radio, Dropdown, Submit }
+export const Dollars = ({ name, label, value, onChange }) => {
+  return (
+    <div>
+      <div>{label} (in USD)</div>
+      <input
+        type="number"
+        step="0.01"
+        min="0.01"
+        name={name}
+        value={value / 100}
+        onChange={(e) => onChange(Math.round(e.target.value * 100))}
+      />
+    </div>
+  )
+}
+
+export { Form, Input, Radio, Dropdown, Submit, Context }
