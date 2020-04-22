@@ -87,8 +87,12 @@ const EnvironmentWrapper = ({ children }) => {
   </EnvironmentContext.Provider>
 }
 
-const useEnviromentVariable = (variableName) => {
-  return useContext(EnvironmentContext)[variableName]
+const useConfig = () => {
+  const { environment: { stripeMode } } = useContext(EnvironmentContext)
+
+  return {
+    stripe: stripeConfig(stripeMode),
+  }
 }
 
-export { EnvironmentWrapper, EnvironmentContext, useEnviromentVariable }
+export { EnvironmentWrapper, EnvironmentContext, useConfig }
