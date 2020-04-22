@@ -92,6 +92,8 @@ const Dropdown = ({ name, options, value, onChange }) => {
         css={css`
           ${base}
 
+          background-color: white;
+
           padding-right: 3em;
 
           -webkit-appearance: none;
