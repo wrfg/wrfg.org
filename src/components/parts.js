@@ -33,9 +33,10 @@ export const FullWidthImage = ({ alt, src }) => {
 }
 
 export const hoverStyles = css`
-  &:hover {
+  &:hover, &:focus {
     box-shadow: 0 0 0.25em 0 ${nearBlack};
     cursor: pointer;
+    outline: 0;
   }
 `
 
