@@ -8,12 +8,18 @@ import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
 import DevTip from '@/components/DevTip'
 import Layout from '@/components/layout.js'
 import { Stack } from '@/components/parts'
-import { Form, Input, Radio, Dropdown, Submit } from '@/components/forms.js'
+import { Form, Input, Radio, Dropdown, Dollars, Submit, Context as FormContext } from '@/components/forms.js'
 import { useConfig } from '@/config.js'
 
 import Show from "@/models/show.js"
 
 const url = (path) => (new URL(path, document.URL)).href
+const endpoint = (url, params) => {
+  return Object.entries(params).reduce((accumulation, [key, value]) => {
+    accumulation.searchParams.set(key, value);
+    return accumulation;
+  }, new URL(url));
+}
 
 const registry = (stripeConfig, frequency, amount) => {
   if (frequency === 'ONCE') {
@@ -83,12 +89,19 @@ export default ({ data }) => {
       return
     }
 
-    trackCustomEvent({category: 'Donation', action: 'Submit', label: values.frequency === 'ONCE' ? 'One time' : 'Monthly', value: parseInt(values.amount, 10)})
-    trackCustomEvent({category: 'Donation', action: 'In support of', label: values.inSupportOf})
-    stripe.redirectToCheckout({
-      items: [registry(stripeConfig, values.frequency, values.amount)],
-      successUrl: url('/thank-you'),
-      cancelUrl: url('/donate'),
+    const amount = values.amount === 'other' ? values.customAmount : values.amount;
+    trackCustomEvent({ category: 'Donation', action: 'Submit', label: values.frequency === 'ONCE' ? 'One time' : 'Monthly', value: amount })
+    trackCustomEvent({ category: 'Donation', action: 'In support of', label: values.inSupportOf })
+
+    fetch(
+      endpoint('https://us-central1-lively-wave-274720.cloudfunctions.net/function-1', {
+        amount: amount,
+        successUrl: url('/thank-you'),
+        cancelUrl: url('/donate'),
+        frequency: values.frequency,
+      })
+    ).then((response) => response.json()).then(({ id }) => {
+      stripe.redirectToCheckout({ sessionId: id });
     })
   }
 
@@ -96,27 +109,41 @@ export default ({ data }) => {
     <Layout title='Donate'>
       <Stack>
         <h2>Donate</h2>
-        <Form initialValues={{ frequency: 'ONCE', amount: '2000', inSupportOf: 'station' }} onSubmit={openCheckout}>
+        <Form initialValues={{ frequency: 'ONCE', amount: 'other', inSupportOf: 'station', customAmount: 4000 }} onSubmit={openCheckout}>
           <Input
             name='frequency'
             label='Select donation frequency'
             presentation={Radio}
             options={[{value: 'ONCE', label: 'One time'}, {value: 'MONTHLY', label: 'Monthly'}]}
           />
-          <Input
-            name='amount'
-            label='Select amount'
-            presentation={Radio}
-            options={[
-              {value: '1000', label: '$10'},
-              {value: '2000', label: '$20'},
-              {value: '5000', label: '$50'},
-              {value: '8930', label: '$89.30'},
-              {value: '12000', label: '$120'},
-              {value: '25000', label: '$250'},
-              {value: '50000', label: '$500'},
-            ]}
-          />
+          <FormContext.Consumer>{({ values }) => {
+            return (
+              <Input
+                name='amount'
+                label='Select amount'
+                presentation={Radio}
+                options={[
+                  {value: '1000', label: '$10'},
+                  {value: '2000', label: '$20'},
+                  {value: '5000', label: '$50'},
+                  {value: '8930', label: '$89.30'},
+                  {value: '12000', label: '$120'},
+                  {value: '25000', label: '$250'},
+                  {value: '50000', label: '$500'},
+                  {value: 'other', label: 'Other', disabled: values.frequency !== 'ONCE'},
+                ]}
+              />
+            )
+          }}</FormContext.Consumer>
+          <FormContext.Consumer>{({ values }) => {
+            return (
+              values.amount === 'other' && (<Input
+                name='customAmount'
+                label='Custom amount'
+                presentation={Dollars}
+              />)
+            )
+          }}</FormContext.Consumer>
           <Input
             name='inSupportOf'
             label='In support of'
@@ -135,7 +162,13 @@ export default ({ data }) => {
             You can use credit card <code>4242 4242 4242 4242</code> with any future expiration and any 3-digit CVV to submit the donation.
           </DevTip>
           <div>
-            <Submit disabled={isLoading}>Donate with credit card</Submit>
+            <FormContext.Consumer>{({ values }) => {
+              const recurringAndOther = values.frequency !== 'ONCE' && values.amount === 'other'
+              const otherAndEmpty = values.amount === 'other' && !values.customAmount
+              const disabled = isLoading || recurringAndOther || otherAndEmpty
+
+              return <Submit disabled={disabled}>Donate with credit card</Submit>
+            }}</FormContext.Consumer>
           </div>
         </Form>
         <div>
