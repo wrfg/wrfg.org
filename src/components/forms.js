@@ -1,5 +1,10 @@
 import React, { useContext, useState } from 'react'
 
+import { css } from "@emotion/core"
+import { grey } from './colors'
+
+import { Stack, Button, hoverStyles } from './parts'
+
 const Context = React.createContext({})
 
 const Form = ({ initialValues, onSubmit, children }) => {
@@ -34,26 +39,28 @@ const Input = ({ name, label, presentation, options }) => {
   const context = useContext(Context)
 
   return (
-    React.createElement(presentation, {
-      name,
-      label,
-      options,
-      value: context.values[name],
-      onChange: (newValue) => context.onChange(name, newValue)
-    })
+    <Stack gap={1}>
+      <div>{label}</div>
+      {React.createElement(presentation, {
+        name,
+        label,
+        options,
+        value: context.values[name],
+        onChange: (newValue) => context.onChange(name, newValue)
+      })}
+    </Stack>
   )
 }
 
 const Submit = ({ disabled, children }) => {
   return (
-    <button disabled={disabled} type='submit'>{children}</button>
+    <Button disabled={disabled} type='primary' behavior='submit'>{children}</Button>
   )
 }
 
-const Radio = ({ name, label, options, value, onChange }) => {
+const Radio = ({ name, options, value, onChange }) => {
   return (
     <div>
-      <div>{label}</div>
       {options.map((option) => {
         const id = `${name}-${option.value}`
 
@@ -76,22 +83,72 @@ const Radio = ({ name, label, options, value, onChange }) => {
   )
 }
 
-const Dropdown = ({ name, label, options, value, onChange }) => {
+const base = css`
+  padding: calc(0.5rem - 2px) calc(1rem - 2px);
+  border: 1px solid ${grey};
+  font-size: .75rem;
+  border-radius: 0.25rem;
+`
+
+const Dropdown = ({ name, options, value, onChange }) => {
   return (
     <div>
-      <div>{label}</div>
-      <select name={name} value={value} onBlur={(e) => onChange(e.target.value)} onChange={(e) => onChange(e.target.value)}>
+      <select
+        css={css`
+          ${base}
+
+          padding-right: 3em;
+
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          -ms-appearance: none;
+          -o-appearance: none;
+          appearance: none;
+          background-image: url(/icons/chevron-expand.svg);
+          background-repeat: no-repeat;
+          background-position: center right calc(1em - 2px);
+
+          ${hoverStyles}
+        `}
+        name={name}
+        value={value}
+        onBlur={(e) => onChange(e.target.value)}
+        onChange={(e) => onChange(e.target.value)}
+      >
         {options.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
       </select>
     </div>
   )
 }
 
-export const Dollars = ({ name, label, value, onChange }) => {
+export const Dollars = ({ name, value, onChange }) => {
   return (
     <div>
-      <div>{label} (in USD)</div>
       <input
+        css={css`
+          ${base}
+          -webkit-appearance: none !important;
+          outline: none;
+          border-right: 0;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          padding-right: 0;
+          box-sizing: content-box;
+          width: 1em;
+        `}
+        value="$"
+        readOnly
+        disabled
+      />
+      <input
+        css={css`
+          ${base}
+          border-left: 0;
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+          padding-left: 0;
+          ${hoverStyles}
+        `}
         type="number"
         step="0.01"
         min="0.01"
@@ -99,6 +156,21 @@ export const Dollars = ({ name, label, value, onChange }) => {
         value={value / 100}
         onChange={(e) => onChange(Math.round(e.target.value * 100))}
       />
+    </div>
+  )
+}
+
+export const Buttons = ({ name, options, value, onChange }) => {
+  return (
+    <div>
+      <div css={css`
+        display: flex;
+        & > *:not(:last-of-type) {
+          margin-right: 0.5em;
+        }
+      `}>
+        {options.map((option) => <Button key={option.value} type={value === option.value ? 'secondary' : 'tertiary'} onClick={() => onChange(option.value)}>{option.label}</Button>)}
+      </div>
     </div>
   )
 }

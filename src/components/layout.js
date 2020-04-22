@@ -7,6 +7,7 @@ import { Global, css } from '@emotion/core'
 import { Helmet } from 'react-helmet-async'
 
 import { ReadableContainer, ExternalLink } from './parts'
+import { grey } from './colors'
 
 import { useStreamPlayer } from '@/client/player'
 import { Context as PersistentPlayerContext } from '@/client/persistent-player'
@@ -19,7 +20,7 @@ const Section = ({ children }) => {
     <div
       css={css`
         padding: 0.5em 0;
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid ${grey};
       `}
     >
       {children}

@@ -2,6 +2,8 @@ import React from "react"
 
 import { css } from "@emotion/core"
 
+import { nearBlack, lightGrey, grey } from './colors'
+
 export const ReadableContainer = ({ children }) => {
   return (
     <div
@@ -17,17 +19,41 @@ export const ReadableContainer = ({ children }) => {
   )
 }
 
-export const Stack = ({ children }) => {
+export const Stack = ({ gap = 2, children }) => {
   return <div
     css={css`
       display: grid;
-      grid-gap: 1em;
+      grid-gap: ${gap / 2}em;
     `}
   >{children}</div>
 }
 
 export const FullWidthImage = ({ alt, src }) => {
   return <img css={css`width: 100%;`} alt={alt} src={src} />
+}
+
+export const hoverStyles = css`
+  &:hover {
+    box-shadow: 0 0 0.25em 0 ${nearBlack};
+    cursor: pointer;
+  }
+`
+
+export const Button = ({ type, onClick, children, behavior = 'button' }) => {
+  const base = css`
+    padding: calc(0.5rem - 2px) calc(1rem - 2px);
+    border: 1px solid ${grey};
+    font-size: .75rem;
+    border-radius: 0.25rem;
+    ${hoverStyles}
+  `
+
+  const styles = {
+    primary: css`${base}; border-color: black; background-color: ${nearBlack}; color: white`,
+    secondary: css`${base}; background-color: ${lightGrey};`,
+    tertiary: css`${base}; background-color: white;`,
+  }[type]
+  return <button css={styles} type={behavior} onClick={onClick}>{children}</button>
 }
 
 export const PlainHtml = ({ html }) => {

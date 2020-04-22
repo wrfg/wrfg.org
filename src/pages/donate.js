@@ -8,7 +8,7 @@ import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
 import DevTip from '@/components/DevTip'
 import Layout from '@/components/layout.js'
 import { Stack } from '@/components/parts'
-import { Form, Input, Radio, Dropdown, Dollars, Submit, Context as FormContext } from '@/components/forms.js'
+import { Form, Input, Buttons, Dropdown, Dollars, Submit, Context as FormContext } from '@/components/forms.js'
 import { useConfig } from '@/config.js'
 
 import Show from "@/models/show.js"
@@ -67,7 +67,7 @@ export default ({ data }) => {
           <Input
             name='frequency'
             label='Select donation frequency'
-            presentation={Radio}
+            presentation={Buttons}
             options={[{value: 'ONCE', label: 'One time'}, {value: 'MONTHLY', label: 'Monthly'}]}
           />
           <FormContext.Consumer>{({ values }) => {
@@ -75,7 +75,7 @@ export default ({ data }) => {
               <Input
                 name='amount'
                 label='Select amount'
-                presentation={Radio}
+                presentation={Buttons}
                 options={[
                   {value: '1000', label: '$10'},
                   {value: '2000', label: '$20'},
