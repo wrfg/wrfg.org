@@ -1,6 +1,4 @@
-import React, { Fragment, useState } from "react"
-
-import { css } from "@emotion/core"
+import React, { useState } from "react"
 
 import { Link, graphql } from "gatsby"
 
