@@ -5,7 +5,7 @@ airshifts:
 - day: Thursday
   start: 8:00a
   duration: '2:00'
-banner_image: ''
+banner_image: "/uploads/1955.jpg"
 website_url: ''
 genres:
 - genre: blues
