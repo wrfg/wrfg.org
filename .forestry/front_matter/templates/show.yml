@@ -206,6 +206,7 @@ fields:
       - jazz
       - lukebox
       - zydeco
+      - gospel
       source:
         type: simple
         section: 
