@@ -14,5 +14,8 @@ airshifts:
 - day: Wednesday
   start: 4:00p
   duration: '1:00'
+website_url: http://www.sotrueradio.org/
+genres:
+- genre: news
 
 ---
