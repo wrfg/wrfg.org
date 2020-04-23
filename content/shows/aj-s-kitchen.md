@@ -7,7 +7,8 @@ airshifts:
   duration: '2:00'
 banner_image: ''
 website_url: ''
-genres: []
+genres:
+- genre: blues
 
 ---
 I cook up the Blues every Tuesday morning from 8-10AM…in AJ’s Blues Kitchen, just the way you like it. From old time blues to contemporary blues, it’s all handpicked and commercial free for our listeners.
