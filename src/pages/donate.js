@@ -112,9 +112,6 @@ export default ({ data }) => {
               }),
             ]}
           />
-          <DevTip visible={stripeConfig.mode === 'TEST'}>
-            You can use credit card <code>4242 4242 4242 4242</code> with any future expiration and any 3-digit CVV to submit the donation.
-          </DevTip>
           <div>
             <FormContext.Consumer>{({ values }) => {
               const recurringAndOther = values.frequency !== 'ONCE' && values.amount === 'other'
@@ -129,6 +126,9 @@ export default ({ data }) => {
           <p>Interested in donating your time or skills? Learn how you can <Link to='/support'>support the station</Link>.</p>
           <p>You can also donate via phone at <a href="tel:+14045233471">(404) 523-3471</a>, or by mailing a check to <Link to="/about">our address</Link>.</p>
         </div>
+        <DevTip visible={stripeConfig.mode === 'TEST'}>
+          You can use credit card <code>4242 4242 4242 4242</code> with any future expiration and any 3-digit CVV to submit the donation.
+        </DevTip>
       </Stack>
     </Layout>
   )
