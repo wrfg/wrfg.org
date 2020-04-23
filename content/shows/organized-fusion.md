@@ -5,7 +5,7 @@ airshifts:
 - day: Wednesday
   start: 10:00a
   duration: '2:00'
-banner_image: "/uploads/download-1.png"
+banner_image: ''
 website_url: ''
 genres:
 - genre: r&b
