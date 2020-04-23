@@ -1,5 +1,5 @@
 ---
-title: It's Friday
+title: Good Morning Blues 1
 program: content/programs/good-morning-blues-1.md
 airshifts:
 - day: Friday
@@ -11,4 +11,3 @@ genres:
 - genre: blues
 
 ---
-A blues show of primary living blues artists with birthday tributes to, and music by, historic artists. Hosted by Abdul.
