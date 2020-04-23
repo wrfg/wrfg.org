@@ -215,7 +215,7 @@ fields:
   config:
     min: 
     max: 
-    labelField: 
+    labelField: genre
   label: Genres
 pages:
 - content/shows/african-experience-worldwide.md
