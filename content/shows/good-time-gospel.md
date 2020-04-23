@@ -7,7 +7,8 @@ airshifts:
   duration: '2:00'
 banner_image: "/uploads/Good-Time-Gospel-3.jpg"
 website_url: ''
-genres: []
+genres:
+- genre: gospel
 
 ---
 “In The Tradition”
