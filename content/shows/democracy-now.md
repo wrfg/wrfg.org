@@ -17,5 +17,9 @@ airshifts:
 - day: Friday
   start: 5:00p
   duration: '1:00'
+banner_image: ''
+website_url: https://www.democracynow.org/
+genres:
+- genre: news
 
 ---
