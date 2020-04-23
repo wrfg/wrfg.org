@@ -12,4 +12,4 @@ genres:
 - genre: house
 
 ---
-Welcome to the Kalakuta Show (Where Music is the Weapon of the Future): where we feature Funk, Jazz, Afrobeat, Rare Grooves, House and Broken beat from all over the diaspora from the past to the present. Visit [https://www.facebook.com/djausar](https://www.facebook.com/djausar "https://www.facebook.com/djausar") for show playlists.
+Welcome to the Kalakuta Show (Where Music is the Weapon of the Future): where we feature Funk, Jazz, Afrobeat, Rare Grooves, House and Broken beat from all over the diaspora from the past to the present. Visit [https://www.facebook.com/djausar](https://www.facebook.com/djausar "https://www.facebook.com/djausar") for show playlists. Hosted by DJ Ausar.
