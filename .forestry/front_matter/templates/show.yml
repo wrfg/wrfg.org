@@ -179,6 +179,44 @@ fields:
     max: 
     labelField: day
   label: airshifts
+- name: genres
+  type: field_group_list
+  fields:
+  - name: genre
+    type: select
+    default: ''
+    config:
+      required: false
+      options:
+      - boogie
+      - jump
+      - house
+      - blues
+      - r&b
+      - hip hop
+      - african
+      - latin
+      - american
+      - carribean
+      - news
+      - americana
+      - folk
+      - country
+      - bluegrass
+      - jazz
+      - lukebox
+      - zydeco
+      source:
+        type: simple
+        section: 
+        file: 
+        path: 
+    label: Genre
+  config:
+    min: 
+    max: 
+    labelField: 
+  label: Genres
 pages:
 - content/shows/african-experience-worldwide.md
 - content/shows/aj-s-kitchen.md
