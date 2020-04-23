@@ -38,7 +38,7 @@ export default ({ data }) => {
     })
   }, [stripeConfig.publishableApiKey])
 
-  const openCheckout = (values) => {
+  const openCheckout = async (values) => {
     if (isLoading) {
       return
     }
@@ -47,16 +47,16 @@ export default ({ data }) => {
     trackCustomEvent({ category: 'Donation', action: 'Submit', label: values.frequency === 'ONCE' ? 'One time' : 'Monthly', value: amount })
     trackCustomEvent({ category: 'Donation', action: 'In support of', label: values.inSupportOf })
 
-    fetch(
+    const response = await fetch(
       endpoint('https://us-central1-lively-wave-274720.cloudfunctions.net/function-1', {
         amount: amount,
         successUrl: url('/thank-you'),
         cancelUrl: url('/donate'),
         frequency: values.frequency,
       })
-    ).then((response) => response.json()).then(({ id }) => {
-      stripe.redirectToCheckout({ sessionId: id });
-    })
+    ).then((response) => response.json())
+
+    return stripe.redirectToCheckout({ sessionId: response.id })
   }
 
   return (

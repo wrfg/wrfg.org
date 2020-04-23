@@ -8,20 +8,25 @@ import { Stack, Button, hoverStyles } from './parts'
 const Context = React.createContext({})
 
 const Form = ({ initialValues, onSubmit, children }) => {
-  const [state, setState] = useState(initialValues);
+  const [state, setState] = useState(initialValues)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   const onChange = (name, value) => {
     setState((s) => {
       return {...s, [name]: value}
     })
   }
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    onSubmit(state)
+    setIsSubmitting(true)
+    await onSubmit(state)
+    setIsSubmitting(false)
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <Context.Provider value={{values: state, onChange}}>
+      <Context.Provider value={{values: state, onChange, isSubmitting}}>
         <Stack>
           {children}
         </Stack>
@@ -48,8 +53,10 @@ const Input = ({ name, label, presentation, options }) => {
 }
 
 const Submit = ({ disabled, children }) => {
+  const { isSubmitting } = useContext(Context)
+
   return (
-    <Button disabled={disabled} type='primary' behavior='submit'>{children}</Button>
+    <Button disabled={disabled || isSubmitting} type='primary' behavior='submit'>{children}</Button>
   )
 }
 

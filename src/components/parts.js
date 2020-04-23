@@ -2,7 +2,7 @@ import React from "react"
 
 import { css } from "@emotion/core"
 
-import { nearBlack, lightGrey, grey } from './colors'
+import { nearBlack, lightGrey, grey, darkGrey } from './colors'
 
 export const ReadableContainer = ({ children }) => {
   return (
@@ -33,42 +33,73 @@ export const FullWidthImage = ({ alt, src }) => {
 }
 
 export const hoverStyles = css`
-  &:hover, &:focus {
+  &:hover:not([disabled]), &:focus:not([disabled]) {
     box-shadow: 0 0 0.25em 0 ${nearBlack};
     cursor: pointer;
     outline: 0;
   }
 `
 
-export const Button = ({ type, onClick, children, behavior = 'button' }) => {
+export const Button = ({ type, onClick, children, disabled = false, behavior = 'button' }) => {
   const base = css`
     padding: calc(0.5rem - 2px) calc(1rem - 2px);
-    border: 1px solid ${grey};
+    border-width: 1px;
+    border-style: solid;
     font-size: .75rem;
     border-radius: 0.25rem;
     ${hoverStyles}
+
+    &[disabled] {
+      cursor: wait;
+    }
   `
 
   const styles = {
     primary: css`
       ${base};
-      border-color: black;
-      background-color: ${nearBlack};
       color: white;
-      &:hover {
-        background-color: #444;
-      }`,
+      background-color: ${nearBlack};
+      border-color: black;
+
+      &:hover:not([disabled]), &:active:not([disabled]) {
+        background-color: ${darkGrey};
+      }
+
+      &[disabled] {
+        color: ${grey};
+        background-color: ${darkGrey};
+        border-color: ${darkGrey};
+      }
+    `,
     secondary: css`
       ${base};
+      color: black;
       background-color: ${lightGrey};
+      border-color: ${grey};
+
+      &:hover:not([disabled]), &:active:not([disabled]) {
+      }
+
+      &[disabled] {
+        color: ${darkGrey};
+      }
     `,
     tertiary: css`
       ${base};
+      color: black;
       background-color: white;
+      border-color: ${grey};
+
+      &:hover:not([disabled]), &:active:not([disabled]) {
+      }
+
+      &[disabled] {
+        color: ${darkGrey};
+      }
     `,
   }[type]
 
-  return <button css={styles} type={behavior} onClick={onClick}>{children}</button>
+  return <button css={styles} type={behavior} onClick={onClick} disabled={disabled}>{children}</button>
 }
 
 export const PlainHtml = ({ html }) => {
