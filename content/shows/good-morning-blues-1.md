@@ -5,7 +5,7 @@ airshifts:
 - day: Friday
   start: 6:00a
   duration: '2:00'
-banner_image: ''
+banner_image: "/uploads/Blues-Chicken.jpg"
 website_url: ''
 genres:
 - genre: blues
