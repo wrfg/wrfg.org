@@ -17,9 +17,11 @@ import Show, { sortByStart, zeitgeist } from "@/models/show.js"
 const Currently = ({ current, next }) => {
   return (
     <Spread gap={2} splits={[1, 4]}>
-      <ShowImageSquare show={current.show} />
+      <div>
+        <ShowImageSquare show={current.show} />
+      </div>
       <VerticallyCenter>
-        <h2><Link to={current.show.slug}>{current.show.title}</Link> is currently on air.</h2>
+        <h3><Link to={current.show.slug}>{current.show.title}</Link> is on air.</h3>
         {next && (
           <div>Up next is <Link to={next.show.slug}>{next.show.title}</Link>.</div>
         )}
