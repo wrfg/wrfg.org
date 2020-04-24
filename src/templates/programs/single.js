@@ -2,8 +2,8 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 
 import Layout from "@/components/layout"
-
-import { Stack } from '@/components/parts'
+import { Stack, Spread, VerticallyCenter } from '@/components/parts'
+import { ShiftSummary, ShowImageSquare } from '@/components/show'
 
 import Program from "@/models/program"
 
@@ -15,13 +15,24 @@ export default ({ data }) => {
     <Layout title={program.title}>
       <Stack>
         <h1>{program.title}</h1>
-        <div>
+        <Stack>
           <h4>Shows</h4>
-          {program.shows.length
-            ? <ul>{program.shows.map((show) => <li key={show.slug}><Link to={show.slug}>{show.title}</Link></li>)}</ul>
-            : <p>No shows</p>
-          }
-        </div>
+          {program.shows.length ? (
+            program.shows.map((show) => (
+              <Link to={show.slug}>
+                <Spread key={show.slug} splits={[1, 4]}>
+                  <ShowImageSquare show={show} />
+                  <VerticallyCenter>
+                    <h3>{show.title}</h3>
+                    <ShiftSummary airshifts={show.airshifts} />
+                  </VerticallyCenter>
+                </Spread>
+              </Link>
+            ))
+          ) : (
+            <p>No shows</p>
+          )}
+        </Stack>
       </Stack>
     </Layout>
   )
@@ -40,6 +51,12 @@ export const query = graphql`
         }
         frontmatter {
           title
+          banner_image
+          airshifts {
+            day
+            start
+            duration
+          }
         }
       }
     }

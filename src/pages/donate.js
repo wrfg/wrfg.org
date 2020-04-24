@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-import { Link } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import { loadStripe } from '@stripe/stripe-js'
 
 import { trackCustomEvent } from 'gatsby-plugin-google-analytics'

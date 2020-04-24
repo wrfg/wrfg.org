@@ -4,6 +4,27 @@ import { css } from "@emotion/core"
 
 import { nearBlack, lightGrey, grey, darkGrey } from './colors'
 
+export const Clear = ({ children }) => {
+  return (
+    <div css={css`
+      clear: both;
+    `}>
+      {children}
+    </div>
+  )
+}
+
+export const Right = ({ width = 1, children }) => {
+  return (
+    <div css={css`
+      float: right;
+      width ${width * 100}%;
+    `}>
+      {children}
+    </div>
+  )
+}
+
 export const ReadableContainer = ({ children }) => {
   return (
     <div
