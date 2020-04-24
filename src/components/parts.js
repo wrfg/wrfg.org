@@ -28,6 +28,30 @@ export const Stack = ({ gap = 2, children }) => {
   >{children}</div>
 }
 
+export const Spread = ({ gap = 2, splits = [], children }) => {
+  return (
+    <div css={css`
+      display: grid;
+      grid-template-columns: ${splits.map((split) => `${split}fr`).join(' ')};
+      grid-gap: ${gap / 2}em;
+    `}>
+      {children}
+    </div>
+  )
+}
+
+export const VerticallyCenter = ({ children }) => {
+  return (
+    <div css={css`
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    `}>
+      {children}
+    </div>
+  )
+}
+
 export const FullWidthImage = ({ alt, src }) => {
   return <img css={css`width: 100%;`} alt={alt} src={src} />
 }

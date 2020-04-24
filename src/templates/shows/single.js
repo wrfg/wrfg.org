@@ -3,7 +3,9 @@ import { Link, graphql } from "gatsby"
 
 import Layout from "@/components/layout.js"
 
-import { Stack, ExternalLink, FullWidthImage } from '@/components/parts'
+import { Stack, ExternalLink, Spread, FullWidthImage, PlainHtml } from '@/components/parts'
+
+import { ShowImageSquare } from '@/components/show'
 
 import Show from "@/models/show.js"
 
@@ -76,40 +78,41 @@ export default ({ data }) => {
 
   return (
     <Layout title={show.title}>
-      <Stack>
+      <Spread gap={2} splits={[2, 1]}>
         <div>
-          <h1>{show.title}</h1>
+          <Stack>
+            <div>
+              <h1>{show.title}</h1>
+            </div>
+            <div>
+              <h4>On air</h4>
+              <div><ShiftSummary airshifts={show.airshifts} /></div>
+            </div>
+            {show.program && (<div>
+              <h4>Program</h4>
+              <div><Link to={show.program.slug}>{show.program.title}</Link></div>
+            </div>)}
+            {show.websiteUrl && (<div>
+              <h4>Links</h4>
+              <div><ExternalLink to={show.websiteUrl}>Website</ExternalLink></div>
+            </div>)}
+            {show.archives.length > 0 && (<div>
+              <h4>Archives</h4>
+              <ul>
+                {show.archives.map((archive, index) => {
+                  return (
+                    <li key={index}><Link to={archive.slug}>{archive.title}</Link></li>
+                  )
+                })}
+              </ul>
+            </div>)}
+            {page.html && (<PlainHtml html={page.html} />)}
+          </Stack>
         </div>
         <div>
-          <h4>On air</h4>
-          <div><ShiftSummary airshifts={show.airshifts} /></div>
+          <ShowImageSquare show={show} />
         </div>
-        {show.bannerImageUrl && (
-          <FullWidthImage src={show.bannerImageUrl} />
-        )}
-        {show.program && (<div>
-          <h4>Program</h4>
-          <div><Link to={show.program.slug}>{show.program.title}</Link></div>
-        </div>)}
-        {show.websiteUrl && (<div>
-          <h4>Links</h4>
-          <div><ExternalLink to={show.websiteUrl}>Website</ExternalLink></div>
-        </div>)}
-        {show.archives.length > 0 && (<div>
-          <h4>Archives</h4>
-          <ul>
-            {show.archives.map((archive, index) => {
-              return (
-                <li key={index}><Link to={archive.slug}>{archive.title}</Link></li>
-              )
-            })}
-          </ul>
-        </div>)}
-        {page.html && (<div>
-          <h4>Notes</h4>
-          <div dangerouslySetInnerHTML={{ __html: page.html }} />
-        </div>)}
-      </Stack>
+      </Spread>
     </Layout>
   )
 }

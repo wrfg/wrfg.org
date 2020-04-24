@@ -8,18 +8,23 @@ import Time from "@/components/time.js"
 
 import { Dropdown } from '@/components/forms'
 
-import { Stack } from '@/components/parts'
+import { Stack, Spread, VerticallyCenter } from '@/components/parts'
+
+import { ShowImageSquare } from '@/components/show'
 
 import Show, { sortByStart, zeitgeist } from "@/models/show.js"
 
 const Currently = ({ current, next }) => {
   return (
-    <Stack gap={1}>
-      <div><Link to={current.show.slug}>{current.show.title}</Link> is currently on air.</div>
-      {next && (
-        <div>Up next is <Link to={next.show.slug}>{next.show.title}</Link>.</div>
-      )}
-    </Stack>
+    <Spread gap={2} splits={[1, 4]}>
+      <ShowImageSquare show={current.show} />
+      <VerticallyCenter>
+        <h2><Link to={current.show.slug}>{current.show.title}</Link> is currently on air.</h2>
+        {next && (
+          <div>Up next is <Link to={next.show.slug}>{next.show.title}</Link>.</div>
+        )}
+      </VerticallyCenter>
+    </Spread>
   )
 }
 
@@ -98,6 +103,7 @@ export const query = graphql`
           id
           frontmatter {
             title
+            banner_image
             airshifts {
               start
               duration
