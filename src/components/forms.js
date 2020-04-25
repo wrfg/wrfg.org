@@ -108,7 +108,7 @@ const Dropdown = ({ name, options, value, onChange }) => {
           -ms-appearance: none;
           -o-appearance: none;
           appearance: none;
-          background-image: url(/icons/chevron-expand.svg);
+          background-image: url("/icons/chevron-expand.svg");
           background-repeat: no-repeat;
           background-position: center right calc(1em - 2px);
 

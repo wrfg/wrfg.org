@@ -32,7 +32,7 @@ export const ShowImageSquare = ({ show }) => {
         css={css`
           padding-bottom: 100%;
           width: 100%;
-          background-image: url(${bannerImageUrl});
+          background-image: url("${bannerImageUrl}");
           background-repeat: no-repeat;
           background-position: center center;
           background-size: cover;
@@ -52,7 +52,7 @@ export const ShowImageSquare = ({ show }) => {
             height: 120%;
             top: -10%;
             left: -10%;
-            background-image: url(/images/logo-disk.png);
+            background-image: url("/images/logo-disk.png");
             background-size: 40%;
             transform: rotate(15deg);
             background-position: center center;
