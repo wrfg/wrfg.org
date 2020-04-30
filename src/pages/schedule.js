@@ -2,7 +2,7 @@ import React, { useState } from "react"
 
 import { Link, graphql } from "gatsby"
 
-import now from "@/now.js"
+import { useNow } from '@/now'
 import Layout from "@/components/layout.js"
 import Time from "@/components/time.js"
 
@@ -45,6 +45,7 @@ const Day = ({ day, airshifts }) => {
 }
 
 const DailySchedule = ({ shows }) => {
+  const now = useNow()
   const allAirshifts = shows.map((show) => {
     return show.airshifts.map((airshift) => [show, airshift])
   }).reduce((accumulation, item) => accumulation.concat(item), [])
@@ -77,7 +78,8 @@ const DailySchedule = ({ shows }) => {
 export default ({ data }) => {
   const shows = data.allMarkdownRemark.edges.map((edge) => edge.node).map(Show.factory)
 
-  const [ current, next ] = zeitgeist(shows)
+  const now = useNow()
+  const [ current, next ] = zeitgeist(shows, now)
 
   return (
     <Layout title="Schedule">

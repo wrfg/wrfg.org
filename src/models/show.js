@@ -4,8 +4,6 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import { LocalTime, Duration } from "@js-joda/core"
 
-import now from "@/now.js"
-
 import Archive from "./archive.js"
 import Program from "./program.js"
 
@@ -150,7 +148,7 @@ const spans = (show, now) => {
   return atOrAfterStart && beforeEnd
 }
 
-const zeitgeist = (shows) => {
+const zeitgeist = (shows, now) => {
   const time = now
 
   const airshifts = shows.map((show) => show.airshifts.map((airshift) => [show, airshift])).reduce((accumulation, item) => accumulation.concat(item), []).sort((x, y) => sortByStart(x[1], y[1]))

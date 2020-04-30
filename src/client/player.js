@@ -6,6 +6,8 @@ import { css } from "@emotion/core"
 
 import Time from '@/components/time'
 
+import { useNow } from '@/now'
+
 import { useShows, zeitgeist } from '@/models/show'
 
 import { usePersistentPlayer } from './persistent-player'
@@ -37,7 +39,8 @@ const Piece = ({ children }) => {
 const streamUrl = 'https://s2.radio.co/s2133c4bad/listen'
 const useStreamPlayer = (id) => {
   const shows = useShows()
-  const [ now ] = useMemo(() => zeitgeist(shows), [shows])
+  const jetzt = useNow()
+  const [ now ] = useMemo(() => zeitgeist(shows, jetzt), [shows, jetzt])
 
   const audioElementRef = useRef(null)
   const onPlay = useRef(() => {})
