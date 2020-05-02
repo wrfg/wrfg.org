@@ -6,8 +6,8 @@ import { Global, css } from '@emotion/core'
 
 import { Helmet } from 'react-helmet-async'
 
-import { ReadableContainer, ExternalLink } from './parts'
-import { grey } from './colors'
+import { ReadableContainer, ExternalLink, Inline, UnadornedLink } from './parts'
+import { lightGrey } from './colors'
 
 import { useStreamPlayer } from '@/client/player'
 import { Context as PersistentPlayerContext } from '@/client/persistent-player'
@@ -19,8 +19,8 @@ const Section = ({ children }) => {
   return (
     <div
       css={css`
-        padding: 0.5em 0;
-        border-bottom: 1px solid ${grey};
+        padding: 1em 0;
+        border-bottom: 1px solid ${lightGrey};
       `}
     >
       {children}
@@ -30,18 +30,6 @@ const Section = ({ children }) => {
 
 const Row = ({ baseCss = [], children }) => {
   return <div css={[css`display: flex; flex-wrap: wrap;`, ...baseCss]}>{children}</div>
-}
-
-const NavLink = ({ children, ...props }) => {
-  return (
-    <Link {...props} css={css`
-      &:not(:last-of-type) {
-        margin-right: 0.5em;
-      }
-    `}>
-      {children}
-    </Link>
-  )
 }
 
 const SocialImageLink = ({ to, src, alt }) => {
@@ -122,6 +110,7 @@ export default ({ title, children }) => {
         styles={css`
           body {
             margin: 0;
+            font-size: 1.25em;
           }
 
           *, *:before, *:after {
@@ -145,12 +134,12 @@ export default ({ title, children }) => {
             <ReadableContainer>
               <Row baseCss={[css`justify-content: center`]}><LogoItem /></Row>
               <Row baseCss={[css`justify-content: space-between`]}>
-                <div>
-                  <NavLink to='/'>Home</NavLink>
-                  <NavLink to='/schedule'>Schedule</NavLink>
-                  <NavLink to='/donate'>Donate</NavLink>
-                  <NavLink to='/about'>About</NavLink>
-                </div>
+                <Inline>
+                  <UnadornedLink to='/'>Home</UnadornedLink>
+                  <UnadornedLink to='/schedule'>Schedule</UnadornedLink>
+                  <UnadornedLink to='/donate'>Donate</UnadornedLink>
+                  <UnadornedLink to='/about'>About</UnadornedLink>
+                </Inline>
                 <div>
                   <SocialImageLink
                     to='https://www.instagram.com/wrfgatlanta/'
@@ -180,14 +169,16 @@ export default ({ title, children }) => {
                       return null
                     }
                     const { label } = registry[id]
-                    return <div key={id}>
-                      <PlayPause
-                        play={() => play(id)}
-                        pause={() => pause(id)}
-                        state={active === id ? 'playing' : 'paused'}
-                      />{' '}
+                    return <Inline key={id} baseCss={css`align-items: center;`}>
+                      <div>
+                        <PlayPause
+                          play={() => play(id)}
+                          pause={() => pause(id)}
+                          state={active === id ? 'playing' : 'paused'}
+                        />
+                      </div>
                       {label || id}
-                    </div>
+                    </Inline>
                   })
                 }}
               </PersistentPlayerContext.Consumer>

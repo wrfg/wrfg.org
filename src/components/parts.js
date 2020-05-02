@@ -1,5 +1,6 @@
 import React from "react"
 
+import { Link } from 'gatsby'
 import { css } from "@emotion/core"
 
 import { nearBlack, lightGrey, grey, darkGrey } from './colors'
@@ -61,6 +62,21 @@ export const Spread = ({ gap = 2, splits = [], children }) => {
   )
 }
 
+export const Inline = ({ baseCss, gap = 2, children }) => {
+  return (
+    <div css={css`
+      ${baseCss};
+      display: flex;
+
+      & > *:not(:first-of-type) {
+        margin-left: ${gap/2}em;
+      }
+    `}>
+      {children}
+    </div>
+  )
+}
+
 export const VerticallyCenter = ({ children }) => {
   return (
     <div css={css`
@@ -85,13 +101,17 @@ export const hoverStyles = css`
   }
 `
 
+export const UnadornedLink = ({ ...props}) => {
+  return <Link {...props} css={css`text-decoration: none;`} />
+}
+
 export const Button = ({ type, onClick, children, disabled = false, behavior = 'button' }) => {
   const base = css`
-    padding: calc(0.5rem - 2px) calc(1rem - 2px);
+    padding: 0.75em 1.5em;
     border-width: 1px;
     border-style: solid;
-    font-size: .75rem;
-    border-radius: 0.25rem;
+    font-size: .75em;
+    border-radius: 0.25em;
     ${hoverStyles}
 
     &[disabled] {

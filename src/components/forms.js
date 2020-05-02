@@ -86,10 +86,10 @@ const Radio = ({ name, options, value, onChange }) => {
 }
 
 const base = css`
-  padding: calc(0.5rem - 2px) calc(1rem - 2px);
+  padding: 0.75em 1.5em;
   border: 1px solid ${grey};
-  font-size: .75rem;
-  border-radius: 0.25rem;
+  font-size: .75em;
+  border-radius: 0.25em;
 `
 
 const Dropdown = ({ name, options, value, onChange }) => {
