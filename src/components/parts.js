@@ -3,7 +3,7 @@ import React from "react"
 import { Link } from 'gatsby'
 import { css } from "@emotion/core"
 
-import { nearBlack, lightGrey, grey, darkGrey } from './colors'
+import { yellow, deepYellow, black, lightGrey, grey, darkGrey } from './colors'
 
 export const Clear = ({ children }) => {
   return (
@@ -95,14 +95,19 @@ export const FullWidthImage = ({ alt, src }) => {
 
 export const hoverStyles = css`
   &:hover:not([disabled]), &:focus:not([disabled]) {
-    box-shadow: 0 0 0.25em 0 ${nearBlack};
+    box-shadow: 0 0 0.25em 0 ${grey};
     cursor: pointer;
     outline: 0;
   }
 `
 
 export const UnadornedLink = ({ ...props}) => {
-  return <Link {...props} css={css`text-decoration: none;`} />
+  return <Link {...props} css={css`
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  `} />
 }
 
 export const Button = ({ type, onClick, children, disabled = false, behavior = 'button' }) => {
@@ -122,12 +127,12 @@ export const Button = ({ type, onClick, children, disabled = false, behavior = '
   const styles = {
     primary: css`
       ${base};
-      color: white;
-      background-color: ${nearBlack};
-      border-color: black;
+      color: ${black};
+      background-color: ${yellow};
+      border-color: ${deepYellow};
 
       &:hover:not([disabled]), &:active:not([disabled]) {
-        background-color: ${darkGrey};
+        background-color: ${deepYellow};
       }
 
       &[disabled] {
@@ -170,7 +175,7 @@ export const Button = ({ type, onClick, children, disabled = false, behavior = '
 export const PlainHtml = ({ html }) => {
   return <div css={css`
     h1, h2, h3, h4, h5, h6, p, ol, ul {
-      margin: 0 0 1em;
+      margin: 1em 0;
     }
 
     p:only-child {

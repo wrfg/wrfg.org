@@ -113,11 +113,6 @@ export default ({ title, children }) => {
             src: url("/images/librebaskerville/librebaskerville-regular.ttf");
           }
 
-          @font-face {
-            font-family: "wrfg-sans-serif";
-            src: url("/images/source-sans-pro/sourcesanspro-regular.ttf");
-          }
-
           body {
             margin: 0;
             font-size: 1.25em;
@@ -131,7 +126,7 @@ export default ({ title, children }) => {
             -moz-box-sizing: border-box;
             -webkit-box-sizing: border-box;
             box-sizing: border-box;
-            color: black;
+            color: inherit;
             border-spacing: 0;
           }
 
