@@ -108,6 +108,16 @@ export default ({ title, children }) => {
       />
       <Global
         styles={css`
+          @font-face {
+            font-family: "wrfg-serif";
+            src: url("/images/librebaskerville/librebaskerville-regular.ttf");
+          }
+
+          @font-face {
+            font-family: "wrfg-sans-serif";
+            src: url("/images/source-sans-pro/sourcesanspro-regular.ttf");
+          }
+
           body {
             margin: 0;
             font-size: 1.25em;
@@ -115,6 +125,7 @@ export default ({ title, children }) => {
               font-size: 1em;
             `)}
           }
+
 
           *, *:before, *:after {
             -moz-box-sizing: border-box;
@@ -127,6 +138,18 @@ export default ({ title, children }) => {
           h1, h2, h3, h4, h5, h6, p, ul, ol {
             margin: 0;
             line-height: 1.5em;
+          }
+
+          body {
+            font-family: "wrfg-serif", Times;
+          }
+
+          h1, h2, h3, h4, h5, h6 {
+            font-family: "wrfg-serif", Times;
+          }
+
+          select, button {
+            font-family: "wrfg-serif", Times;
           }
         `}
       />
