@@ -182,8 +182,13 @@ export const PlainHtml = ({ html }) => {
 // at and below this value, a viewport is considered "small"
 const small = 575
 
-export const hideSmall = css`@media (max-width: ${small}px) {display: none;}`
-export const showSmall = css`@media (min-width: ${small + 1}px) {display: none;}`
+export const mediaSmall = (rules) => {
+  return css`
+    @media (max-width: ${small}px) {
+      ${rules};
+    }
+  `
+}
 
 export const Spacer = ({ size }) => {
   const multiplier = {

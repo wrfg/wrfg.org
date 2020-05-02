@@ -6,7 +6,7 @@ import { Global, css } from '@emotion/core'
 
 import { Helmet } from 'react-helmet-async'
 
-import { ReadableContainer, ExternalLink, Inline, UnadornedLink } from './parts'
+import { ReadableContainer, ExternalLink, Inline, UnadornedLink, mediaSmall } from './parts'
 import { lightGrey } from './colors'
 
 import { useStreamPlayer } from '@/client/player'
@@ -111,6 +111,9 @@ export default ({ title, children }) => {
           body {
             margin: 0;
             font-size: 1.25em;
+            ${mediaSmall(`
+              font-size: 1em;
+            `)}
           }
 
           *, *:before, *:after {
