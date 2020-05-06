@@ -5,6 +5,6 @@ sections:
   content: test test![](/uploads/Sister Rosetta - single cover.jpg)
 - template: image
   image: "/uploads/Sister Rosetta - single cover.jpg"
-  alt: ''
+  alt: In a sentence of less....
 
 ---
