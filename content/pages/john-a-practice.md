@@ -2,6 +2,9 @@
 title: John A Practice
 sections:
 - template: text
-  content: ''
+  content: test test
+- template: image
+  image: ''
+  alt: ''
 
 ---
