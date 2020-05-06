@@ -17,6 +17,7 @@ fields:
     min: 
     max: 
 pages:
+- content/pages/john-a-practice.md
 - content/pages/support.md
 - content/pages/test.md
 - content/pages/thank-you.md
