@@ -4,7 +4,7 @@ sections:
 - template: text
   content: test test![](/uploads/Sister Rosetta - single cover.jpg)
 - template: image
-  image: ''
+  image: "/uploads/Sister Rosetta - single cover.jpg"
   alt: ''
 
 ---
