@@ -28,6 +28,10 @@ sections:
     you to become a donor. Please [click here](/donate) to make your tax-deductible
     donation, or you can mail it to WRFG at 1083 Austin Avenue NE, Atlanta, GA 30307.
     Every donation, no matter the size, is important and appreciated! "
+- template: image
+  image: "/uploads/Sister Rosetta - single cover.jpg"
+- template: text
+  content: This is additional content. It'll be at the bottom.
 title: Home
 
 ---
