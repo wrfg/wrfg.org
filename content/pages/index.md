@@ -1,10 +1,10 @@
 ---
 sections:
 - template: text
-  content: WRFG 89.3 FM is an independent, non-profit, community radio station in
-    Atlanta, Georgia. We are dedicated to providing unique programming that reflects
-    progressive perspectives and the diversity of people, ideas, and cultural expressions
-    that embody that spirit, WRFG is a like breath of fresh air on the radio dial.
+  content: |-
+    Welcome to the new site! [Learn why we changed it](/new-site).
+
+    WRFG 89.3 FM is an independent, non-profit, community radio station in Atlanta, Georgia. We are dedicated to providing unique programming that reflects progressive perspectives and the diversity of people, ideas, and cultural expressions that embody that spirit, WRFG is a like breath of fresh air on the radio dial.
 - template: image
   image: "/uploads/WRFG Building.jpg"
   alt: WRFG Station on Austin Avenue
