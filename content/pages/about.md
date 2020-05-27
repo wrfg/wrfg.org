@@ -32,7 +32,7 @@ sections:
     Baptist, Station Manager, & Wanique Shabazz, Operations Director.\n\n## Contact\n\n#####
     Our Address\n\nWRFG 89.3 FM  \nRadio Free Georgia Broadcasting Organization  \n1083
     Austin Avenue NE  \nAtlanta, GA 30307-1940\n\n##### Business Office\n\nEmail:
-    [office@wrfg.org](mailto:office@wrfg.org)  \nPhone: [(404) 523-3471](tel:4045233471)
+    [manager@wrfg.org](mailto:manager@wrfg.org)  \nPhone: [(404) 523-3471](tel:4045233471)
     \ \nFax: [(404) 523-8990](tel:4045238990)"
 title: About
 

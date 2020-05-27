@@ -63,6 +63,7 @@ export default ({ data }) => {
     <Layout title='Donate'>
       <Stack>
         <h2>Donate</h2>
+        <p>Every donation, no matter the size, is important and appreciated!</p>
         <Form initialValues={{ frequency: 'ONCE', amount: '2000', inSupportOf: 'station', customAmount: 4000 }} onSubmit={openCheckout}>
           <Input
             name='frequency'
@@ -77,12 +78,11 @@ export default ({ data }) => {
                 label='Select amount'
                 presentation={Buttons}
                 options={[
-                  {value: '1000', label: '$10'},
                   {value: '2000', label: '$20'},
-                  {value: '5000', label: '$50'},
+                  {value: '4000', label: '$40'},
                   {value: '8930', label: '$89.30'},
                   {value: '12000', label: '$120'},
-                  {value: '25000', label: '$250'},
+                  {value: '37500', label: '$375'},
                   {value: '50000', label: '$500'},
                   {value: 'other', label: 'Other', disabled: values.frequency !== 'ONCE'},
                 ]}
@@ -118,7 +118,7 @@ export default ({ data }) => {
               const otherAndEmpty = values.amount === 'other' && !values.customAmount
               const disabled = isLoading || recurringAndOther || otherAndEmpty
 
-              return <Submit disabled={disabled}>Donate with credit card</Submit>
+              return <Submit disabled={disabled}>Donate</Submit>
             }}</FormContext.Consumer>
           </div>
         </Form>
