@@ -9,22 +9,25 @@ sections:
   image: "/uploads/WRFG Building.jpg"
   alt: WRFG Station on Austin Avenue
 - template: text
-  content: |-
-    Since 1973, WRFG has been broadcasting an invigorating mix of programming that has made us a favorite among discerning listeners:
-
-    * Hand-Picked Music that spans a multitude of cultures:  Zydeco, Blues, Jazz, Celtic, Folk, Caribbean, Indian, R&B, Doo-Wop, Latin, Bluegrass, Hip Hop…. and many more!
-    * Public Affairs that address topics of concern to us all – health and nutrition, the environment, peace and justice, animal rights, race/gender issues, the economy, workers’ rights, poverty issues.
-    * News from around the world and around the neighborhood that tends to get ignored or shortchanged in other media outlets – locally-produced shows along with national programs like Democracy Now!
-
-    We stream worldwide at wrfg.org bringing WRFG to the world … and the world to WRFG.
-
-    The goal of WRFG’s programming is to uplift human dignity by providing truthful, useful information, and music that touches our collective soul.
-
-    Our greatest accomplishment, though, is the support of thousands of listeners who understand the importance of independent media.  Media consolidation means fewer and fewer companies own more and more media outlets that control what you hear, read and see, and what you don’t.
-
-    Now that’s scary!
-
-    In order to remain independent, financially stable, and relevant to the needs of the community, WRFG 89.3 FM relies on the continuing support of people who understand the urgent need for noncommercial, diverse, community radio. We hope you will become a donor to WRFG.  The end of the year is coming fast and you can make your 2019 tax-deductible donation at wrfg.org, or mail it to WRFG 1083 Austin Ave. NE, Atlanta, GA. 30307.
+  content: "Since 1973, WRFG has been broadcasting an invigorating mix of programming
+    that has made us a favorite among discerning listeners:\n\n* Hand-picked quality
+    music that spans a multitude of cultures:  Zydeco, Blues, Jazz, Celtic, Folk,
+    Caribbean, Indian, R&B, Doo-Wop, Latin, Bluegrass, Hip Hop…. and many more!\n*
+    Public Affairs that address topics of concern to us all: health and nutrition,
+    the environment, peace and justice, animal rights, race, gender, the economy,
+    workers’ rights, poverty.\n* News from around the world and around the neighborhood
+    that tends to get ignored or shortchanged in other media outlets – locally-produced
+    shows along with national programs like Democracy Now!\n\nWe stream worldwide
+    at wrfg.org bringing WRFG to the world … and the world to WRFG.\n\nThe goal of
+    WRFG’s programming is to uplift human dignity by providing truthful, useful information,
+    and music that touches our collective soul.\n\nOur greatest accomplishment, though,
+    is the support of thousands of listeners who understand the importance of independent
+    media.\n\nMedia consolidation means that fewer and fewer megacorporations own
+    more and more of the radio, newspaper, and television outlets that control what
+    you hear, read and see — and what you don’t. Now that’s scary!\n\nWe encourage
+    you to become a donor. Please [click here](/donate) to make your tax-deductible
+    donation, or you can mail it to WRFG at 1083 Austin Avenue NE, Atlanta, GA 30307.
+    Every donation, no matter the size, is important and appreciated! "
 title: Home
 
 ---
