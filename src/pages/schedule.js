@@ -2,13 +2,14 @@ import React, { useState } from "react"
 
 import { Link, graphql } from "gatsby"
 
-import { useNow } from '@/now'
+import { useNow, days, times } from '@/now'
 import Layout from "@/components/layout.js"
 import Time from "@/components/time.js"
+import { lightGrey } from '@/components/colors'
 
 import { Dropdown } from '@/components/forms'
 
-import { Stack, Spread, VerticallyCenter } from '@/components/parts'
+import { Stack, Spread, VerticallyCenter, Cell, Grid } from '@/components/parts'
 
 import { ShowImageSquare } from '@/components/show'
 
@@ -44,6 +45,36 @@ const Day = ({ day, airshifts }) => {
   )
 }
 
+const Everything = ({ airshifts }) => {
+  const dayKeys = days.map((day) => day.value)
+
+  return (
+    <div style={{ fontSize: '0.666em' }}>
+      <Grid>
+        {days.map((day, index) => (
+          <Cell column={index + 2} row={1}>{day.label}</Cell>
+        ))}
+        {times.map((time, index) => (
+          <Cell column={1} row={index + 2}>{time.minute() === 0 ? <Time value={time} /> : ' '}</Cell>
+        ))}
+        {airshifts.map(([show, airshift], index) => {
+          return (
+            <Cell
+              key={index}
+              column={dayKeys.indexOf(airshift.day.toLowerCase()) + 2}
+              row={(airshift.start.hour() * 2 + airshift.start.minute() / 30) + 2}
+              rowSpan={airshift.duration.toHours() * 2}
+              style={{ backgroundColor: lightGrey }}
+            >
+              <Link to={show.slug}>{show.title}</Link>
+            </Cell>
+          )
+        })}
+      </Grid>
+    </div>
+  )
+}
+
 const DailySchedule = ({ shows }) => {
   const now = useNow()
   const allAirshifts = shows.map((show) => {
@@ -61,16 +92,15 @@ const DailySchedule = ({ shows }) => {
         value={day}
         onChange={setDay}
         options={[
-          {value: 'sunday', label: 'Sunday'},
-          {value: 'monday', label: 'Monday'},
-          {value: 'tuesday', label: 'Tuesday'},
-          {value: 'wednesday', label: 'Wednesday'},
-          {value: 'thursday', label: 'Thursday'},
-          {value: 'friday', label: 'Friday'},
-          {value: 'saturday', label: 'Saturday'},
+          ...days,
+          {value: 'grid', label: 'All'},
         ]}
       />
-      <Day day={day} airshifts={airshifts} />
+      {day === 'grid' ? (
+        <Everything airshifts={allAirshifts} />
+      ) : (
+        <Day day={day} airshifts={airshifts} />
+      )}
     </Stack>
   )
 }

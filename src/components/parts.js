@@ -62,6 +62,38 @@ export const Spread = ({ gap = 2, splits = [], children }) => {
   )
 }
 
+export const Cell = ({ column, row, rowSpan = 1, children, style }) => {
+  return (
+    <div
+      style={{
+        gridColumn: column,
+        gridRow: row,
+        gridRowEnd: `span ${rowSpan}`,
+        overflowWrap: 'anywhere',
+        borderRadius: '0.25em',
+        padding: '0.25em',
+        ...style,
+      }}
+    >
+      {children}
+    </div>
+  )
+}
+
+export const Grid = ({ children, columns }) => {
+  return (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: `repeat(${columns}, ${100 / columns}%)`,
+        gridGap: '0.25em',
+      }}
+    >
+      {children}
+    </div>
+  )
+}
+
 export const Inline = ({ baseCss, gap = 2, children }) => {
   return (
     <div css={css`
