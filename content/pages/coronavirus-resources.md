@@ -5,7 +5,7 @@ sections:
   image: "/uploads/coronavirus-resources-banner.png"
   alt: ''
 - template: image
-  image: ''
+  image: "/uploads/the-covid-tracking-project-bar.png"
   alt: ''
 
 ---
