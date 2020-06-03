@@ -2,7 +2,7 @@
 title: Coronavirus Resources
 sections:
 - template: image
-  image: "/uploads/coronavirus-resources-banner.png"
+  image: "/uploads/coronavirus-graphic-for-facebook.jpg"
   alt: ''
 - template: image
   image: "/uploads/the-covid-tracking-project-bar.png"
