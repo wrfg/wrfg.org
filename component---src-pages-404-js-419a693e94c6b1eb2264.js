@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{w2l6:function(t,n,e){"use strict";e.r(n);e("q1tI");var o=e("Bl7J"),c=e("Wbzz"),a=e("qKvR");n.default=()=>{let t="/404";if("undefined"!=typeof window){const n=new URL(window.location.href);t=n.pathname+n.search+n.hash}return Object(a.c)(o.a,null,Object(a.c)("h3",null,"Not found"),Object(a.c)("p",null,"There's no content at this URL, ",Object(a.c)("code",null,t),". Consider ",Object(a.c)(c.a,{to:"/"},"starting from the top"),"."))}}}]);
+//# sourceMappingURL=component---src-pages-404-js-419a693e94c6b1eb2264.js.map
