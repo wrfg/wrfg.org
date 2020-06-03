@@ -17,6 +17,7 @@ fields:
     min: 
     max: 
 pages:
+- content/pages/coronavirus-resources.md
 - content/pages/john-a-practice.md
 - content/pages/new-site.md
 - content/pages/support.md
